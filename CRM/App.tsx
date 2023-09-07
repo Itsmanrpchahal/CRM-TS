@@ -5,17 +5,33 @@
  * @format
  */
 
+// @ts-ignore
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+import { store } from './src/store';
 
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { ThemeProvider, useTheme } from 'styled-components';
+import { navigationTheme } from './src/theme/theme';
+import Routes from './src/navigation/Routes';
+import { LogBox } from 'react-native';
 
-function App(): JSX.Element {
+const persistor = persistStore(store);
+const queryClient = new QueryClient();
 
+export default function App() {
+  LogBox.ignoreAllLogs()
   return (
-    <SafeAreaView >
-      <Text>hello</Text>
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={navigationTheme.light}>
+            <Routes scheme={navigationTheme.light} />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </PersistGate>
+    </Provider>
   );
 }
-
-export default App;

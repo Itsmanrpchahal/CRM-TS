@@ -26,22 +26,26 @@ export const MainParentWrapper = styled.View`
 export const commonStyledText = styled.Text``;
 
 export const MainWrapper = styled.View`
-  background-color: '#EBEBEB;
   height:100%;
+  width:100%;
+  padding:16px;
+  justify-content:center;
+  align-items:center;
+  background-color:${({ theme }: any) => theme.colors.primary}
 `;
 
 
 export const MainWrapperWhite = styled.View`
-  background-color: '#FFFFFF;
+  background-color: #FFFFFF;
   height:100%;
 `;
 type DrawerWrapperProps = {
-    backgroundColor: string;
-    height: string;
+  backgroundColor: string;
+  height: string;
 };
 
 export const Divider = styled.View<DrawerWrapperProps>`
   height: ${({ height }: any) => height}px;
-  margin-top: 10px;
+  margin-top: 5px;
   background-color: ${({ backgroundColor }: any) => backgroundColor};
 `;
