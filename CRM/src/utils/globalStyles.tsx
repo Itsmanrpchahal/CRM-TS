@@ -37,6 +37,7 @@ export const MainWrapper = styled.View`
 
 export const MainWrapperWhite = styled.View`
   background-color: #FFFFFF;
+  padding:10px;
   height:100%;
 `;
 type DrawerWrapperProps = {

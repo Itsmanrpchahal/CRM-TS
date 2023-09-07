@@ -10,6 +10,7 @@ import navigationStrings from './navigationStrings';
 import { TabBarIcon } from './TabbarIcon';
 import { MenuIcon } from '../assets';
 import surfLeads from '../screens/private/surfLeads';
+import { CalenderWhiteIcon, NotificatioWhiteIcon } from '../utils/assets';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,8 @@ function DashboardTabs(props: any) {
                 tabBarStyle: { backgroundColor: colors.primary },
                 tabBarActiveTintColor: colors.white,
                 tabBarInactiveTintColor: colors.black,
+                headerTintColor: colors.white,
+                headerTitleAlign: 'center',
                 headerStyle: {
                     backgroundColor: colors.primary,
                 },
@@ -35,6 +38,20 @@ function DashboardTabs(props: any) {
                             source={type === 'dark' ? MenuIcon : MenuIcon}
                         />
                     </TouchableOpacity>
+                ),
+                headerRight: () => (
+                    <IconWrapper>
+                        <TouchableOpacity onPress={() => { }}>
+                            <HeaderIcon
+                                source={NotificatioWhiteIcon}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { }}>
+                            <HeaderIcon
+                                source={CalenderWhiteIcon}
+                            />
+                        </TouchableOpacity>
+                    </IconWrapper>
                 ),
             })}>
             <Tab.Screen name={navigationStrings.TAB_BAR_PROPERTIES} component={Properties} options={{
@@ -70,6 +87,17 @@ function DashboardTabs(props: any) {
 }
 
 export default DashboardTabs;
+
+const HeaderIcon = styled.Image`
+    margin-right:16px;
+    height:22px;
+    width:22px;
+`;
+
+const IconWrapper = styled.View`
+    flex-direction:row;
+`;
+
 const NavigationBurgerIcon = styled.Image`
   margin-left: 16px;
 `;

@@ -10,7 +10,7 @@ import { clearAll } from "../storage";
 import { persistor } from "../store";
 import { useActions } from "../hooks/useActions";
 import axios from "axios";
-import { SurfIconIcon, profileIcon, settingIcon } from '../assets';
+import { profileIcon, settingIcon } from '../assets';
 import { sideMenuOptions } from '../utils/constants'
 
 function CustomDrawer(props: any) {

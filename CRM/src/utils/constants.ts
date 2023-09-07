@@ -1,6 +1,22 @@
 
 import { Dimensions, Platform } from 'react-native';
-import { AgentsIcon, CallCenterIcon, ContactsIcon, FolderIcon, MarketingIcon, PropertiesIcon, RetalorsIcon, SelfSourcedIcon, SurfIconIcon, TransactionIcons, UsersIconIcon } from './assets';
+import {
+    AgentsIcon,
+    BlueDocumentIcon,
+    CallCenterIcon,
+    ContactsIcon,
+    FolderIcon,
+    MarketingIcon,
+    Opportunities,
+    PropertiesIcon,
+    RetalorsIcon,
+    SelfSourcedIcon,
+    SurfIconIcon,
+    TransactionIcons,
+    UsersIconIcon,
+    calenderIcon,
+    rocketIcon,
+} from './assets';
 
 export const WINDOW_DEVICE_WIDTH = Dimensions.get('window').width;
 export const WINDOW_DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -21,4 +37,35 @@ export const sideMenuOptions = [
     { label: "Marketing", value: 11, image: MarketingIcon },
 ];
 
-
+export const dataCell = [
+    {
+        title: 'Opportunities',
+        subTitle: '142',
+        image: Opportunities
+    },
+    {
+        title: 'Transactions',
+        subTitle: '$1.92MM',
+        image: rocketIcon
+    },
+    {
+        title: 'YTD Earnings',
+        subTitle: '$128,000',
+        image: calenderIcon
+    },
+    {
+        title: 'Document Portal',
+        subTitle: '',
+        image: rocketIcon
+    },
+    {
+        title: 'Call Center',
+        subTitle: FolderIcon,
+        image: calenderIcon
+    },
+    {
+        title: 'Document Portal',
+        subTitle: '',
+        image: calenderIcon
+    },
+]

@@ -21,6 +21,14 @@ import PhoneGreenIcon from '../assets/phonegreen/phonegreen.png'
 import MessageBlueIcon from '../assets/messgBlue/messgBlue.png'
 import mailBlackIcon from '../assets/mailBlack/mailBlack.png'
 import vedioGreenIcon from '../assets/vedioGreen/vedioGreen.png'
+import NeedleCustom from '../assets/needlecustom/needlecustom.png'
+import BlueDocumentIcon from '../assets/bluedocumnet/bluedocumnet.png'
+import BaseIcon from '../assets/base/base.png'
+import Opportunities from '../assets/Opportunities/Opportunities.png'
+import rocketIcon from '../assets/rocket/rocket.png'
+import calenderIcon from '../assets/calender/calender.png'
+import NotificatioWhiteIcon from '../assets/notificationwhite/notificationwhite.png'
+import CalenderWhiteIcon from '../assets/calendarwhite/calendarwhite.png'
 
 export {
     ChatIcon,
@@ -45,5 +53,13 @@ export {
     PhoneGreenIcon,
     MessageBlueIcon,
     mailBlackIcon,
-    vedioGreenIcon
+    vedioGreenIcon,
+    NeedleCustom,
+    BlueDocumentIcon,
+    BaseIcon,
+    Opportunities,
+    rocketIcon,
+    calenderIcon,
+    NotificatioWhiteIcon,
+    CalenderWhiteIcon
 };

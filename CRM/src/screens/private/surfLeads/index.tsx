@@ -1,13 +1,16 @@
 import React from "react";
-import { View } from 'react-native'
 import { withTheme } from "styled-components/native";
 import ContactSurfUI from "../../../components/ContactSurfUI";
+import { styled } from "styled-components/native";
 const surfLeads = () => {
     return (
-        <View>
+        <MainWrapper>
             <ContactSurfUI data={[1, 1, 1, 1, 1, 1, 1, 1, 1]}></ContactSurfUI>
-        </View>
+        </MainWrapper>
     )
 }
 
 export default withTheme(surfLeads)
+
+
+const MainWrapper = styled.View``;

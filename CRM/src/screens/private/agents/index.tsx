@@ -1,8 +1,7 @@
 import React from "react";
-import { View } from 'react-native'
 import { styled, withTheme } from "styled-components/native";
 import ContactSurfUI from "../../../components/ContactSurfUI";
-const Contacts = () => {
+const Agents = () => {
     return (
         <MainWrapper>
             <ContactSurfUI data={[1, 1, 1, 1, 1, 1]}></ContactSurfUI>
@@ -10,6 +9,6 @@ const Contacts = () => {
     )
 }
 
-export default withTheme(Contacts)
+export default withTheme(Agents)
 
 const MainWrapper = styled.View``;

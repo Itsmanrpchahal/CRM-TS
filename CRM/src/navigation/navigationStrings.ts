@@ -7,4 +7,6 @@ export default {
     TAB_BAR_MESSAGE: 'Messages',
     TAB_BAR_CHAT: 'Chat',
     TAB_BAR_CALL: 'Call',
+    AGENTS: "Agents",
+    RETALORS: 'Retalors',
 };

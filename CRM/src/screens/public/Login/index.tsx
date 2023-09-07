@@ -15,7 +15,6 @@ const Login = ({ navigation }) => {
     }, [])
     return (
         <MainWrapper>
-
             <LoginWrapper>
                 <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Lokal CRM WIP</TextWrapper>
                 <TextWrapper marginTop={30} color={colors.white} fontSize={40} fontWeight={700}>Welcome</TextWrapper>

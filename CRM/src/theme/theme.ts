@@ -10,7 +10,8 @@ export const navigationTheme = {
             secondary: '#E3E1EE',
             white: '#ffffff',
             black: '#000000',
-            gray: '#D9D8D8'
+            gray: '#D9D8D8',
+            green: '#00FF18',
         },
         spacing: {
             horizontal: 15,
@@ -31,7 +32,8 @@ export const navigationTheme = {
             secondary: '#E3E1EE',
             white: '#ffffff',
             black: '#000000',
-            gray: '#D9D8D8'
+            gray: '#D9D8D8',
+            green: '#00FF18',
         },
         spacing: {
             horizontal: 15,

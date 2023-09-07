@@ -4,14 +4,13 @@ import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import navigationStrings from '../navigation/navigationStrings';
 import { useTheme } from '@react-navigation/native';
-// @ts-ignore
-import styled from 'styled-components/native';
 import Login from '../screens/public/Login';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import DashboardTabs from './Tabbar';
 import { Call, Chat, Contacts, Messages, Properties } from '.';
-import messages from '../screens/private/messages';
 import surfLeads from '../screens/private/surfLeads';
+import agents from '../screens/private/agents';
+import retalors from '../screens/private/retalors';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -91,6 +90,24 @@ function StackNavigator(props: any) {
                     title: 'Contacts',
                 }}
             />
+            <Stack.Screen
+                name={navigationStrings.AGENTS}
+                component={agents}
+                options={{
+                    headerShown: false,
+                    title: 'Agents',
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.RETALORS}
+                component={retalors}
+                options={{
+                    headerShown: false,
+                    title: 'Retalors',
+                }}
+            />
+
         </Stack.Navigator>
     )
 }
