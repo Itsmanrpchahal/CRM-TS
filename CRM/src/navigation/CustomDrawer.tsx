@@ -2,8 +2,8 @@
 import React from 'react';
 // @ts-ignore
 import styled from 'styled-components/native';
-import { useTheme } from '@react-navigation/native';
-import { FlatList, SafeAreaView, ScrollView } from 'react-native';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import { FlatList, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { withTheme } from 'styled-components';
 import navigationStrings from './navigationStrings';
 import { clearAll } from "../storage";
@@ -16,7 +16,7 @@ import { sideMenuOptions } from '../utils/constants'
 function CustomDrawer(props: any) {
   const { setAuthentication } = useActions();
   const { colors }: any = useTheme();
-
+  const navigation = useNavigation()
   const logout = async () => {
     await clearAll();
     await persistor.flush();
@@ -46,18 +46,28 @@ function CustomDrawer(props: any) {
               ItemSeparatorComponent={<Divider backgroundColor={colors.white}></Divider>}
               renderItem={({ item }) => {
                 return (
-                  <ItemWrapper>
-                    <ImageView source={item.image}></ImageView>
-                    <UserName>{item.label}</UserName>
-                  </ItemWrapper>
+                  <TouchableOpacity onPress={() => {
+                    item.value === 2 ? navigation.navigate(navigationStrings.TAB_BAR_CONTACTS) :
+                      item.value === 3 ? navigation.navigate(navigationStrings.TAB_BAR_USERS) :
+                        item.value === 5 ? navigation.navigate(navigationStrings.TRANSACTION_DESK) :
+                          item.value === 8 ? navigation.navigate(navigationStrings.CALL_CENTER) :
+                            item.value === 9 ? navigation.navigate(navigationStrings.AGENTS) :
+                              item.value === 10 ? navigation.navigate(navigationStrings.AGENTS) :
+                                null
+                  }}>
+                    <ItemWrapper>
+                      <ImageView source={item.image}></ImageView>
+                      <UserName>{item.label}</UserName>
+                    </ItemWrapper>
+                  </TouchableOpacity>
                 )
               }}>
 
             </FlatList>
           </MainWrapper>
         </DrawerWrapper>
-      </ScrollView>
-    </SafeAreaView>
+      </ScrollView >
+    </SafeAreaView >
   );
 }
 
@@ -75,6 +85,9 @@ const UserName = styled.Text`
 
 const ImageView = styled.Image`
   margin: 10px;
+  height:28px;
+  width:28px;
+  resize-mode:contain;
 `;
 
 const HorizontalWrapper = styled.View`

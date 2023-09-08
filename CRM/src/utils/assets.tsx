@@ -29,6 +29,12 @@ import rocketIcon from '../assets/rocket/rocket.png'
 import calenderIcon from '../assets/calender/calender.png'
 import NotificatioWhiteIcon from '../assets/notificationwhite/notificationwhite.png'
 import CalenderWhiteIcon from '../assets/calendarwhite/calendarwhite.png'
+import UndoIcon from '../assets/undo/undo.png'
+import BrushIcon from '../assets/brush/brush.png'
+import voiceMailIcon from '../assets/voiceMail/voiceMail.png'
+import calenderminusIcon from '../assets/calenderminus/calenderminus.png'
+import phoneincomingIcon from '../assets/phoneincoming/phoneincoming.png'
+import chainIcon from '../assets/chain/chain.png'
 
 export {
     ChatIcon,
@@ -61,5 +67,11 @@ export {
     rocketIcon,
     calenderIcon,
     NotificatioWhiteIcon,
-    CalenderWhiteIcon
+    CalenderWhiteIcon,
+    UndoIcon,
+    BrushIcon,
+    voiceMailIcon,
+    calenderminusIcon,
+    phoneincomingIcon,
+    chainIcon
 };

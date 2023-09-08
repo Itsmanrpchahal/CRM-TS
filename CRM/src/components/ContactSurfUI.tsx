@@ -169,7 +169,7 @@ const TabsWarpper = styled.View`
 
 const FilterView = styled.View`
     flex-direction:row;
-    width:40%;
+    width:30%;
     align-items:center;
     justify-content:flex-end;
 `;
@@ -189,7 +189,7 @@ const ImageView = styled.Image<ImageProps>`
 
 const SearchWrapperTextFieldView = styled.View`
     flex-direction:row;
-    width:60%;
+    width:70%;
     padding:5px;
     align-items:center;
     border-radius:8px;

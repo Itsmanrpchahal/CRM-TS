@@ -38,7 +38,8 @@ type Props = {
     labelNoteStyle?: any,
     useNativeDriver?: any,
     marginTopLebel?: any,
-    labelFontSize?: any
+    labelFontSize?: any,
+    backgroundColor?: any
 }
 
 const Speedmeter = ({
@@ -62,7 +63,8 @@ const Speedmeter = ({
     labelNoteStyle,
     useNativeDriver,
     marginTopLebel = -70,
-    labelFontSize = 25
+    labelFontSize = 25,
+    backgroundColor = '#EFEFEF'
 }: Props) => {
     const degree = 180;
     const perLevelDegree = calculateDegreeFromLabels(degree, labels);
@@ -146,6 +148,7 @@ const Speedmeter = ({
                     height: (currentSize / 2) * 0.88,
                     borderTopLeftRadius: currentSize / 2,
                     borderTopRightRadius: currentSize / 2,
+                    backgroundColor: backgroundColor
                 }, innerCircleStyle]}
                 />
                 {/* </View> */}

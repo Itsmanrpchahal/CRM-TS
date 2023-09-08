@@ -11,6 +11,8 @@ import { Call, Chat, Contacts, Messages, Properties } from '.';
 import surfLeads from '../screens/private/surfLeads';
 import agents from '../screens/private/agents';
 import retalors from '../screens/private/retalors';
+import transactionDesk from '../screens/private/transactionDesk';
+import callCenter from '../screens/private/callCenter';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -94,8 +96,13 @@ function StackNavigator(props: any) {
                 name={navigationStrings.AGENTS}
                 component={agents}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
                     title: 'Agents',
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
                 }}
             />
 
@@ -103,8 +110,42 @@ function StackNavigator(props: any) {
                 name={navigationStrings.RETALORS}
                 component={retalors}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
                     title: 'Retalors',
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.TRANSACTION_DESK}
+                component={transactionDesk}
+                options={{
+                    headerShown: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: 'Transaction Desk',
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.CALL_CENTER}
+                component={callCenter}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.CALL_CENTER,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
                 }}
             />
 

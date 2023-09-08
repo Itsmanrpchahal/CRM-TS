@@ -8,7 +8,11 @@ import TextField from '../../../components/TextField';
 import { Formik } from 'formik';
 import { LOGIN_SCHEMA } from "./helpers";
 import PrimaryButton from '../../../components/Button';
-
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from '@react-native-google-signin/google-signin';
 const Login = ({ navigation }) => {
     const { colors }: any = useTheme();
     useEffect(() => {
@@ -21,8 +25,8 @@ const Login = ({ navigation }) => {
                 <Formik
                     validationSchema={LOGIN_SCHEMA}
                     initialValues={{
-                        email: '',
-                        password: '',
+                        email: 'fd@m.c',
+                        password: 'as',
                     }}
                     onSubmit={(values) => {
                         navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)

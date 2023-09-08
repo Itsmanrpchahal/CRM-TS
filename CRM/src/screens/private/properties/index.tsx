@@ -1,13 +1,35 @@
-import React from "react";
-import { FlatList, Text, View } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { FlatList, Text } from 'react-native'
 import { styled, withTheme } from "styled-components/native";
-import { MainWrapper, MainWrapperWhite } from '../../../utils/globalStyles'
-import { AddIcon, FilterIcon } from '../../../utils/assets'
+import { MainWrapperWhite } from '../../../utils/globalStyles'
+import { AddIcon, BrushIcon, FilterIcon, UndoIcon } from '../../../utils/assets'
+import CardSwipeWrapper from "../../../components/CardSwipeWrapper";
+
 const Properties = () => {
+    const [topHeight, setTopHeight] = useState(0)
+    const [centerHeight, setCenterHeight] = useState(0)
+    const [mainHeight, setMainHeight] = useState(0)
+    const [visible, setVisible] = useState(false)
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(true)
+        }, 2000)
+    }, [])
+    useEffect(() => {
+        setCenterHeight(mainHeight - (topHeight + 30))
+    }, [topHeight, mainHeight])
     return (
-        <MainWrapperWhite>
-            <ChildWrapper>
-                <TopWrapper>
+        <MainWrapperWhite onLayout={({ nativeEvent }) => {
+            const { x, y, width, height } = nativeEvent.layout
+            setMainHeight(height)
+        }}>
+            <ChildWrapper >
+                <TopWrapper onLayout={({ nativeEvent }) => {
+                    const { x, y, width, height } = nativeEvent.layout
+                    setTopHeight(height)
+                }}>
                     <FlatList
                         data={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
                         horizontal
@@ -21,17 +43,28 @@ const Properties = () => {
                             )
                         }}>
                     </FlatList>
-                    <FilterBtn>
-                        <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                        <TextWrapper>Filters</TextWrapper>
-                    </FilterBtn>
+                    <TabWrapper>
+                        <FilterBtn>
+                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                            <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
+                        </FilterBtn>
+                        <FilterBtn>
+                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                            <TextWrapper>Filter</TextWrapper>
+                        </FilterBtn>
+                        <FilterBtn>
+                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                            <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>
+                        </FilterBtn>
+                    </TabWrapper>
+
                 </TopWrapper>
 
-                <CenterWrapper>
+                {
+                    visible && <CardSwipeWrapper height={centerHeight}></CardSwipeWrapper>
+                }
 
-                </CenterWrapper>
 
-                <BottomWrapper></BottomWrapper>
             </ChildWrapper>
         </MainWrapperWhite>
     )
@@ -45,12 +78,20 @@ type ImageProps = {
     width?: number;
 }
 
-const BottomWrapper = styled.View`
-height:100px;
+type CenterProps = {
+    height?: number
+}
+
+const TabWrapper = styled.View`
+    flex-direction:row;
+    width:100%;
+    justify-content:space-between;
 `;
 
-const CenterWrapper = styled.View`
-    height:100px;
+
+
+const CenterWrapper = styled.View<CenterProps>`
+    height:${({ height }: any) => height}px;
 `;
 
 const TopWrapper = styled.View`
@@ -59,7 +100,7 @@ const TopWrapper = styled.View`
     `;
 
 const FilterBtn = styled.View`
-flex-direction:row;
+    flex-direction:row;
     height:30px;
     width:120px;
     padding-horizontal:15px;
@@ -89,5 +130,5 @@ const FilterTabs = styled.View`
 
 const ChildWrapper = styled.View`
     justify-content:space-between;
-    height:100%;
+    flex:1;
 `;
