@@ -36,7 +36,6 @@ const Login = ({ navigation }) => {
                             <TextField
                                 onChangeText={(value: any) => {
                                     setFieldValue('email', value);
-
                                 }}
                                 placeholder="email"
                                 keyboardType={'email-address'}

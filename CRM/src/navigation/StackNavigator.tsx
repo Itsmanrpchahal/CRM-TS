@@ -13,6 +13,7 @@ import agents from '../screens/private/agents';
 import retalors from '../screens/private/retalors';
 import transactionDesk from '../screens/private/transactionDesk';
 import callCenter from '../screens/private/callCenter';
+import userProfileView from '../screens/private/userProfileView';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -21,7 +22,7 @@ function StackNavigator(props: any) {
 
     // @ts-ignore
     return (
-        <Stack.Navigator initialRouteName={navigationStrings.LOGIN}  >
+        <Stack.Navigator initialRouteName={navigationStrings.LOGIN} >
             <Stack.Screen
                 name={navigationStrings.LOGIN}
                 component={Login}
@@ -113,7 +114,7 @@ function StackNavigator(props: any) {
                     headerShown: true,
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
-                    title: 'Retalors',
+                    title: navigationStrings.RETALORS,
                     headerStyle: {
                         backgroundColor: colors.primary
                     }
@@ -143,6 +144,21 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.CALL_CENTER,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.USER_PROFILE}
+                component={userProfileView}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.USER_PROFILE,
                     headerStyle: {
                         backgroundColor: colors.primary
                     }

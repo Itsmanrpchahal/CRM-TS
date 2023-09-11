@@ -35,6 +35,12 @@ import voiceMailIcon from '../assets/voiceMail/voiceMail.png'
 import calenderminusIcon from '../assets/calenderminus/calenderminus.png'
 import phoneincomingIcon from '../assets/phoneincoming/phoneincoming.png'
 import chainIcon from '../assets/chain/chain.png'
+import attachmentIcon from '../assets/attachment/attachment.png'
+import addUserIcon from '../assets/addUser/addUser.png'
+import leftRightIcon from '../assets/leftRight/leftRight.png'
+import sendIcon from '../assets/send/send.png'
+import editIcon from '../assets/edit/edit.png'
+import noteIcon from '../assets/notes/notes.png'
 
 export {
     ChatIcon,
@@ -73,5 +79,11 @@ export {
     voiceMailIcon,
     calenderminusIcon,
     phoneincomingIcon,
-    chainIcon
+    chainIcon,
+    attachmentIcon,
+    addUserIcon,
+    leftRightIcon,
+    sendIcon,
+    editIcon,
+    noteIcon
 };

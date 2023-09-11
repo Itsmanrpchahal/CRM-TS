@@ -10,5 +10,6 @@ export default {
     TAB_BAR_CALL: 'Call',
     AGENTS: "Agents",
     RETALORS: 'Retalors',
-    CALL_CENTER: "Call Center"
+    CALL_CENTER: "Call Center",
+    USER_PROFILE: 'User Profile',
 };

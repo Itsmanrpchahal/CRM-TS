@@ -93,7 +93,6 @@ type TextProps = {
     fontSize: number;
 }
 
-
 type ImageProps = {
     marginLeft?: number,
     height?: number,
@@ -161,7 +160,7 @@ const VerticleWrapper = styled.View`
 `;
 
 const MainWrapper = styled.View`
-    margin:8px;
+    margin:16px;
     border-radius:12px;
     padding : 15px;
     background-color:${({ theme }: any) => theme.colors.white};

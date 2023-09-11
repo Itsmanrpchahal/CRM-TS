@@ -52,7 +52,7 @@ function CustomDrawer(props: any) {
                         item.value === 5 ? navigation.navigate(navigationStrings.TRANSACTION_DESK) :
                           item.value === 8 ? navigation.navigate(navigationStrings.CALL_CENTER) :
                             item.value === 9 ? navigation.navigate(navigationStrings.AGENTS) :
-                              item.value === 10 ? navigation.navigate(navigationStrings.AGENTS) :
+                              item.value === 10 ? navigation.navigate(navigationStrings.RETALORS) :
                                 null
                   }}>
                     <ItemWrapper>

@@ -5,7 +5,9 @@ import { useTheme, withTheme } from "styled-components";
 // @ts-ignore
 import styled from "styled-components/native";
 import { profileIcon } from "../assets";
+import { navigationRef } from '../navigation/RootNavigation'
 import { AddIcon, FilterIcon, MessageBlueIcon, PhoneGreenIcon, mailBlackIcon, seacrhIcon, vedioGreenIcon } from "../utils/assets";
+import navigationStrings from "../navigation/navigationStrings";
 
 type ContactSurfProps = {
     sreenName: string;
@@ -63,25 +65,29 @@ const contactSurfUI: React.FC<ContactSurfProps> = ({
                 ListHeaderComponentStyle={{ marginTop: 16 }}
                 renderItem={() => {
                     return (
-                        <ListWapper>
-                            <HorizontalView>
-                                <ProfileImageWrapper>
-                                    <ProfileImage source={profileIcon} />
-                                    <OnlineImage></OnlineImage>
-                                </ProfileImageWrapper>
-                                <VerticleWrapper>
-                                    <TabText fontSize={15} color={tab === 1 ? colors.black : colors.black}>Partner contacts</TabText>
-                                    <TabText fontSize={12} color={tab === 1 ? colors.black : colors.black}>Partner contacts</TabText>
-                                </VerticleWrapper>
-                            </HorizontalView>
+                        <TouchableOpacity onPress={() => {
+                            sreenName === 'Contacts' ? null : navigationRef.current.navigate(navigationStrings.USER_PROFILE)
+                        }}>
+                            <ListWapper>
+                                <HorizontalView>
+                                    <ProfileImageWrapper>
+                                        <ProfileImage source={profileIcon} />
+                                        <OnlineImage></OnlineImage>
+                                    </ProfileImageWrapper>
+                                    <VerticleWrapper>
+                                        <TabText fontSize={15} color={tab === 1 ? colors.black : colors.black}>Partner contacts</TabText>
+                                        <TabText fontSize={12} color={tab === 1 ? colors.black : colors.black}>Partner contacts</TabText>
+                                    </VerticleWrapper>
+                                </HorizontalView>
 
-                            <SocailMediaWrapper>
-                                <ImageView height={24} width={24} marginLeft={0} source={PhoneGreenIcon}></ImageView>
-                                <ImageView height={24} width={24} marginLeft={8} source={MessageBlueIcon}></ImageView>
-                                <ImageView height={24} width={24} marginLeft={8} source={mailBlackIcon}></ImageView>
-                                <ImageView height={24} width={24} marginLeft={8} source={vedioGreenIcon}></ImageView>
-                            </SocailMediaWrapper>
-                        </ListWapper>
+                                <SocailMediaWrapper>
+                                    <ImageView height={24} width={24} marginLeft={0} source={PhoneGreenIcon}></ImageView>
+                                    <ImageView height={24} width={24} marginLeft={8} source={MessageBlueIcon}></ImageView>
+                                    <ImageView height={24} width={24} marginLeft={8} source={mailBlackIcon}></ImageView>
+                                    <ImageView height={24} width={24} marginLeft={8} source={vedioGreenIcon}></ImageView>
+                                </SocailMediaWrapper>
+                            </ListWapper>
+                        </TouchableOpacity>
                     )
                 }}>
 
