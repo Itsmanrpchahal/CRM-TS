@@ -14,6 +14,11 @@ import retalors from '../screens/private/retalors';
 import transactionDesk from '../screens/private/transactionDesk';
 import callCenter from '../screens/private/callCenter';
 import userProfileView from '../screens/private/userProfileView';
+import contactView from '../screens/private/contactView';
+import documentPortal from '../screens/private/documentPortal';
+import DocumentPortalDetail from '../screens/private/DocumentPortalDetail';
+import marketing from '../screens/private/marketing';
+import selfSourcedLeads from '../screens/private/selfSourcedLeads';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -159,6 +164,82 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.USER_PROFILE,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.CONTACT_VIEW}
+                component={contactView}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.CONTACT_VIEW,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.DOCUMENT_PORTAL}
+                component={documentPortal}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.DOCUMENT_PORTAL,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+
+            <Stack.Screen
+                name={navigationStrings.DOCUMENT_PORTAL_DETAIL}
+                component={DocumentPortalDetail}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.DOCUMENT_PORTAL_DETAIL,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.MARKETING}
+                component={marketing}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.MARKETING,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    }
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.SELF_SOURCED_LEADS}
+                component={selfSourcedLeads}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.SELF_SOURCED_LEADS,
                     headerStyle: {
                         backgroundColor: colors.primary
                     }

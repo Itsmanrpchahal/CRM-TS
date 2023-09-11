@@ -86,6 +86,7 @@ type TextProps = {
     fontWeight?: number
 }
 
+
 const ItemImage = styled.Image`
     height:12;
     width:12;

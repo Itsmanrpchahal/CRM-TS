@@ -5,7 +5,7 @@ import ContactSurfUI from "../../../components/ContactSurfUI";
 const Contacts = () => {
     return (
         <MainWrapper>
-            <ContactSurfUI data={[1, 1, 1, 1, 1, 1]}></ContactSurfUI>
+            <ContactSurfUI data={[1, 1, 1, 1, 1, 1]} sreenName='Contacts'></ContactSurfUI>
         </MainWrapper >
     )
 }

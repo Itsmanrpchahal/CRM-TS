@@ -41,6 +41,22 @@ import leftRightIcon from '../assets/leftRight/leftRight.png'
 import sendIcon from '../assets/send/send.png'
 import editIcon from '../assets/edit/edit.png'
 import noteIcon from '../assets/notes/notes.png'
+import arrowDownIcon from '../assets/arrowDown/arrowDown.png'
+import usersRoundIcon from '../assets/usersRound/usersRound.png'
+import waveIcon from '../assets/wave/wave.png'
+import rocketRoundIcon from '../assets/rocketRound/rocket.png'
+import messageIcon from '../assets/messageIcon/messageIcon.png'
+import dollarHomeIcon from '../assets/dollarHome/dollarHome.png'
+import rocketMoneyIcon from '../assets/rocketMoney/rocketMoney.png'
+import docIcon from '../assets/docHome/doc.png'
+import buildingIcon from '../assets/building/building.png'
+import formsIcon from '../assets/forms/forms.png'
+import tickShadowIcon from '../assets/tickShadow/tickShadow.png'
+import documentUpIcon from '../assets/documentUp/documentUp.png'
+import emailTemplateIcon from '../assets/emailTemplate/emailTemplate.png'
+import textTemplateIcon from '../assets/textTemplate/textTemplate.png'
+import dripCampaignIcon from '../assets/dripCampaign/dripCampaign.png'
+import tagsIcon from '../assets/tags/tag.png'
 
 export {
     ChatIcon,
@@ -85,5 +101,21 @@ export {
     leftRightIcon,
     sendIcon,
     editIcon,
-    noteIcon
+    noteIcon,
+    arrowDownIcon,
+    usersRoundIcon,
+    waveIcon,
+    rocketRoundIcon,
+    messageIcon,
+    dollarHomeIcon,
+    rocketMoneyIcon,
+    docIcon,
+    buildingIcon,
+    formsIcon,
+    tickShadowIcon,
+    documentUpIcon,
+    emailTemplateIcon,
+    textTemplateIcon,
+    dripCampaignIcon,
+    tagsIcon
 };

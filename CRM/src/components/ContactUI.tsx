@@ -15,10 +15,6 @@ const ContactSurfUI = () => {
         setToggle(!isEnabled);
     };
 
-    useEffect(() => {
-        alert('Here')
-    }, [])
-
     return (
         <MainWrapper>
             <ScrollView style={{ marginLeft: 16, marginRight: 16, paddingTop: 16 }} showsVerticalScrollIndicator={false}>

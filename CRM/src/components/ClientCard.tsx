@@ -148,6 +148,7 @@ const ImageWrapper = styled.Image`
 const TextWrapper = styled.Text<TextProps>`
     font-size:${({ fontSize }: any) => fontSize}px;
     align-self:center;
+    margin-top:5px;
     color:${({ theme }: any) => theme.colors.black};
 `;
 

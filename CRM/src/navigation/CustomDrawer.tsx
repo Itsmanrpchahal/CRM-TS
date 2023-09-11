@@ -47,13 +47,18 @@ function CustomDrawer(props: any) {
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity onPress={() => {
-                    item.value === 2 ? navigation.navigate(navigationStrings.TAB_BAR_CONTACTS) :
-                      item.value === 3 ? navigation.navigate(navigationStrings.TAB_BAR_USERS) :
-                        item.value === 5 ? navigation.navigate(navigationStrings.TRANSACTION_DESK) :
-                          item.value === 8 ? navigation.navigate(navigationStrings.CALL_CENTER) :
-                            item.value === 9 ? navigation.navigate(navigationStrings.AGENTS) :
-                              item.value === 10 ? navigation.navigate(navigationStrings.RETALORS) :
-                                null
+                    item.value === 1 ? navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD) :
+                      item.value === 2 ? navigation.navigate(navigationStrings.TAB_BAR_CONTACTS) :
+                        item.value === 3 ? navigation.navigate(navigationStrings.TAB_BAR_USERS) :
+                          item.value === 4 ? navigation.navigate(navigationStrings.SELF_SOURCED_LEADS) :
+                            item.value === 5 ? navigation.navigate(navigationStrings.TRANSACTION_DESK) :
+                              item.value === 6 ? navigation.navigate(navigationStrings.DOCUMENT_PORTAL) :
+                                item.value === 7 ? navigation.navigate(navigationStrings.TAB_BAR_PROPERTIES) :
+                                  item.value === 8 ? navigation.navigate(navigationStrings.CALL_CENTER) :
+                                    item.value === 9 ? navigation.navigate(navigationStrings.AGENTS) :
+                                      item.value === 10 ? navigation.navigate(navigationStrings.RETALORS) :
+                                        item.value === 11 ? navigation.navigate(navigationStrings.MARKETING) :
+                                          null
                   }}>
                     <ItemWrapper>
                       <ImageView source={item.image}></ImageView>

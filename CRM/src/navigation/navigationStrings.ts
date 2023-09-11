@@ -12,4 +12,9 @@ export default {
     RETALORS: 'Retalors',
     CALL_CENTER: "Call Center",
     USER_PROFILE: 'User Profile',
+    CONTACT_VIEW: 'Contact',
+    DOCUMENT_PORTAL: 'Document Portal',
+    DOCUMENT_PORTAL_DETAIL: 'Document Portal Detail',
+    MARKETING: 'Marketing',
+    SELF_SOURCED_LEADS: 'Self Sourced Leads'
 };

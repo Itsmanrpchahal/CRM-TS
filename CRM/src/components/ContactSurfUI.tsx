@@ -40,19 +40,19 @@ const contactSurfUI: React.FC<ContactSurfProps> = ({
             <TabsWarpper>
                 <TouchableOpacity onPress={() => { setTab(0) }}>
                     <TabView>
-                        <TabText fontSize={12} color={tab === 0 ? colors.primary : colors.black}>All contacts</TabText>
+                        <TabText fontSize={12} color={tab === 0 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'All leads' : 'All Contacts'}</TabText>
                         <Divider color={tab === 0 ? colors.primary : 'transparent'}></Divider>
                     </TabView>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { setTab(1) }}>
                     <TabView>
-                        <TabText fontSize={12} color={tab === 1 ? colors.primary : colors.black}>Partner contacts</TabText>
+                        <TabText fontSize={12} color={tab === 1 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'My Sphere' : 'Partner contacts'}</TabText>
                         <Divider color={tab === 1 ? colors.primary : 'transparent'}></Divider>
                     </TabView>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { setTab(2) }}>
                     <TabView>
-                        <TabText fontSize={12} color={tab === 2 ? colors.primary : colors.black}>My sphere</TabText>
+                        <TabText fontSize={12} color={tab === 2 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'New Leads' : 'Partner contacts'}</TabText>
                         <Divider color={tab === 2 ? colors.primary : 'transparent'}></Divider>
                     </TabView>
                 </TouchableOpacity>
@@ -66,7 +66,8 @@ const contactSurfUI: React.FC<ContactSurfProps> = ({
                 renderItem={() => {
                     return (
                         <TouchableOpacity onPress={() => {
-                            sreenName === 'Contacts' ? null : navigationRef.current.navigate(navigationStrings.USER_PROFILE)
+                            sreenName === 'Contacts' ? navigationRef.current.navigate(navigationStrings.CONTACT_VIEW) :
+                                sreenName === 'surfLeads' ? navigationRef.current.navigate(navigationStrings.CONTACT_VIEW) : navigationRef.current.navigate(navigationStrings.USER_PROFILE)
                         }}>
                             <ListWapper>
                                 <HorizontalView>
