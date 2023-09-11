@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './RootNavigation';
 // @ts-ignore
 import MainDrawer from '../navigation/Drawer';
+import { StatusBar } from 'react-native';
 
 type RouteProps = {
     scheme: any;
@@ -14,6 +15,7 @@ type RouteProps = {
 const Routes: React.FC<RouteProps> = ({ scheme }) => {
     return (
         <NavigationContainer ref={navigationRef} theme={scheme}  >
+            <StatusBar backgroundColor='#496D8C'></StatusBar>
             <MainDrawer />
         </NavigationContainer>
     );

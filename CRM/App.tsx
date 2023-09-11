@@ -17,6 +17,7 @@ import { ThemeProvider, useTheme } from 'styled-components';
 import { navigationTheme } from './src/theme/theme';
 import Routes from './src/navigation/Routes';
 import { LogBox } from 'react-native';
+import ModalManager from './src/store/global_modal/manager';
 
 const persistor = persistStore(store);
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={navigationTheme.light}>
             <Routes scheme={navigationTheme.light} />
+            <ModalManager />
           </ThemeProvider>
         </QueryClientProvider>
       </PersistGate>
