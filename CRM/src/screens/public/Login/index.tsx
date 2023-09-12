@@ -13,12 +13,9 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from '../../../hooks/useActions'
 const Login = ({ navigation }) => {
     const { colors }: any = useTheme();
-    const {
-        openModal,
-    } = useActions();
     useEffect(() => {
     }, [])
     return (
@@ -33,13 +30,8 @@ const Login = ({ navigation }) => {
                         password: 'as',
                     }}
                     onSubmit={(values) => {
-                        // navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
-                        openModal(
-                            'AccountModalSheet',
-                            {
-                                height: '80%',
-                            },
-                        )
+                        navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
+
                     }}>
                     {({ setFieldValue, handleSubmit, errors }) => (
                         <FormikWrapper>

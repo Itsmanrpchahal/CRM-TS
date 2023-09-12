@@ -8,7 +8,7 @@ import BottomSheet, {
 import styled from 'styled-components/native';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 // @ts-ignore
 import {
     AccountModalSheet,
@@ -17,7 +17,7 @@ import { useTheme } from 'styled-components/native';
 
 const ModalManager = () => {
     const { closeModal } = useActions();
-    const bottomSheetRef = useRef(null);
+    const bottomSheetRef = useRef();
     const { colors }: any = useTheme();
     /**
      * * @{ get current modal }
@@ -39,7 +39,7 @@ const ModalManager = () => {
     // variables
     const snapPoints = useMemo(
         () => [
-            '0%',
+            1,
             modalProps !== null && modalProps.hasOwnProperty('height')
                 ? modalProps.height
                 : '70%',

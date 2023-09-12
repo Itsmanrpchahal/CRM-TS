@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useState } from 'react';
+import React from 'react';
 // @ts-ignore
 import { createStackNavigator } from '@react-navigation/stack';
 import navigationStrings from '../navigation/navigationStrings';
@@ -7,7 +7,7 @@ import { useTheme } from '@react-navigation/native';
 import Login from '../screens/public/Login';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import DashboardTabs from './Tabbar';
-import { Call, Chat, Contacts, Messages, Properties } from '.';
+import { Call, Chat, Contacts, Properties } from '.';
 import surfLeads from '../screens/private/surfLeads';
 import agents from '../screens/private/agents';
 import retalors from '../screens/private/retalors';
@@ -19,6 +19,10 @@ import documentPortal from '../screens/private/documentPortal';
 import DocumentPortalDetail from '../screens/private/DocumentPortalDetail';
 import marketing from '../screens/private/marketing';
 import selfSourcedLeads from '../screens/private/selfSourcedLeads';
+import messageDetail from '../screens/private/messageDetail';
+import { styled } from 'styled-components/native';
+import { VedioIcon } from '../utils/assets';
+import SurfMailDrawer from './surfMailDrawer';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -74,9 +78,9 @@ function StackNavigator(props: any) {
             />
             <Stack.Screen
                 name={navigationStrings.TAB_BAR_MESSAGE}
-                component={Messages}
+                component={SurfMailDrawer}
                 options={{
-                    headerShown: false,
+                    headerShown: true,
                     title: 'Message',
                 }}
             />
@@ -246,7 +250,33 @@ function StackNavigator(props: any) {
                 }}
             />
 
+            <Stack.Screen
+                name={navigationStrings.MESSAGE_DETAIL}
+                component={messageDetail}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.MESSAGE_DETAIL,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+                    headerRight: () => (
+                        <ImageView source={VedioIcon}></ImageView>
+                    ),
+                }}
+
+            />
+
         </Stack.Navigator>
     )
 }
 export default StackNavigator;
+
+const ImageView = styled.Image`
+    height:30px;
+    width:30px;
+    resize-mode:contain;
+    margin-right:16px;
+`;

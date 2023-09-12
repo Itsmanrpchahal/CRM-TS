@@ -5,12 +5,14 @@ import { useTheme } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 // @ts-ignore
 import styled from 'styled-components/native';
-import { Chat, Call, Contacts, Dashboard, Properties, Messages } from '../navigation/index';
+import { Chat, Call, Contacts, Dashboard, Properties, surfMails } from '../navigation/index';
 import navigationStrings from './navigationStrings';
 import { TabBarIcon } from './TabbarIcon';
 import { MenuIcon } from '../assets';
 import surfLeads from '../screens/private/surfLeads';
 import { CalenderWhiteIcon, NotificatioWhiteIcon } from '../utils/assets';
+import surfMailStackNavigator from './SurfMailStackNavigator';
+import SurfMailDrawer from './surfMailDrawer';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,7 +75,7 @@ function DashboardTabs(props: any) {
                 tabBarLabel: () => { return null }
             }} />
 
-            <Tab.Screen name={navigationStrings.TAB_BAR_MESSAGE} component={Messages} options={{
+            <Tab.Screen name={navigationStrings.TAB_BAR_MESSAGE} component={SurfMailDrawer} options={{
                 tabBarLabel: () => { return null }
             }} />
             <Tab.Screen name={navigationStrings.TAB_BAR_CALL} component={Call} options={{

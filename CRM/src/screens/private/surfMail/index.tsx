@@ -1,22 +1,32 @@
 import React from "react";
-import { FlatList, Platform, TouchableOpacity, View } from "react-native";
+import { FlatList, Platform, TouchableOpacity } from "react-native";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { seacrhIcon } from '../../../utils/assets'
-import { profileIcon } from "../../../assets";
+import { MenuIcon, seacrhIcon } from "../../../utils/assets";
 import navigationStrings from "../../../navigation/navigationStrings";
-const Chat = ({ navigation }) => {
+import { profileIcon } from "../../../assets";
+const surfMails = ({ navigation }) => {
+
     const { colors } = useTheme()
     return (
         <MainWrapper>
             <TopView>
-                <TextView color={colors.black} fontSize={20} fontWeight={700}>
-                    Messages
-                </TextView>
-
                 <SearchWrapperView>
                     <SearchWrapperTextFieldView>
-                        <ImageView height={16} width={16} marginLeft={0} source={seacrhIcon} />
-                        <SearchTextInput style={{ paddingTop: Platform.OS === 'android' && -5, paddingBottom: Platform.OS === 'android' && -5 }} placeholder="Search"></SearchTextInput>
+
+                        <SearchWrapperView>
+                            <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
+                                <ImageView style={{
+                                    transform: [
+                                        { scaleX: -1 }
+                                    ]
+                                }} height={16} width={16} marginLeft={0} source={MenuIcon} tintColor={colors.black} />
+                            </TouchableOpacity>
+                            <Dashline></Dashline>
+                            <ImageView height={16} width={16} marginLeft={10} source={seacrhIcon} />
+
+                            <SearchTextInput style={{ paddingTop: Platform.OS === 'android' && -5, paddingBottom: Platform.OS === 'android' && -5 }} placeholder="Search"></SearchTextInput>
+
+                        </SearchWrapperView>
                     </SearchWrapperTextFieldView>
                 </SearchWrapperView>
             </TopView>
@@ -55,7 +65,8 @@ const Chat = ({ navigation }) => {
     )
 }
 
-export default withTheme(Chat)
+export default withTheme(surfMails)
+
 
 type TextProps = {
     color?: string;
@@ -76,6 +87,15 @@ type OnlineWrapper = {
 type DrawerWrapperProps = {
     backgroundColor: string;
 };
+
+const Dashline = styled.View`
+    height:35px;
+    width:1px;
+    margin-top:-5px;
+    margin-bottom:-5px;
+    margin-left:5px;
+    background-color:${({ theme }: any) => theme.colors.gray};
+`;
 
 const Divider = styled.View<DrawerWrapperProps>`
   height: 1px;
@@ -127,12 +147,12 @@ const ImageView = styled.Image<ImageProps>`
     margin-left:${({ theme, marginLeft }: any) => marginLeft}px;
     height:${({ theme, height }: any) => height}px;
     width:${({ theme, width }: any) => width}px;
+    resize-mode:contain;
     `;
 
 const SearchWrapperTextFieldView = styled.View`
     flex-direction:row;
     width:100%;
-    padding:5px;
     align-items:center;
     border-radius:8px;
     border-width:0.5px;
@@ -142,9 +162,10 @@ const SearchWrapperTextFieldView = styled.View`
 
 const SearchWrapperView = styled.View`
     flex-direction:row; 
-    justify-content:space-between;
+    justify-content:center;
+    align-items:center;
     width:100%;
-    padding-top:10px;
+    padding:5px;
 `;
 
 const TextView = styled.Text<TextProps>`

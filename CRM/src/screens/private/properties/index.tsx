@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text } from 'react-native'
+import { FlatList, Text, TouchableOpacity } from 'react-native'
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from '../../../utils/globalStyles'
 import { AddIcon, BrushIcon, FilterIcon, UndoIcon } from '../../../utils/assets'
 import CardSwipeWrapper from "../../../components/CardSwipeWrapper";
+import { useActions } from '../../../hooks/useActions'
 
 const Properties = () => {
     const [topHeight, setTopHeight] = useState(0)
     const [centerHeight, setCenterHeight] = useState(0)
     const [mainHeight, setMainHeight] = useState(0)
     const [visible, setVisible] = useState(false)
-
+    const {
+        openModal,
+    } = useActions();
 
     useEffect(() => {
         setTimeout(() => {
@@ -48,10 +51,19 @@ const Properties = () => {
                             <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
                             <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
                         </FilterBtn>
-                        <FilterBtn>
-                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                            <TextWrapper>Filter</TextWrapper>
-                        </FilterBtn>
+                        <TouchableOpacity onPress={() => {
+                            openModal(
+                                'AccountModalSheet',
+                                {
+                                    height: '80%',
+                                },
+                            )
+                        }}>
+                            <FilterBtn>
+                                <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                <TextWrapper>Filter</TextWrapper>
+                            </FilterBtn>
+                        </TouchableOpacity>
                         <FilterBtn>
                             <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
                             <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>

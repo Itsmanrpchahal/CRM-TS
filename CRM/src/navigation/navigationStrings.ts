@@ -5,8 +5,8 @@ export default {
     TAB_BAR_CONTACTS: 'Contacts',
     TAB_BAR_DASHBOARD: 'Dashboard',
     TRANSACTION_DESK: 'Transaction Desk',
-    TAB_BAR_MESSAGE: 'Messages',
-    TAB_BAR_CHAT: 'Chat',
+    TAB_BAR_MESSAGE: 'surf Mail',
+    TAB_BAR_CHAT: 'surf Messaging',
     TAB_BAR_CALL: 'Call',
     AGENTS: "Agents",
     RETALORS: 'Retalors',
@@ -16,5 +16,6 @@ export default {
     DOCUMENT_PORTAL: 'Document Portal',
     DOCUMENT_PORTAL_DETAIL: 'Document Portal Detail',
     MARKETING: 'Marketing',
-    SELF_SOURCED_LEADS: 'Self Sourced Leads'
+    SELF_SOURCED_LEADS: 'Self Sourced Leads',
+    MESSAGE_DETAIL: 'Message Detail'
 };

@@ -57,6 +57,10 @@ import emailTemplateIcon from '../assets/emailTemplate/emailTemplate.png'
 import textTemplateIcon from '../assets/textTemplate/textTemplate.png'
 import dripCampaignIcon from '../assets/dripCampaign/dripCampaign.png'
 import tagsIcon from '../assets/tags/tag.png'
+import VedioIcon from '../assets/video/video.png'
+import MicIcon from '../assets/mic/mic.png'
+import addGrayIcon from '../assets/addGray/addGray.png'
+import nochIcon from '../assets/noch/nochnew.png'
 
 export {
     ChatIcon,
@@ -117,5 +121,9 @@ export {
     emailTemplateIcon,
     textTemplateIcon,
     dripCampaignIcon,
-    tagsIcon
+    tagsIcon,
+    VedioIcon,
+    MicIcon,
+    addGrayIcon,
+    nochIcon
 };
