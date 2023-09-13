@@ -15,7 +15,7 @@ type RouteProps = {
 const Routes: React.FC<RouteProps> = ({ scheme }) => {
     return (
         <NavigationContainer ref={navigationRef} theme={scheme}  >
-            <StatusBar backgroundColor='#496D8C'></StatusBar>
+            <StatusBar backgroundColor='#496D8C' barStyle={'light-content'}></StatusBar>
             <MainDrawer />
         </NavigationContainer>
     );

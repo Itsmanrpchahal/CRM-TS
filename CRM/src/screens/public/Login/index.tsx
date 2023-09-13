@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapper } from '../../../utils/globalStyles'
 import navigationStrings from "../../../navigation/navigationStrings";
