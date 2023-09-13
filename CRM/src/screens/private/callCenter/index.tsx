@@ -5,12 +5,14 @@ import { Switch } from 'react-native-switch';
 import { MessageIcon, calenderminusIcon, leftRightIcon, phoneincomingIcon, voiceMailIcon } from "../../../utils/assets";
 import ClientCard from "../../../components/ClientCard";
 import ChatUI from "../../../components/ChatUI";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import RetalorUI from "../../../components/RetalorUI";
+import { useActions } from "../../../hooks/useActions";
 
 const CallCenter = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [toggle, setToggle] = useState(false);
+    const { openModal } = useActions()
     const { colors } = useTheme()
     const toggleSwitch = () => {
         setIsEnabled((previousState) => !previousState);
@@ -61,9 +63,18 @@ const CallCenter = () => {
                 <ClientCard></ClientCard>
                 <ChatUI></ChatUI>
                 <RetalorUI></RetalorUI>
-                <ImageView>
-                    <ImageWrapper1 marginBottom={30} marginTop={30} height={30} width={60} source={leftRightIcon}></ImageWrapper1>
-                </ImageView>
+                <TouchableOpacity onPress={() => {
+                    openModal(
+                        'AddNewRealtorSheet',//AddNewRealtorSheet
+                        {
+                            height: '80%'
+                        }
+                    )
+                }}>
+                    <ImageView>
+                        <ImageWrapper1 marginBottom={30} marginTop={30} height={30} width={60} source={leftRightIcon}></ImageWrapper1>
+                    </ImageView>
+                </TouchableOpacity>
 
             </MainWrapper>
         </ScrollView>

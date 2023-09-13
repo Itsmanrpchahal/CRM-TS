@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useEffect, useRef } from 'react';
-
 import BottomSheet, {
     BottomSheetBackdrop,
     BottomSheetScrollView,
@@ -11,7 +10,16 @@ import { useActions } from '../../hooks/useActions';
 import { ScrollView, View } from 'react-native';
 // @ts-ignore
 import {
-    AccountModalSheet,
+    ActivityLogSheet,
+    ActivitySummarySheet,
+    InterestedPartiesSheet,
+    SendSelectedPropertiesSheet,
+    SendSearchCriteriaSheet,
+    FilterSheet,
+    AssignaRealtorSheet,
+    CallsinQueueSheet,
+    AddNewAgentSheet,
+    AddNewRealtorSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -81,7 +89,7 @@ const ModalManager = () => {
                     snapPoints={snapPoints}
                     onChange={handleSheetChanges}>
                     <BottomSheetScrollView
-                        style={{ backgroundColor: colors.primary }}
+                        style={{ backgroundColor: colors.white }}
                         showsVerticalScrollIndicator={false}>
                         {renderedModal}
                     </BottomSheetScrollView>
@@ -118,7 +126,16 @@ export const WelcomeModal = (props: any) => {
 
 const modalLookup: any = {
     WelcomeModal,
-    AccountModalSheet,
+    ActivityLogSheet,
+    ActivitySummarySheet,
+    InterestedPartiesSheet,
+    SendSelectedPropertiesSheet,
+    SendSearchCriteriaSheet,
+    FilterSheet,
+    AssignaRealtorSheet,
+    CallsinQueueSheet,
+    AddNewAgentSheet,
+    AddNewRealtorSheet
 };
 
 const WelcomeModalWrapper = styled.View`

@@ -61,6 +61,18 @@ import VedioIcon from '../assets/video/video.png'
 import MicIcon from '../assets/mic/mic.png'
 import addGrayIcon from '../assets/addGray/addGray.png'
 import nochIcon from '../assets/noch/nochnew.png'
+import telephoneIcon from '../assets/telephone/telephone.png'
+import videoRoundIcon from '../assets/videoRound/videoRound.png'
+import landlineIcon from '../assets/landline/landline.png'
+import websiteIcon from '../assets/website/website.png'
+import eyeglassIcon from '../assets/eyeglass/eyeglass.png'
+import thumbsupIcon from '../assets/thumbsup/thumbsup.png'
+import dropdownIcon from '../assets/dropdown/dropdown.png'
+import homeIcon from '../assets/home/home.png'
+import pencilIcon from '../assets/pencil/pencil.png'
+import updownIcon from '../assets/updown/updown.png'
+import downCircleIcon from '../assets/downCircle/downCircle.png'
+import tickCircleIcon from '../assets/tickCircle/tickRound.png'
 
 export {
     ChatIcon,
@@ -125,5 +137,17 @@ export {
     VedioIcon,
     MicIcon,
     addGrayIcon,
-    nochIcon
+    nochIcon,
+    telephoneIcon,
+    videoRoundIcon,
+    landlineIcon,
+    websiteIcon,
+    eyeglassIcon,
+    thumbsupIcon,
+    dropdownIcon,
+    homeIcon,
+    pencilIcon,
+    updownIcon,
+    downCircleIcon,
+    tickCircleIcon
 };

@@ -1,4 +1,6 @@
 // @ts-ignore
+import { type } from 'os';
+import { any } from 'prop-types';
 import React, { useState } from 'react';
 
 import { withTheme } from 'styled-components';
@@ -8,6 +10,7 @@ import styled from 'styled-components/native';
 type TextFieldProps = {
   onChangeText?: Function;
   placeholder?: string;
+  accessibilityLabelColor?: string;
   value?: string;
   accessibilityLabel?: string;
   secureTextEntry?: boolean;
@@ -18,11 +21,14 @@ type TextFieldProps = {
   defaultValue?: string;
   editable?: boolean;
   style?: any;
+  borderColor?: string;
+  borderRadius?: number;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
   placeholder,
   accessibilityLabel,
+  accessibilityLabelColor = 'white',
   secureTextEntry = false,
   keyboardType = 'default',
   onChangeText = false,
@@ -32,6 +38,8 @@ const TextField: React.FC<TextFieldProps> = ({
   defaultValue = '',
   editable = true,
   style = {},
+  borderColor = 'white',
+  borderRadius = 8,
   ...rest
 }) => {
   const [showSecureEntry, setShowSecureEntry] = useState(false);
@@ -40,13 +48,13 @@ const TextField: React.FC<TextFieldProps> = ({
     <TextFieldWrapper>
       {accessibilityLabel !== undefined && (
         <TextInputLabelWrapper>
-          <TextInputLabelWrapper__Content>
+          <TextInputLabelWrapper__Content accessibilityLabelColor={accessibilityLabelColor}>
             {accessibilityLabel}
           </TextInputLabelWrapper__Content>
         </TextInputLabelWrapper>
       )}
 
-      <Horizontal>
+      <Horizontal borderColor={borderColor} borderRadius={borderRadius}>
         <TextInputField
           onChangeText={onChangeText}
           secureTextEntry={showSecureEntry ? false : secureTextEntry}
@@ -74,6 +82,14 @@ const TextField: React.FC<TextFieldProps> = ({
 // @ts-ignore
 export default withTheme(TextField);
 
+type HorizontalProps = {
+  borderColor: string;
+  borderRadius: number;
+}
+
+type accessibilityLabelProps = {
+  color: string;
+}
 const ErrorWrapper = styled.View`
   margin-top: 3px;
   padding-left: 2px;
@@ -89,7 +105,7 @@ const TextInputField = styled.TextInput`
   paddingVertical: 0
 `;
 
-const Horizontal = styled.View`
+const Horizontal = styled.View<HorizontalProps>`
   display: flex;
   padding-left: 15px;
   padding-right: 15px;
@@ -98,13 +114,13 @@ const Horizontal = styled.View`
   flex-direction: row;
   align-items: center;
   border-width: 1px;
-  border-color: ${({ theme }: any) => theme.colors.white};
-  border-radius: 8px;
+  border-color: ${({ borderColor }: any) => borderColor};
+  border-radius: ${({ borderRadius }: any) => borderRadius}px;
   margin-top: 10px;
 `;
 
-const TextInputLabelWrapper__Content = styled.Text`
-  color: ${({ theme }: any) => theme.colors.white};
+const TextInputLabelWrapper__Content = styled.Text<accessibilityLabelProps>`
+  color: ${({ theme, color }: any) => color};
 `;
 
 const TextInputLabelWrapper = styled.View`

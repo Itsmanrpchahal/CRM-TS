@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity } from 'react-native'
+import { FlatList, TouchableOpacity } from 'react-native'
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from '../../../utils/globalStyles'
-import { AddIcon, BrushIcon, FilterIcon, UndoIcon } from '../../../utils/assets'
+import { AddIcon, FilterIcon } from '../../../utils/assets'
 import CardSwipeWrapper from "../../../components/CardSwipeWrapper";
 import { useActions } from '../../../hooks/useActions'
 
@@ -48,25 +48,57 @@ const Properties = () => {
                     </FlatList>
                     <TabWrapper>
                         <FilterBtn>
-                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                            <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    openModal(
+                                        'SendSelectedPropertiesSheet',
+                                        {
+                                            height: '80%',
+                                        },
+                                    )
+                                }}>
+                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                    <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
+                                </TabWrapper>
+                            </TouchableOpacity>
                         </FilterBtn>
-                        <TouchableOpacity onPress={() => {
-                            openModal(
-                                'AccountModalSheet',
-                                {
-                                    height: '80%',
-                                },
-                            )
-                        }}>
-                            <FilterBtn>
-                                <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                                <TextWrapper>Filter</TextWrapper>
-                            </FilterBtn>
-                        </TouchableOpacity>
+
+                        <FilterBtn >
+                            <TouchableOpacity
+                                onPress={() => {
+                                    openModal(
+                                        'FilterSheet',
+                                        {
+                                            height: '80%',
+                                        },
+                                    )
+                                }}>
+                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                    <TextWrapper style={{ marginLeft: 10 }}>Filter</TextWrapper>
+                                </TabWrapper>
+                            </TouchableOpacity>
+
+
+                        </FilterBtn>
                         <FilterBtn>
-                            <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                            <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>
+
+                            <TouchableOpacity
+                                onPress={() => {
+                                    openModal(
+                                        'SendSearchCriteriaSheet',
+                                        {
+                                            height: '90%',
+                                        },
+                                    )
+                                }}>
+                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                    <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>
+                                </TabWrapper>
+                            </TouchableOpacity>
+
                         </FilterBtn>
                     </TabWrapper>
 
@@ -100,12 +132,6 @@ const TabWrapper = styled.View`
     justify-content:space-between;
 `;
 
-
-
-const CenterWrapper = styled.View<CenterProps>`
-    height:${({ height }: any) => height}px;
-`;
-
 const TopWrapper = styled.View`
     justify-content:center;
     align-items:center;
@@ -113,8 +139,8 @@ const TopWrapper = styled.View`
 
 const FilterBtn = styled.View`
     flex-direction:row;
+    width:33%;
     height:30px;
-    width:120px;
     padding-horizontal:15px;
     justify-content:space-evenly;
     display:inline;

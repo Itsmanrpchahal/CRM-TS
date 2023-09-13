@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { Switch } from 'react-native-switch';
 import { AddIcon, arrowDownIcon, editIcon, messageIcon, rocketRoundIcon, sendIcon, usersRoundIcon, waveIcon } from "../../../utils/assets";
 import ClientCard from "../../../components/ClientCard";
-import { FlatList, ScrollView, TextInput } from "react-native";
+import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { useActions } from "../../../hooks/useActions";
 
 const ContactView = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [toggle, setToggle] = useState(false);
     const { colors } = useTheme()
+    const {
+        openModal,
+    } = useActions();
     const toggleSwitch = () => {
         setIsEnabled((previousState) => !previousState);
         setToggle(!isEnabled);
@@ -123,22 +126,49 @@ const ContactView = () => {
                     }
                 </TabWrapeer>
 
-                <Card>
-                    <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Activity Log</TextView1>
-                    <ImageView1 height={40} width={40} marginLeft={10} source={waveIcon} />
-                </Card>
+                <TouchableOpacity onPress={() => {
+                    openModal(
+                        'ActivityLogSheet',
+                        {
+                            height: '80%',
+                        },
+                    )
+                }}>
+                    <Card>
+                        <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Activity Log</TextView1>
+                        <ImageView1 height={40} width={40} marginLeft={10} source={waveIcon} />
+                    </Card>
+                </TouchableOpacity>
 
-                <Card>
-                    <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Interested
-                        Parties</TextView1>
-                    <ImageView1 height={40} width={40} marginLeft={10} source={usersRoundIcon} />
-                </Card>
+                <TouchableOpacity onPress={() => {
+                    openModal(
+                        'ActivitySummarySheet',
+                        {
+                            height: '80%',
+                        },
+                    )
+                }}>
+                    <Card>
+                        <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Interested
+                            Parties</TextView1>
+                        <ImageView1 height={40} width={40} marginLeft={10} source={usersRoundIcon} />
+                    </Card>
+                </TouchableOpacity>
 
-                <Card>
-                    <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Start
-                        Transaction</TextView1>
-                    <ImageView1 height={40} width={40} marginLeft={10} source={rocketRoundIcon} />
-                </Card>
+                <TouchableOpacity onPress={() => {
+                    openModal(
+                        'InterestedPartiesSheet',
+                        {
+                            height: '80%',
+                        },
+                    )
+                }}>
+                    <Card>
+                        <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>Start
+                            Transaction</TextView1>
+                        <ImageView1 height={40} width={40} marginLeft={10} source={rocketRoundIcon} />
+                    </Card>
+                </TouchableOpacity>
 
                 <BottomView>
                     <ImageView height={60} width={60} source={messageIcon} marginLeft={0} />
@@ -200,8 +230,6 @@ const TagView = styled.Text`
     padding:3px;
     align-items:center;
     justify-content:center;
-    padding-left:4px;
-    padding-right:4px;
     border-width:1px;
     border-color:${({ theme }: any) => theme.colors.primary};
     `;
