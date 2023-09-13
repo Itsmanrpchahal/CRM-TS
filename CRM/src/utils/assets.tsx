@@ -73,6 +73,10 @@ import pencilIcon from '../assets/pencil/pencil.png'
 import updownIcon from '../assets/updown/updown.png'
 import downCircleIcon from '../assets/downCircle/downCircle.png'
 import tickCircleIcon from '../assets/tickCircle/tickRound.png'
+import trashIcon from '../assets/trash/trash.png'
+import sendHorizontalIcon from '../assets/sendHorizontal/sendHorizotal.png'
+import inboxIcon from '../assets/inbox/inbox.png'
+import draftsIcon from '../assets/drafts/drafts.png'
 
 export {
     ChatIcon,
@@ -149,5 +153,9 @@ export {
     pencilIcon,
     updownIcon,
     downCircleIcon,
-    tickCircleIcon
+    tickCircleIcon,
+    trashIcon,
+    sendHorizontalIcon,
+    inboxIcon,
+    draftsIcon
 };
