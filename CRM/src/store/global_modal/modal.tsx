@@ -8,6 +8,10 @@ import AssignaRealtorSheet from '../../components/sheets/AssignaRealtorSheet'
 import CallsinQueueSheet from '../../components/sheets/CallsinQueueSheet'
 import AddNewAgentSheet from '../../components/sheets/AddNewAgentSheet'
 import AddNewRealtorSheet from '../../components/sheets/AddNewRealtorSheet'
+import VoiceMailSheet from '../../components/sheets/VoiceMailSheet'
+import EmailTemplatesSheet from '../../components/sheets/EmailTemplatesSheet'
+import SMSTemplatesSheet from '../../components/sheets/SMSTemplateSheet'
+import DripCampaignsSheet from '../../components/sheets/DripCampaignsSheet'
 
 export {
     ActivityLogSheet,
@@ -19,5 +23,9 @@ export {
     AssignaRealtorSheet,
     CallsinQueueSheet,
     AddNewAgentSheet,
-    AddNewRealtorSheet
+    AddNewRealtorSheet,
+    VoiceMailSheet,
+    EmailTemplatesSheet,
+    SMSTemplatesSheet,
+    DripCampaignsSheet
 };

@@ -1,7 +1,8 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { dripCampaignIcon, emailTemplateIcon, tagsIcon, textTemplateIcon, tickShadowIcon } from "../../../utils/assets";
+import { dripCampaignIcon, emailTemplateIcon, tagsIcon, textTemplateIcon } from "../../../utils/assets";
+import { useActions } from "../../../hooks/useActions";
 
 const data = [
     { title: 'Send an email template', image: emailTemplateIcon },
@@ -13,26 +14,41 @@ const data = [
 ]
 const Marketing = () => {
     const { colors } = useTheme()
+    const { openModal } = useActions()
     return (
         <MainWrapper>
             <ScrollView showsVerticalScrollIndicator={false}>
+                <TextView1 fontSize={18} fontWeight={500} color={colors.black} marginTop={16}>Quick Actions</TextView1>
                 <MainCardView>
                     {
-                        data.map((item) => {
+                        data.map((item, index) => {
                             return (
-                                <Card style={{
-                                    shadowColor: 'black',
-                                    shadowOffset: { width: 0, height: 2 },
-                                    shadowRadius: 6,
-                                    shadowOpacity: 0.26,
-                                    elevation: 8,
-                                    backgroundColor: 'white',
-                                    padding: 20,
-                                    borderRadius: 10
+                                <TouchableOpacity onPress={() => {
+                                    {
+                                        index === 0 ? openModal('EmailTemplatesSheet', {
+                                            height: '80%'
+                                        }) : index === 1 ? openModal('SMSTemplatesSheet', {
+                                            height: '80%'
+                                        }) :
+                                            index === 2 ? openModal('DripCampaignsSheet', {
+                                                height: '80%'
+                                            }) : null
+                                    }
                                 }}>
-                                    <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>{item.title}</TextView1>
-                                    <ImageView1 height={40} width={40} marginLeft={10} source={item.image} />
-                                </Card>
+                                    <Card style={{
+                                        shadowColor: 'black',
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowRadius: 6,
+                                        shadowOpacity: 0.26,
+                                        elevation: 8,
+                                        backgroundColor: 'white',
+                                        padding: 20,
+                                        borderRadius: 10
+                                    }}>
+                                        <TextView1 fontSize={15} color={colors.primary} fontWeight={700} marginTop={0}>{item.title}</TextView1>
+                                        <ImageView1 height={40} width={40} marginLeft={10} source={item.image} />
+                                    </Card>
+                                </TouchableOpacity>
                             )
                         })
                     }
@@ -55,7 +71,7 @@ type ImageViewProps = {
 type TextProps = {
     fontSize: number;
     color: string;
-    marginTop: number;
+    marginTop?: number;
     fontWeight?: number;
 }
 

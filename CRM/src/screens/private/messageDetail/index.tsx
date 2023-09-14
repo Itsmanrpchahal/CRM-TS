@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { styled, useTheme, withTheme } from "styled-components/native";
 import { profileIcon } from "../../../assets";
-import { MicIcon, addGrayIcon, attachmentIcon, nochIcon } from "../../../utils/assets";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { MicIcon, addGrayIcon, nochIcon } from "../../../utils/assets";
 
 const MessageDetail = ({ navigation }) => {
     const { colors } = useTheme()

@@ -13,6 +13,7 @@ import surfLeads from '../screens/private/surfLeads';
 import { CalenderWhiteIcon, NotificatioWhiteIcon } from '../utils/assets';
 import surfMailStackNavigator from './SurfMailStackNavigator';
 import SurfMailDrawer from './surfMailDrawer';
+import surfCallTabs from './surfCallTabbar';
 
 const Tab = createBottomTabNavigator();
 
@@ -78,7 +79,7 @@ function DashboardTabs(props: any) {
             <Tab.Screen name={navigationStrings.TAB_BAR_MESSAGE} component={SurfMailDrawer} options={{
                 tabBarLabel: () => { return null }
             }} />
-            <Tab.Screen name={navigationStrings.TAB_BAR_CALL} component={Call} options={{
+            <Tab.Screen name={navigationStrings.TAB_BAR_CALL} component={surfCallTabs} options={{
                 tabBarLabel: () => { return null }
             }} />
             <Tab.Screen name={navigationStrings.TAB_BAR_CHAT} component={Chat} options={{

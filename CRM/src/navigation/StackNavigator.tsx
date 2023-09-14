@@ -21,8 +21,9 @@ import marketing from '../screens/private/marketing';
 import selfSourcedLeads from '../screens/private/selfSourcedLeads';
 import messageDetail from '../screens/private/messageDetail';
 import { styled } from 'styled-components/native';
-import { VedioIcon } from '../utils/assets';
+import { VedioIcon, trashIcon } from '../utils/assets';
 import SurfMailDrawer from './surfMailDrawer';
+import mailView from '../screens/private/mailView';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -266,7 +267,22 @@ function StackNavigator(props: any) {
                         <ImageView source={VedioIcon}></ImageView>
                     ),
                 }}
+            />
 
+            <Stack.Screen
+                name={navigationStrings.MAIL_VIEW}
+                component={mailView}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.MAIL_VIEW,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
             />
 
         </Stack.Navigator>

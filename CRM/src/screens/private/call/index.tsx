@@ -1,12 +1,19 @@
 import React from "react";
-import { View } from 'react-native'
+import { styled, useTheme } from "styled-components/native";
 import { withTheme } from "styled-components/native";
 const Call = () => {
+    const { colors } = useTheme()
     return (
-        <View>
+        <MainWrapper>
 
-        </View>
+
+        </MainWrapper>
     )
 }
 
-export default withTheme(Call)
+export default withTheme(Call);
+
+const MainWrapper = styled.View`
+    background-color:#F5F5F5;
+    height:100%;
+`;

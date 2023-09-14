@@ -7,7 +7,7 @@ export default {
     TRANSACTION_DESK: 'Transaction Desk',
     TAB_BAR_MESSAGE: 'surf Mail',
     TAB_BAR_CHAT: 'surf Messaging',
-    TAB_BAR_CALL: 'Call',
+    TAB_BAR_CALL: 'surf Phone',
     AGENTS: "Agents",
     RETALORS: 'Retalors',
     CALL_CENTER: "Call Center",
@@ -17,5 +17,10 @@ export default {
     DOCUMENT_PORTAL_DETAIL: 'Document Portal Detail',
     MARKETING: 'Marketing',
     SELF_SOURCED_LEADS: 'Self Sourced Leads',
-    MESSAGE_DETAIL: 'Message Detail'
+    MESSAGE_DETAIL: 'Message Detail',
+    MAIL_VIEW: 'Mail View',
+    KEYPAD: 'Keypad',
+    RECENTS: 'Recents',
+    SURF_CONTACTS: 'Surf Contacts',
+    VOICEMAIL: 'Voicemail'
 };

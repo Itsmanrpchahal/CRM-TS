@@ -77,6 +77,21 @@ import trashIcon from '../assets/trash/trash.png'
 import sendHorizontalIcon from '../assets/sendHorizontal/sendHorizotal.png'
 import inboxIcon from '../assets/inbox/inbox.png'
 import draftsIcon from '../assets/drafts/drafts.png'
+import pencilEditIcon from '../assets/pencilEdit/pencilEdit.png'
+import replyAllArrowIcon from '../assets/replyAllArrow/replyAllArrow.png'
+import replyArrowIcon from '../assets/replyArrow/replyArrow.png'
+import forwardArrowIcon from '../assets/forwardArrow/forwardArrow.png'
+import backspaceIcon from '../assets/backspace/backspace.png'
+import dialGreenIcon from '../assets/dialGreen/dialGreen.png'
+import speakerIcon from '../assets/speaker/speaker.png'
+import deleteRedIcon from '../assets/deleteRed/deleteRed.png'
+import callBlueIcon from '../assets/callBlue/callBlue.png'
+import playIcon from '../assets/play/play.png'
+import emailOpenIcon from '../assets/emailOpen/emailOpen.png'
+import arrowUpIcon from '../assets/arrowUp/arrowUp.png'
+import arrowDownBorderIcon from '../assets/arrowDownBorder/arrowDownBorder.png'
+import smsIcon from '../assets/sms/sms.png'
+import timelineIcon from '../assets/timeline/timeline.png'
 
 export {
     ChatIcon,
@@ -157,5 +172,20 @@ export {
     trashIcon,
     sendHorizontalIcon,
     inboxIcon,
-    draftsIcon
+    draftsIcon,
+    pencilEditIcon,
+    replyArrowIcon,
+    replyAllArrowIcon,
+    forwardArrowIcon,
+    backspaceIcon,
+    dialGreenIcon,
+    speakerIcon,
+    deleteRedIcon,
+    callBlueIcon,
+    playIcon,
+    emailOpenIcon,
+    arrowUpIcon,
+    arrowDownBorderIcon,
+    smsIcon,
+    timelineIcon
 };

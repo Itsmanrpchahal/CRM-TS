@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Platform, TouchableOpacity } from "react-native";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { MenuIcon, seacrhIcon } from "../../../utils/assets";
+import { MenuIcon, pencilEditIcon, seacrhIcon } from "../../../utils/assets";
 import navigationStrings from "../../../navigation/navigationStrings";
 import { profileIcon } from "../../../assets";
 const surfMails = ({ navigation }) => {
@@ -35,7 +35,7 @@ const surfMails = ({ navigation }) => {
                 ItemSeparatorComponent={<Divider backgroundColor={colors.gray} />}
                 renderItem={() => {
                     return (
-                        <TouchableOpacity onPress={() => { navigation.navigate(navigationStrings.MESSAGE_DETAIL) }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate(navigationStrings.MAIL_VIEW) }}>
                             <ChatWrapper>
                                 <LeftView>
                                     <OnlineView backgroundColor={colors.green} />
@@ -59,8 +59,10 @@ const surfMails = ({ navigation }) => {
                         </TouchableOpacity>
                     )
                 }}>
-
             </FlatList>
+            <NewChatWrapper>
+                <ImageView height={22} width={22} marginLeft={0} source={pencilEditIcon} />
+            </NewChatWrapper>
         </MainWrapper>
     )
 }
@@ -87,6 +89,21 @@ type OnlineWrapper = {
 type DrawerWrapperProps = {
     backgroundColor: string;
 };
+
+const NewChatWrapper = styled.View`
+    height:55px;
+    width:55px;
+    border-radius:27px;
+    justify-content:center;
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin-right:16px;
+    margin-bottom:16px;
+    align-items:center;
+    background-color:${({ theme }: any) => theme.colors.primary};
+`;
+
 
 const Dashline = styled.View`
     height:35px;

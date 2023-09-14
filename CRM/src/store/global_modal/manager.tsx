@@ -19,7 +19,11 @@ import {
     AssignaRealtorSheet,
     CallsinQueueSheet,
     AddNewAgentSheet,
-    AddNewRealtorSheet
+    AddNewRealtorSheet,
+    VoiceMailSheet,
+    EmailTemplatesSheet,
+    SMSTemplatesSheet,
+    DripCampaignsSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -135,7 +139,11 @@ const modalLookup: any = {
     AssignaRealtorSheet,
     CallsinQueueSheet,
     AddNewAgentSheet,
-    AddNewRealtorSheet
+    AddNewRealtorSheet,
+    VoiceMailSheet,
+    EmailTemplatesSheet,
+    SMSTemplatesSheet,
+    DripCampaignsSheet
 };
 
 const WelcomeModalWrapper = styled.View`

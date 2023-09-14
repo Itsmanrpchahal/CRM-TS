@@ -37,6 +37,55 @@ export const sideMenuOptions = [
     { label: "Marketing", value: 11, image: MarketingIcon },
 ];
 
+export const dialPad = [
+    {
+        number: 1,
+        alpha: ''
+    },
+    {
+        number: 2,
+        alpha: 'ABC'
+    },
+    {
+        number: 3,
+        alpha: 'DEF'
+    },
+    {
+        number: 4,
+        alpha: 'GHI'
+    },
+    {
+        number: 5,
+        alpha: 'JKL'
+    },
+    {
+        number: 6,
+        alpha: 'MNO'
+    },
+    {
+        number: 7,
+        alpha: 'PQRS'
+    },
+    {
+        number: 8,
+        alpha: 'TUV'
+    },
+    {
+        number: 9,
+        alpha: 'WXYZ'
+    },
+    {
+        alpha: '*'
+    },
+    {
+        number: 0,
+        alpha: '.'
+    },
+    {
+        alpha: '#'
+    },
+]
+
 export const dataCell = [
     {
         title: 'Opportunities',

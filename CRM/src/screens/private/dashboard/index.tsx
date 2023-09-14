@@ -41,33 +41,35 @@ const Dashboard = () => {
                     </Speedmeter>
                     <ImageView source={BaseIcon}></ImageView>
 
-                    <ListContainer>
-                        <FlatList
-                            numColumns={2}
-                            data={dataCell}
-                            renderItem={({ item }) => {
+                    <MainCardView>
+                        {
+                            dataCell.map((item) => {
                                 return (
-                                    <CardWrapper>
-                                        <CardChildWrapper style={{
+                                    <Card style={{
+                                        shadowColor: 'black',
+                                        shadowOffset: { width: 0, height: 2 },
+                                        shadowRadius: 6,
+                                        shadowOpacity: 0.26,
+                                        elevation: 8,
+                                        backgroundColor: 'white',
+                                        padding: 20,
+                                        borderRadius: 10
+                                    }}>
+
+                                        <CardItemView style={{
                                             shadowOffset: { width: -2, height: 4 },
                                             shadowOpacity: 0.2,
                                             shadowRadius: 3,
                                         }} >
-                                            <CardItemView style={{
-                                                shadowOffset: { width: -2, height: 4 },
-                                                shadowOpacity: 0.2,
-                                                shadowRadius: 3,
-                                            }} >
-                                                <ItemImage source={item.image}></ItemImage>
-                                            </CardItemView>
-                                            <TextWrapper fontWeight={300} fontSize={15} color={colors.black}>{item.title}</TextWrapper>
-                                            <TextWrapper fontWeight={800} fontSize={18} color={colors.primary}>{item.subTitle}</TextWrapper>
-                                        </CardChildWrapper>
-                                    </CardWrapper>
+                                            <ItemImage source={item.image}></ItemImage>
+                                        </CardItemView>
+                                        <TextWrapper fontWeight={300} fontSize={15} color={colors.black}>{item.title}</TextWrapper>
+                                        <TextWrapper fontWeight={800} fontSize={18} color={colors.primary}>{item.subTitle}</TextWrapper>
+                                    </Card>
                                 )
-                            }}>
-                        </FlatList>
-                    </ListContainer>
+                            })
+                        }
+                    </MainCardView>
 
 
 
@@ -86,6 +88,24 @@ type TextProps = {
     fontWeight?: number
 }
 
+const Card = styled.View`
+    height:140px;
+    width:140px;
+    align-self:center;
+    margin:15px;
+    border-radius:15px;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    background-color:${({ theme }: any) => theme.colors.white};
+`;
+
+const MainCardView = styled.View`
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content:center;
+    margin-bottom:50px;
+`;
 
 const ItemImage = styled.Image`
     height:12;

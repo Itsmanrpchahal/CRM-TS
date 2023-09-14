@@ -108,7 +108,6 @@ const Properties = () => {
                     visible && <CardSwipeWrapper height={centerHeight}></CardSwipeWrapper>
                 }
 
-
             </ChildWrapper>
         </MainWrapperWhite>
     )
@@ -122,9 +121,6 @@ type ImageProps = {
     width?: number;
 }
 
-type CenterProps = {
-    height?: number
-}
 
 const TabWrapper = styled.View`
     flex-direction:row;

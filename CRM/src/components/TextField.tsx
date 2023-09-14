@@ -10,6 +10,8 @@ import styled from 'styled-components/native';
 type TextFieldProps = {
   onChangeText?: Function;
   placeholder?: string;
+  color?: string;
+  placeholderColor?: string;
   accessibilityLabelColor?: string;
   value?: string;
   accessibilityLabel?: string;
@@ -27,6 +29,8 @@ type TextFieldProps = {
 
 const TextField: React.FC<TextFieldProps> = ({
   placeholder,
+  placeholderColor = 'white',
+  color = 'white',
   accessibilityLabel,
   accessibilityLabelColor = 'white',
   secureTextEntry = false,
@@ -56,10 +60,11 @@ const TextField: React.FC<TextFieldProps> = ({
 
       <Horizontal borderColor={borderColor} borderRadius={borderRadius}>
         <TextInputField
+          color={color}
           onChangeText={onChangeText}
           secureTextEntry={showSecureEntry ? false : secureTextEntry}
           placeholder={placeholder}
-          placeholderTextColor="white"
+          placeholderTextColor={placeholderColor}
           keyboardType={keyboardType}
           autoCapitalize={autoCapitalize}
           editable={editable}
@@ -90,6 +95,8 @@ type HorizontalProps = {
 type accessibilityLabelProps = {
   color: string;
 }
+
+
 const ErrorWrapper = styled.View`
   margin-top: 3px;
   padding-left: 2px;
@@ -98,9 +105,9 @@ const ErrorWrapper__Text = styled.Text`
   color: red;
 `;
 
-const TextInputField = styled.TextInput`
+const TextInputField = styled.TextInput<accessibilityLabelProps>`
   flex: 1;
-  color: ${({ theme }: any) => theme.colors.white};
+  color: ${({ color }: any) => color};
   padding-left: 8px;
   paddingVertical: 0
 `;
