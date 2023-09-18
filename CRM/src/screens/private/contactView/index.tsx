@@ -227,7 +227,7 @@ const TagView = styled.Text`
     border-radius:15px;
     align-self:center;
     margin:8px;
-    padding:3px;
+    padding:5px;
     align-items:center;
     justify-content:center;
     border-width:1px;
