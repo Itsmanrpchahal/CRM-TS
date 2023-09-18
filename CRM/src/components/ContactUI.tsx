@@ -3,7 +3,7 @@ import { styled, withTheme } from "styled-components/native";
 import { Switch } from 'react-native-switch';
 import { useTheme } from "styled-components";
 import { MessageBlueIcon, PhoneGreenIcon, editIcon, mailBlackIcon, noteIcon, sendIcon, vedioGreenIcon } from "../../../utils/assets";
-import { profileIcon } from "../../../assets";
+import { profileIcon } from "../utils/assets";
 import { ScrollView, TextInput } from "react-native";
 
 const ContactSurfUI = () => {

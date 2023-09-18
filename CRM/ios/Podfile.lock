@@ -512,7 +512,7 @@ PODS:
   - RNGoogleSignin (10.0.1):
     - GoogleSignIn (~> 7.0)
     - React-Core
-  - RNReanimated (3.5.0):
+  - RNReanimated (3.5.2):
     - DoubleConversion
     - FBLazyVector
     - glog
@@ -811,7 +811,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNGoogleSignin: ccaa4a81582cf713eea562c5dd9dc1961a715fd0
-  RNReanimated: fd0dc9a5889bfac6c45a922b26c902dc6185b4dc
+  RNReanimated: 2491645f0883526f4470d8b5c761308709ba31f8
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   RNSnackbar: 3727b42bf6c4314a53c18185b5203e915a4ab020
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9

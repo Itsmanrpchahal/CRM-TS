@@ -24,6 +24,7 @@ import { styled } from 'styled-components/native';
 import { VedioIcon, trashIcon } from '../utils/assets';
 import SurfMailDrawer from './surfMailDrawer';
 import mailView from '../screens/private/mailView';
+import setting from '../screens/private/setting';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -278,6 +279,22 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.MAIL_VIEW,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.SETTING}
+                component={setting}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.SETTING,
                     headerStyle: {
                         backgroundColor: colors.primary
                     },

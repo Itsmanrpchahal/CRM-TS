@@ -12,6 +12,7 @@ import VoiceMailSheet from '../../components/sheets/VoiceMailSheet'
 import EmailTemplatesSheet from '../../components/sheets/EmailTemplatesSheet'
 import SMSTemplatesSheet from '../../components/sheets/SMSTemplateSheet'
 import DripCampaignsSheet from '../../components/sheets/DripCampaignsSheet'
+import AddTagSheet from '../../components/sheets/AddTagSheet'
 
 export {
     ActivityLogSheet,
@@ -27,5 +28,6 @@ export {
     VoiceMailSheet,
     EmailTemplatesSheet,
     SMSTemplatesSheet,
-    DripCampaignsSheet
+    DripCampaignsSheet,
+    AddTagSheet
 };

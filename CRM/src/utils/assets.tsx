@@ -92,9 +92,17 @@ import arrowUpIcon from '../assets/arrowUp/arrowUp.png'
 import arrowDownBorderIcon from '../assets/arrowDownBorder/arrowDownBorder.png'
 import smsIcon from '../assets/sms/sms.png'
 import timelineIcon from '../assets/timeline/timeline.png'
+import profileIcon from '../assets/profilePic/profilePic.png'
+import uncheckIcon from '../assets/uncheck/uncheck.png'
+import tagIcon from '../assets/tag/tag.png'
+import closeIcon from '../assets/close/close.png'
+import blueTagIcon from '../assets/blueTag/blueTag.png'
+import tickRoundIcon from '../assets/tickRound/tickRound.png'
+import googleIcon from '../assets/google/google.png'
 
 export {
     ChatIcon,
+    profileIcon,
     ContactsIcon,
     MessageIcon,
     PhoneIcon,
@@ -187,5 +195,11 @@ export {
     arrowUpIcon,
     arrowDownBorderIcon,
     smsIcon,
-    timelineIcon
+    timelineIcon,
+    uncheckIcon,
+    tagIcon,
+    closeIcon,
+    blueTagIcon,
+    tickRoundIcon,
+    googleIcon
 };

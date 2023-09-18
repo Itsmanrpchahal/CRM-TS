@@ -11,30 +11,38 @@ enum IconPosition {
 
 type PrimaryButtonProps = {
     onPress: Function;
+    width?: string;
     btnText: string;
     loading?: boolean;
+    height?: number;
     icon?: string;
     isIconLeft?: boolean;
     fontSize?: number;
+    style?: object;
 };
 
 const SecondaryButton: React.FC<PrimaryButtonProps> = ({
     onPress,
     btnText,
+    width = '100',
     loading = false,
+    height = 50,
     icon,
     isIconLeft = true,
     fontSize,
+    style,
 }) => {
     return (
         <TouchableOpacity onPress={() => onPress()}>
-            <SecondaryButton__Wrapper iconPosition={isIconLeft}>
+            <SecondaryButton__Wrapper width={width} height={height} style={style}>
                 <SecondaryButton__Wrapper__Text fontSize={fontSize}>
                     {loading ? 'Loading...' : btnText}
                 </SecondaryButton__Wrapper__Text>
-                <ImageWrapperRight>
-                    <ImageWrapperRight__Image tintColor={'white'} source={icon} />
-                </ImageWrapperRight>
+                {
+                    isIconLeft && <ImageWrapperRight>
+                        <ImageWrapperRight__Image tintColor={'white'} source={icon} />
+                    </ImageWrapperRight>
+                }
             </SecondaryButton__Wrapper>
         </TouchableOpacity>
     );
@@ -65,16 +73,15 @@ const ImageWrapperRight__Image = styled.Image`
 
 const SecondaryButton__Wrapper = styled.View<SecondaryButton__WrapperProps>`
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color: ${({ theme }: any) => theme.colors.primary};
-    height: 50px;
+    height: ${({ height }: any) => height}px;
     border-radius: 25px;
-    flex-direction: ${({ iconPosition }: any) =>
-        iconPosition ? 'row-reverse' : 'row'};
     padding: 0 6px 0 6px;
     margin-left:auto;
+    width:${({ width }: any) => width}px
 `;
 const SecondaryButton__Wrapper__Text = styled.Text<FontSizeProps>`
     color: ${({ theme }: any) => theme.colors.white};
-    font-size: ${({ theme, fontSize }: any) => fontSize};
+    font-size: ${({ theme, fontSize }: any) => fontSize}px;
 `;

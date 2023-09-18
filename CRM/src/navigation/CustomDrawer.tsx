@@ -39,7 +39,11 @@ function CustomDrawer(props: any) {
                 <ImageView source={profileIcon}></ImageView>
                 <UserName>Username</UserName>
               </ItemWrapper>
-              <ImageView source={settingIcon}></ImageView>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate(navigationStrings.SETTING)
+              }}>
+                <ImageView source={settingIcon}></ImageView>
+              </TouchableOpacity>
             </HorizontalWrapper>
             <FlatList
               data={sideMenuOptions}

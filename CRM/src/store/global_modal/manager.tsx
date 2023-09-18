@@ -23,7 +23,8 @@ import {
     VoiceMailSheet,
     EmailTemplatesSheet,
     SMSTemplatesSheet,
-    DripCampaignsSheet
+    DripCampaignsSheet,
+    AddTagSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -143,7 +144,8 @@ const modalLookup: any = {
     VoiceMailSheet,
     EmailTemplatesSheet,
     SMSTemplatesSheet,
-    DripCampaignsSheet
+    DripCampaignsSheet,
+    AddTagSheet
 };
 
 const WelcomeModalWrapper = styled.View`

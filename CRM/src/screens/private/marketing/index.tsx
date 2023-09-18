@@ -32,6 +32,8 @@ const Marketing = () => {
                                         }) :
                                             index === 2 ? openModal('DripCampaignsSheet', {
                                                 height: '80%'
+                                            }) : index === 3 ? openModal('AddTagSheet', {
+                                                height: '80%'
                                             }) : null
                                     }
                                 }}>

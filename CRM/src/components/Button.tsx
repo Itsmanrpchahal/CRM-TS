@@ -12,6 +12,7 @@ type PrimaryButtonProps = {
     backgroundColor?: string;
     heightBT?: number;
     color?: string;
+    borderColor?: string;
     width?: string;
 };
 
@@ -20,6 +21,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     btnText,
     loading = false,
     backgroundColor,
+    borderColor = 'white',
     heightBT,
     color = 'white',
     width,
@@ -27,6 +29,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     return (
         <TouchableOpacity onPress={() => onPress()}>
             <PrimaryButton__Wrapper
+                borderColor={borderColor}
                 backgroundColor={backgroundColor}
                 height={heightBT}
                 width={width}>
@@ -44,13 +47,19 @@ export default withTheme(PrimaryButton);
 type Props = {
     color: string;
 }
-const PrimaryButton__Wrapper = styled.View`
+
+type PrimaryProps = {
+    borderColor: string
+}
+const PrimaryButton__Wrapper = styled.View<PrimaryProps>`
   justify-content: center;
   align-items: center;
+  border-color:${({ borderColor }: any) => borderColor};
   background-color: ${({ theme, backgroundColor }: any) =>
         backgroundColor ? backgroundColor : theme.colors.greenColor};
   height: ${({ height }: any) => (height ? height : 55)}px;
   border-radius: 26px;
+  border-width:1px;
   width: ${({ width }: any) => (width ? width : 180)}px;
 `;
 const PrimaryButton__Wrapper__Text = styled.Text<Props>`

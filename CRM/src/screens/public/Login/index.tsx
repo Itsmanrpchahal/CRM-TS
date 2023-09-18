@@ -12,11 +12,44 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { useActions } from '../../../hooks/useActions'
+import { googleIcon } from "../../../utils/assets";
+import { TouchableOpacity } from "react-native";
 const Login = ({ navigation }) => {
     const { colors }: any = useTheme();
     useEffect(() => {
+        GoogleSignin.configure({
+            webClientId: '681904798882-r41s7mipcih0gdmsau2ds4c21pq4p476.apps.googleusercontent.com',
+            iosClientId: '681904798882-24aavuvkrsg3l1mqrkn49g4kh0s4pom5.apps.googleusercontent.com',
+        });
     }, [])
+
+    const signIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            await GoogleSignin.signOut()
+            const userInfo = await GoogleSignin.signIn();
+            console.log('userInfo ==>', userInfo)
+            //   setState({ userInfo });
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                console.log('userInfo4 ==>', error)
+
+                // user cancelled the login flow
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                console.log('userInfo3 ==>', error)
+
+                // operation (e.g. sign in) is in progress already
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                // play services not available or outdated
+                console.log('userInfo2 ==>', error)
+
+            } else {
+                // some other error happened
+                console.log('userInfo1 ==>', error)
+            }
+        }
+    };
+
     return (
         <MainWrapper>
             <LoginWrapper>
@@ -60,11 +93,19 @@ const Login = ({ navigation }) => {
                                     loading={false}
                                     color={colors.black}
                                 />
+                                <TouchableOpacity onPress={() => { signIn() }}>
+                                    <GoogleButton>
+                                        <ImageView source={googleIcon}></ImageView>
+                                        <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Sign in with google</TextWrapper>
+                                    </GoogleButton>
+                                </TouchableOpacity>
                             </ButtonWrapper>
 
                         </FormikWrapper>
                     )}
                 </Formik>
+
+
             </LoginWrapper>
         </MainWrapper>
     )
@@ -78,6 +119,27 @@ type TextProps = {
     fontWeight?: number;
     marginTop?: number;
 }
+
+
+const ImageView = styled.Image`
+    justify-content:center;
+    align-items:center;
+    height:30px;
+    width:30px;
+    resize-mode:contain;
+    margin-right:10px;
+`;
+
+const GoogleButton = styled.View`
+    border-color:white;
+    border-width:1px;
+    padding:5px;
+    flex-direction:row;
+    margin: 0px 10px 0px 10px;
+    align-items:center;
+    border-radius:20px;
+    margin-top:20px;
+`;
 
 const FormikWrapper = styled.View`
     width:100%;

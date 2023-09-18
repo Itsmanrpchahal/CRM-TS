@@ -22,5 +22,6 @@ export default {
     KEYPAD: 'Keypad',
     RECENTS: 'Recents',
     SURF_CONTACTS: 'Surf Contacts',
-    VOICEMAIL: 'Voicemail'
+    VOICEMAIL: 'Voicemail',
+    SETTING: 'Settings'
 };

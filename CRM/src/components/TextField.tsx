@@ -25,6 +25,8 @@ type TextFieldProps = {
   style?: any;
   borderColor?: string;
   borderRadius?: number;
+  icon?: boolean;
+  imageIcon?: any;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -44,6 +46,8 @@ const TextField: React.FC<TextFieldProps> = ({
   style = {},
   borderColor = 'white',
   borderRadius = 8,
+  icon = false,
+  imageIcon = '',
   ...rest
 }) => {
   const [showSecureEntry, setShowSecureEntry] = useState(false);
@@ -74,6 +78,7 @@ const TextField: React.FC<TextFieldProps> = ({
           style={style}
           {...rest}
         />
+        {icon && <ImageView source={imageIcon}></ImageView>}
       </Horizontal>
       {error !== null && (
         <ErrorWrapper>
@@ -95,6 +100,12 @@ type HorizontalProps = {
 type accessibilityLabelProps = {
   color: string;
 }
+
+const ImageView = styled.Image`
+    height:22px;
+    width:22px;
+    resize-mode:contain;
+`;
 
 
 const ErrorWrapper = styled.View`
