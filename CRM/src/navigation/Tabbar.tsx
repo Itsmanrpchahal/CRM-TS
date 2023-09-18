@@ -14,6 +14,7 @@ import { CalenderWhiteIcon, NotificatioWhiteIcon } from '../utils/assets';
 import surfMailStackNavigator from './SurfMailStackNavigator';
 import SurfMailDrawer from './surfMailDrawer';
 import surfCallTabs from './surfCallTabbar';
+import { navigationRef } from './RootNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +50,7 @@ function DashboardTabs(props: any) {
                                 source={NotificatioWhiteIcon}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={() => { navigationRef.current.navigate(navigationStrings.CALENDER_SCREEN) }}>
                             <HeaderIcon
                                 source={CalenderWhiteIcon}
                             />

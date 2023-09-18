@@ -25,6 +25,7 @@ import { VedioIcon, trashIcon } from '../utils/assets';
 import SurfMailDrawer from './surfMailDrawer';
 import mailView from '../screens/private/mailView';
 import setting from '../screens/private/setting';
+import calenderScreen from '../screens/private/calenderScreen';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -295,6 +296,21 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.SETTING,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+            <Stack.Screen
+                name={navigationStrings.CALENDER_SCREEN}
+                component={calenderScreen}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.CALENDER_SCREEN,
                     headerStyle: {
                         backgroundColor: colors.primary
                     },

@@ -99,6 +99,7 @@ import closeIcon from '../assets/close/close.png'
 import blueTagIcon from '../assets/blueTag/blueTag.png'
 import tickRoundIcon from '../assets/tickRound/tickRound.png'
 import googleIcon from '../assets/google/google.png'
+import plusIcon from '../assets/plus/plus.png'
 
 export {
     ChatIcon,
@@ -201,5 +202,6 @@ export {
     closeIcon,
     blueTagIcon,
     tickRoundIcon,
-    googleIcon
+    googleIcon,
+    plusIcon
 };
