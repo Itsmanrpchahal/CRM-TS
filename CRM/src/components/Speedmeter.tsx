@@ -78,7 +78,7 @@ const Speedmeter = ({
             toValue: limitValue(value, minValue, maxValue, allowedDecimals),
             duration: easeDuration,
             easing: Easing.linear,
-            useNativeDriver,
+            useNativeDriver: true,
         },
     ).start();
 

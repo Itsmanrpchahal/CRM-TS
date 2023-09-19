@@ -13,6 +13,8 @@ import EmailTemplatesSheet from '../../components/sheets/EmailTemplatesSheet'
 import SMSTemplatesSheet from '../../components/sheets/SMSTemplateSheet'
 import DripCampaignsSheet from '../../components/sheets/DripCampaignsSheet'
 import AddTagSheet from '../../components/sheets/AddTagSheet'
+import HeatMapSheet from '../../components/sheets/HeatMapsheet'
+import ContactHeatMap from '../../components/sheets/ContactHeatMap'
 
 export {
     ActivityLogSheet,
@@ -29,5 +31,7 @@ export {
     EmailTemplatesSheet,
     SMSTemplatesSheet,
     DripCampaignsSheet,
-    AddTagSheet
+    AddTagSheet,
+    HeatMapSheet,
+    ContactHeatMap
 };

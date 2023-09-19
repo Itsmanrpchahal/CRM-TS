@@ -26,6 +26,7 @@ import SurfMailDrawer from './surfMailDrawer';
 import mailView from '../screens/private/mailView';
 import setting from '../screens/private/setting';
 import calenderScreen from '../screens/private/calenderScreen';
+import notifications from '../screens/private/notifications';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -311,6 +312,22 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.CALENDER_SCREEN,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.NOTIFICATION}
+                component={notifications}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.NOTIFICATION,
                     headerStyle: {
                         backgroundColor: colors.primary
                     },

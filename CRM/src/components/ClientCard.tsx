@@ -5,7 +5,8 @@ import { BaseIcon, MessageBlueIcon, MessageIcon, NeedleCustom, PhoneGreenIcon, c
 import Speedmeter from './Speedmeter';
 import { profileIcon } from '../assets';
 import { Switch } from 'react-native-switch';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { useActions } from '../hooks/useActions';
 
 type ContactCardProps = {
 
@@ -20,6 +21,7 @@ const ClientCard: React.FC<ContactCardProps> = ({
         setIsEnabled((previousState) => !previousState);
         setToggle(!isEnabled);
     };
+    const { openModal } = useActions()
     return (
         <MainWrapper>
             <VerticleWrapper>
@@ -29,24 +31,33 @@ const ClientCard: React.FC<ContactCardProps> = ({
             </VerticleWrapper>
 
             <VerticleWrapper>
-                <View>
-                    <Speedmeter
-                        minValue={0}
-                        defaultValue={0}
-                        allowedDecimals={0}
-                        size={80}
-                        needleImage={NeedleCustom}
-                        maxValue={100}
-                        backgroundColor={'#FFFFFF'}
-                        marginTopLebel={-30}
-                        labelFontSize={15}
-                        labels={[
+                <TouchableOpacity onPress={() => {
+                    openModal(
+                        'ContactHeatMap',
+                        {
+                            height: '80%',
+                        },
+                    )
+                }}>
+                    <View>
+                        <Speedmeter
+                            minValue={0}
+                            defaultValue={0}
+                            allowedDecimals={0}
+                            size={80}
+                            needleImage={NeedleCustom}
+                            maxValue={100}
+                            backgroundColor={'#FFFFFF'}
+                            marginTopLebel={-30}
+                            labelFontSize={15}
+                            labels={[
 
-                        ]}
-                        value={20}>
-                    </Speedmeter>
-                    <ImageViewBottom source={BaseIcon} />
-                </View>
+                            ]}
+                            value={20}>
+                        </Speedmeter>
+                        <ImageViewBottom source={BaseIcon} />
+                    </View>
+                </TouchableOpacity>
 
 
                 <ImageCard>

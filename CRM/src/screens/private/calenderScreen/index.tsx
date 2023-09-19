@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { styled, withTheme } from 'styled-components/native'
+import { styled, useTheme, withTheme } from 'styled-components/native'
 import { Agenda, DateData } from 'react-native-calendars';
 import { Card } from 'react-native-paper'
 import { TouchableOpacity, View, Text } from 'react-native';
 import { plusIcon } from '../../../utils/assets'
 
 const CalerderScreen = () => {
-    const [selected, setSelected] = useState('');
     const [items, setItems] = useState({})
+    const { colors } = useTheme()
     const loadItems = (day: DateData) => {
         const timeToString = (time: number) => {
             const date = new Date(time);
@@ -58,6 +58,8 @@ const CalerderScreen = () => {
             <Agenda
                 items={items}
                 loadItemsForMonth={loadItems}
+                numColumns={2}
+                theme={{ dotColor: colors.primary, agendaKnobColor: colors.primary, selectedDayBackgroundColor: colors.primary }}
                 selected={'2023-10-17'}
                 renderItem={renderDay}>
             </Agenda>

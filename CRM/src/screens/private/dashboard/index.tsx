@@ -1,12 +1,16 @@
 import React from "react";
 import { profileIcon } from '../../../assets';
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { FlatList, ScrollView, View } from 'react-native'
+import { FlatList, ScrollView, TouchableOpacity, View } from 'react-native'
 import Speedmeter from "../../../components/Speedmeter";
 import { BaseIcon, NeedleCustom } from "../../../utils/assets";
 import { dataCell } from '../../../utils/constants'
+import { useActions } from "../../../hooks/useActions";
 const Dashboard = () => {
     const { colors } = useTheme();
+    const {
+        openModal,
+    } = useActions();
     return (
         <MainWrapper>
             <OnlineWrapper>
@@ -27,18 +31,27 @@ const Dashboard = () => {
                         Welcome John
                     </TextWrapper>
 
-                    <Speedmeter
-                        minValue={0}
-                        defaultValue={0}
-                        allowedDecimals={0}
-                        size={200}
-                        needleImage={NeedleCustom}
-                        maxValue={100}
-                        labels={[
+                    <TouchableOpacity onPress={() => {
+                        openModal(
+                            'HeatMapSheet',
+                            {
+                                height: '80%',
+                            },
+                        )
+                    }}>
+                        <Speedmeter
+                            minValue={0}
+                            defaultValue={0}
+                            allowedDecimals={0}
+                            size={200}
+                            needleImage={NeedleCustom}
+                            maxValue={100}
+                            labels={[
 
-                        ]}
-                        value={20}>
-                    </Speedmeter>
+                            ]}
+                            value={20}>
+                        </Speedmeter>
+                    </TouchableOpacity>
                     <ImageView source={BaseIcon}></ImageView>
 
                     <MainCardView>

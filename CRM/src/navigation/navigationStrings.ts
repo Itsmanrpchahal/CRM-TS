@@ -24,5 +24,6 @@ export default {
     SURF_CONTACTS: 'Surf Contacts',
     VOICEMAIL: 'Voicemail',
     SETTING: 'Settings',
-    CALENDER_SCREEN: 'Calender'
+    CALENDER_SCREEN: 'Calender',
+    NOTIFICATION: 'Notifications'
 };

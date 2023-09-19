@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
 // @ts-ignore
-import { ChatIcon, ContactsIcon, MessageIcon, PropertiesIcon, SurfIconIcon, UsersIconIcon, chatTabIcon, phoneTabIcon } from '../assets';
+import { ContactsIcon, MessageIcon, PropertiesIcon, SurfIconIcon, UsersIconIcon, chatTabIcon, phoneTabIcon } from '../assets';
 import navigationStrings from '../navigation/navigationStrings';
 
 const tabIcon = {

@@ -18,17 +18,18 @@ export const login = (data: any) => {
         });
         try {
             const response = await service.post(apiUri.auth.login, data);
-            setAuthInitalToken(response.data.data.access_token);
-            await storeData(storageConstants.access_token, response.data.data.access_token);
+            alert(JSON.stringify(response))
+            // setAuthInitalToken(response.data.data.access_token);
+            // await storeData(storageConstants.access_token, response.data.data.access_token);
 
-            AsyncStorage.setItem('TOKEN', response.data.data.access_token)
-            AsyncStorage.setItem('EMAIL_CONFIRMED', response.data.email_confirmed)
-            await dispatch(
-                setUser({
-                    access_token: response.data.data.access_token,
-                    email_confirmed: response.data.email_confirmed
-                }),
-            );
+            // AsyncStorage.setItem('TOKEN', "" + response)
+            // AsyncStorage.setItem('EMAIL_CONFIRMED', response.data.email_confirmed)
+            // await dispatch(
+            //     setUser({
+            //         access_token: response.data.data.access_token,
+            //         email_confirmed: response.data.email_confirmed
+            //     }),
+            // );
             dispatch(setAuthentication(true));
             return response;
         } catch (e: any) {

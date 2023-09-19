@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapper } from '../../../utils/globalStyles'
 import navigationStrings from "../../../navigation/navigationStrings";
@@ -9,19 +9,43 @@ import { LOGIN_SCHEMA } from "./helpers";
 import PrimaryButton from '../../../components/Button';
 import {
     GoogleSignin,
-    GoogleSigninButton,
     statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { googleIcon } from "../../../utils/assets";
 import { TouchableOpacity } from "react-native";
+import messaging from '@react-native-firebase/messaging';
+import { useActions } from '../../../hooks/useActions'
+import { requestUserPermission, NotificationListerner } from '../../../utils/pushnotifications_helper'
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+
+
 const Login = ({ navigation }) => {
     const { colors }: any = useTheme();
+    const [deviceToken, setDeviceToken] = useState('')
+    const { login } = useActions();
+    const { loading, error, isAuthenticated } = useTypedSelector(
+        state => state.auth,
+    );
     useEffect(() => {
         GoogleSignin.configure({
             webClientId: '681904798882-r41s7mipcih0gdmsau2ds4c21pq4p476.apps.googleusercontent.com',
             iosClientId: '681904798882-24aavuvkrsg3l1mqrkn49g4kh0s4pom5.apps.googleusercontent.com',
         });
     }, [])
+
+    useEffect(() => {
+        requestUserPermission()
+        NotificationListerner()
+    }, [])
+
+    useEffect(() => {
+        getToken()
+    }, [])
+
+    const getToken = async () => {
+        const token = await messaging().getToken()
+        setDeviceToken(token)
+    }
 
     const signIn = async () => {
         try {
@@ -58,12 +82,18 @@ const Login = ({ navigation }) => {
                 <Formik
                     validationSchema={LOGIN_SCHEMA}
                     initialValues={{
-                        email: 'fd@m.c',
-                        password: 'as',
+                        email: '',
+                        password: '',
                     }}
-                    onSubmit={(values) => {
+                    onSubmit={async (values) => {
+                        const formData = new FormData()
+                        formData.append('username', 'access@wpkraken.io')
+                        formData.append('password', 'CherryPicker1!')
+                        formData.append('device_type', '2')
+                        formData.append('device_token', deviceToken)
+                        formData.append('user_type', '2')
+                        await login(formData)
                         navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
-
                     }}>
                     {({ setFieldValue, handleSubmit, errors }) => (
                         <FormikWrapper>

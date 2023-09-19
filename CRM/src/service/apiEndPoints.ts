@@ -1,8 +1,8 @@
-const baseURL = '';
+const baseURL = 'https://www.surflokal.com/';
 
 const apiUri = {
     auth: {
-        login: 'login', //email,password,device_type,device_token in Form Data
+        login: 'wp-json/custom-plugin/login/', //email,password,device_type = {1 for android ,2 for IOS},device_token in Form Data
     },
 };
 

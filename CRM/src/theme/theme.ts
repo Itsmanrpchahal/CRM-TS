@@ -15,6 +15,7 @@ export const navigationTheme = {
             blue: '#206AD8',
             red: '#FF0000',
             lightGray: '#F5F5F5',
+            orange: '#EC7B23',
         },
         spacing: {
             horizontal: 15,
@@ -40,6 +41,7 @@ export const navigationTheme = {
             blue: '#206AD8',
             red: '#FF0000',
             lightGray: '#F5F5F5',
+            orange: '#EC7B23',
         },
         spacing: {
             horizontal: 15,

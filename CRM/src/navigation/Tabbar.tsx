@@ -45,7 +45,7 @@ function DashboardTabs(props: any) {
                 ),
                 headerRight: () => (
                     <IconWrapper>
-                        <TouchableOpacity onPress={() => { }}>
+                        <TouchableOpacity onPress={() => { navigationRef.current.navigate(navigationStrings.NOTIFICATION) }}>
                             <HeaderIcon
                                 source={NotificatioWhiteIcon}
                             />

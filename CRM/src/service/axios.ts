@@ -13,16 +13,17 @@ const instance = axios.create({
     timeoutErrorMessage: "Timeout error",
 });
 
-AsyncStorage.getItem('TOKEN').then((asyncStorageRes) => {
-    // @ts-ignore
-    instance.defaults.headers.common.Authorization = `Bearer ${asyncStorageRes}`;
-});
+// AsyncStorage.getItem('TOKEN').then((asyncStorageRes) => {
+//     // @ts-ignore
+//     instance.defaults.headers.common.Authorization = `Bearer ${asyncStorageRes}`;
+// });
 export const setAuthInitalToken = (token: string) => {
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 instance.defaults.headers.common.Accept = `application/json`;
 instance.defaults.headers.common.Connection = "keep-alive"
+instance.defaults.headers['security_key'] = "SurfLokal52"
 
 
 instance.interceptors.request.use(payload => {

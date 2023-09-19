@@ -100,6 +100,12 @@ import blueTagIcon from '../assets/blueTag/blueTag.png'
 import tickRoundIcon from '../assets/tickRound/tickRound.png'
 import googleIcon from '../assets/google/google.png'
 import plusIcon from '../assets/plus/plus.png'
+import infoIcon from '../assets/info/info.png'
+import RookieIcon from '../assets/rookie/rookie.png'
+import RookieAloneIcon from '../assets/RookieAlone/RookieAlone.png'
+import grommetIcon from '../assets/grommet/grommet.png'
+import transactionDeskIcon from '../assets/transactionDesk/transactionDesk.png'
+import pulseIcon from '../assets/pulse/pulse.png'
 
 export {
     ChatIcon,
@@ -203,5 +209,11 @@ export {
     blueTagIcon,
     tickRoundIcon,
     googleIcon,
-    plusIcon
+    plusIcon,
+    infoIcon,
+    RookieIcon,
+    RookieAloneIcon,
+    grommetIcon,
+    transactionDeskIcon,
+    pulseIcon
 };
