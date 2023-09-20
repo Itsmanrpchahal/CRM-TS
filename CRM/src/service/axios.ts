@@ -13,12 +13,12 @@ const instance = axios.create({
     timeoutErrorMessage: "Timeout error",
 });
 
-// AsyncStorage.getItem('TOKEN').then((asyncStorageRes) => {
-//     // @ts-ignore
-//     instance.defaults.headers.common.Authorization = `Bearer ${asyncStorageRes}`;
-// });
+AsyncStorage.getItem('TOKEN').then((asyncStorageRes) => {
+    // @ts-ignore
+    instance.defaults.headers['access_token'] = asyncStorageRes;
+});
 export const setAuthInitalToken = (token: string) => {
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    instance.defaults.headers['access_token'] = token;
 };
 
 instance.defaults.headers.common.Accept = `application/json`;
@@ -27,17 +27,25 @@ instance.defaults.headers['security_key'] = "SurfLokal52"
 
 
 instance.interceptors.request.use(payload => {
-    console.log("Payload   ==== >  ", payload);
 
     return payload;
 });
 
 instance.interceptors.response.use(
     response => {
+        if (!response.data.status) {
+            Snackbar.show({
+                text: response && response.data.message,
+                duration: Snackbar.LENGTH_SHORT,
+            })
+        }
         return response;
     },
     error => {
-        console.log('Error ==> ', error.response.data.status)
+        Snackbar.show({
+            text: error && error.response.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+        })
         if (error.response.data && !error.response.data.status) {
             // Snackbar.show({
             //   text: error && error.response.data.message,

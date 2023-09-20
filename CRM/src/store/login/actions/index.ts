@@ -10,8 +10,8 @@ interface LoginSuccessAction {
 }
 
 interface LoginSuccessResponseObject {
-    access_token: string;
-    email_confirmed: string;
+    authToken: string;
+    user_email: string;
 }
 
 interface LoginErrorAction {

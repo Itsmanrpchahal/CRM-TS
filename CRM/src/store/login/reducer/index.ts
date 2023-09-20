@@ -5,16 +5,16 @@ import { ActionType } from '../actions-types';
 interface RepositoriesStateInterface {
     loading: boolean;
     error: string | null;
-    access_token: string;
-    email_confirmed: string;
+    authToken: string;
+    user_email: string;
     isAuthenticated: boolean;
 }
 
 const initialState = {
     loading: false,
     error: null,
-    access_token: '',
-    email_confirmed: '',
+    authToken: '',
+    user_email: '',
     isAuthenticated: false,
 };
 
@@ -31,22 +31,22 @@ const reducer = (
             case ActionType.LOGIN:
                 draft.loading = true;
                 draft.error = null;
-                draft.access_token = '';
-                draft.email_confirmed = '';
+                draft.authToken = '';
+                draft.user_email = '';
                 draft.isAuthenticated = false;
                 return draft;
             case ActionType.LOGIN_SUCCESS:
                 draft.loading = false;
                 draft.error = null;
-                draft.access_token = action.payload.access_token;
-                draft.email_confirmed = action.payload.email_confirmed;
+                draft.authToken = action.payload.authToken;
+                draft.user_email = action.payload.user_email;
                 draft.isAuthenticated = true;
                 return draft;
             case ActionType.LOGIN_ERROR:
                 draft.loading = false;
                 draft.error = action.payload;
-                draft.access_token = '';
-                draft.email_confirmed = '';
+                draft.authToken = '';
+                draft.user_email = '';
                 draft.isAuthenticated = false;
                 return draft;
 

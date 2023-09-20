@@ -35,6 +35,7 @@ export const sideMenuOptions = [
     { label: "Agents", value: 9, image: AgentsIcon },
     { label: "Realtors", value: 10, image: RetalorsIcon },
     { label: "Marketing", value: 11, image: MarketingIcon },
+    { label: "Sign Out", value: 12, image: MarketingIcon },
 ];
 
 export const dialPad = [

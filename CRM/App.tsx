@@ -6,7 +6,7 @@
  */
 
 // @ts-ignore
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
@@ -20,11 +20,14 @@ import { LogBox } from 'react-native';
 import ModalManager from './src/store/global_modal/manager';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+
 const persistor = persistStore(store);
 const queryClient = new QueryClient();
 
 export default function App() {
   LogBox.ignoreAllLogs()
+
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>

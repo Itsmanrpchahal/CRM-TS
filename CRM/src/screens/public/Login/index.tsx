@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapper } from '../../../utils/globalStyles'
 import navigationStrings from "../../../navigation/navigationStrings";
@@ -12,19 +12,23 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { googleIcon } from "../../../utils/assets";
-import { TouchableOpacity } from "react-native";
+import { Platform, TouchableOpacity } from "react-native";
 import messaging from '@react-native-firebase/messaging';
 import { useActions } from '../../../hooks/useActions'
 import { requestUserPermission, NotificationListerner } from '../../../utils/pushnotifications_helper'
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
+import Activity from '../../../components/Activity'
+import { PermissionsAndroid } from 'react-native';
 
 const Login = ({ navigation }) => {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
     const { colors }: any = useTheme();
-    const [deviceToken, setDeviceToken] = useState('')
-    const { login } = useActions();
+    const { login, sociallogin } = useActions();
     const { loading, error, isAuthenticated } = useTypedSelector(
         state => state.auth,
+    );
+    const { s_loading, s_isAuthenticated } = useTypedSelector(
+        state => state.socialLogin,
     );
     useEffect(() => {
         GoogleSignin.configure({
@@ -34,17 +38,19 @@ const Login = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        requestUserPermission()
-        NotificationListerner()
-    }, [])
+        if (isAuthenticated || s_isAuthenticated) {
+            navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
+        }
+    }, [isAuthenticated, s_isAuthenticated])
 
     useEffect(() => {
+        requestUserPermission()
+        NotificationListerner()
         getToken()
     }, [])
 
     const getToken = async () => {
         const token = await messaging().getToken()
-        setDeviceToken(token)
     }
 
     const signIn = async () => {
@@ -52,92 +58,97 @@ const Login = ({ navigation }) => {
             await GoogleSignin.hasPlayServices();
             await GoogleSignin.signOut()
             const userInfo = await GoogleSignin.signIn();
-            console.log('userInfo ==>', userInfo)
-            //   setState({ userInfo });
+            const fcmtoken = await messaging().getToken()
+            const formData = new FormData()
+            formData.append('email', userInfo?.user?.email)
+            formData.append('username', userInfo?.user?.email)
+            formData.append('social_id', userInfo?.user?.id)
+            formData.append('social_token', userInfo?.idToken)
+            formData.append('last_name', userInfo?.user.familyName)
+            formData.append('first_name', userInfo?.user.givenName)
+            formData.append('device_type', '2')
+            formData.append('device_token', fcmtoken)
+            formData.append('user_type', '2')
+            await sociallogin(formData)
         } catch (error) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                console.log('userInfo4 ==>', error)
-
-                // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {
-                console.log('userInfo3 ==>', error)
-
-                // operation (e.g. sign in) is in progress already
             } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                // play services not available or outdated
-                console.log('userInfo2 ==>', error)
-
             } else {
-                // some other error happened
-                console.log('userInfo1 ==>', error)
             }
         }
     };
 
     return (
-        <MainWrapper>
-            <LoginWrapper>
-                <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Lokal CRM WIP</TextWrapper>
-                <TextWrapper marginTop={30} color={colors.white} fontSize={40} fontWeight={700}>Welcome</TextWrapper>
-                <Formik
-                    validationSchema={LOGIN_SCHEMA}
-                    initialValues={{
-                        email: '',
-                        password: '',
-                    }}
-                    onSubmit={async (values) => {
-                        const formData = new FormData()
-                        formData.append('username', 'access@wpkraken.io')
-                        formData.append('password', 'CherryPicker1!')
-                        formData.append('device_type', '2')
-                        formData.append('device_token', deviceToken)
-                        formData.append('user_type', '2')
-                        await login(formData)
-                        navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
-                    }}>
-                    {({ setFieldValue, handleSubmit, errors }) => (
-                        <FormikWrapper>
-                            <TextField
-                                onChangeText={(value: any) => {
-                                    setFieldValue('email', value);
-                                }}
-                                placeholder="email"
-                                keyboardType={'email-address'}
-                                autoCapitalize={'none'}
-                                error={errors ? errors.email : null}
-                            />
-                            <TextField
-                                onChangeText={(value: any) => {
-                                    setFieldValue('password', value);
-                                }}
-                                placeholder="********"
-                                secureTextEntry={true}
-                                error={errors ? errors.password : null}
-                            />
+        <MainView>
+            {
+                loading || s_loading ? <LoaderView>
+                    <Activity />
+                </LoaderView > : null
 
-                            <ButtonWrapper>
-                                <PrimaryButton
-                                    onPress={handleSubmit}
-                                    backgroundColor={colors.white}
-                                    btnText={'Continue'}
-                                    loading={false}
-                                    color={colors.black}
+            }
+            <MainWrapper>
+                <LoginWrapper>
+                    <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Lokal CRM WIP</TextWrapper>
+                    <TextWrapper marginTop={30} color={colors.white} fontSize={40} fontWeight={700}>Welcome</TextWrapper>
+                    <Formik
+                        validationSchema={LOGIN_SCHEMA}
+                        initialValues={{
+                            email: '',
+                            password: '',
+                        }}
+                        onSubmit={async (values) => {
+                            const fcmtoken = await messaging().getToken()
+                            const formData = new FormData()
+                            formData.append('username', values.email)
+                            formData.append('password', values.password)
+                            formData.append('device_type', '2')
+                            formData.append('device_token', fcmtoken)
+                            formData.append('user_type', '2')
+                            await login(formData)
+                        }}>
+                        {({ setFieldValue, handleSubmit, errors }) => (
+                            <FormikWrapper>
+                                <TextField
+                                    onChangeText={(value: any) => {
+                                        setFieldValue('email', value);
+                                    }}
+                                    placeholder="email"
+                                    keyboardType={'email-address'}
+                                    autoCapitalize={'none'}
+                                    error={errors ? errors.email : null}
                                 />
-                                <TouchableOpacity onPress={() => { signIn() }}>
-                                    <GoogleButton>
-                                        <ImageView source={googleIcon}></ImageView>
-                                        <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Sign in with google</TextWrapper>
-                                    </GoogleButton>
-                                </TouchableOpacity>
-                            </ButtonWrapper>
+                                <TextField
+                                    onChangeText={(value: any) => {
+                                        setFieldValue('password', value);
+                                    }}
+                                    placeholder="********"
+                                    secureTextEntry={true}
+                                    error={errors ? errors.password : null}
+                                />
 
-                        </FormikWrapper>
-                    )}
-                </Formik>
+                                <ButtonWrapper>
+                                    <PrimaryButton
+                                        onPress={handleSubmit}
+                                        backgroundColor={colors.white}
+                                        btnText={'Continue'}
+                                        loading={false}
+                                        color={colors.black}
+                                    />
+                                    <TouchableOpacity onPress={() => { signIn() }}>
+                                        <GoogleButton>
+                                            <ImageView source={googleIcon}></ImageView>
+                                            <TextWrapper marginTop={0} color={colors.white} fontSize={18} fontWeight={700}>Sign in with google</TextWrapper>
+                                        </GoogleButton>
+                                    </TouchableOpacity>
+                                </ButtonWrapper>
+                            </FormikWrapper>
+                        )}
+                    </Formik>
+                </LoginWrapper>
+            </MainWrapper>
+        </MainView>
 
-
-            </LoginWrapper>
-        </MainWrapper>
     )
 }
 
@@ -189,11 +200,21 @@ const TextWrapper = styled.Text<TextProps>`
     margin-top:${({ theme, marginTop }: any) => marginTop}px;
 `;
 
-const TopView = styled.View``;
-
 const LoginWrapper = styled.View`
     height:100%;
     width:100%;
     justify-content:center;
     align-items:center;
 `
+const LoaderView = styled.View`
+    height: 100%;
+    width: 100%;
+    backgroundColor: rgba(0,0,0,.2);
+    position: absolute;
+    zIndex: 99;
+    left: 0;
+    top: 0;
+`;
+const MainView = styled.View`
+    flex:1;
+`;

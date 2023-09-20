@@ -106,6 +106,10 @@ import RookieAloneIcon from '../assets/RookieAlone/RookieAlone.png'
 import grommetIcon from '../assets/grommet/grommet.png'
 import transactionDeskIcon from '../assets/transactionDesk/transactionDesk.png'
 import pulseIcon from '../assets/pulse/pulse.png'
+import bathIcon from '../assets/bath/bath.png'
+import newbedIcon from '../assets/newbed/newbed.png'
+import measuringtapeIcon from '../assets/measuringtape/measuringtape.png'
+import hoasIcon from '../assets/hoas/hoas.png'
 
 export {
     ChatIcon,
@@ -215,5 +219,9 @@ export {
     RookieAloneIcon,
     grommetIcon,
     transactionDeskIcon,
-    pulseIcon
+    pulseIcon,
+    bathIcon,
+    newbedIcon,
+    measuringtapeIcon,
+    hoasIcon
 };

@@ -67,7 +67,7 @@ const Loader = () => {
   });
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: "100%", backgroundColor: 'rgba(0,0,0,.2)' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: "100%" }}>
       <View style={styles.container}>
         <Animated.View style={[styles.spinner, animatedStyles]} />
         <Animated.View style={[styles.spinner2, animatedStyles1]} />

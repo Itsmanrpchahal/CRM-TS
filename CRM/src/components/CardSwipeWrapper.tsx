@@ -4,15 +4,15 @@ import { useTheme, withTheme } from 'styled-components';
 // @ts-ignore
 import styled from 'styled-components/native';
 import Swiper from 'react-native-deck-swiper'
-import { profileIcon } from '../assets'
-import { Text, View } from 'react-native';
-import { AddIcon, BrushIcon, UndoIcon } from '../utils/assets';
+import { BrushIcon, UndoIcon, bathIcon, hoasIcon, measuringtapeIcon, newbedIcon } from '../utils/assets';
 
 type CardSwipeProps = {
-    height: number
+    height: number,
+    data: any,
 };
 const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
     height,
+    data = [],
     ...rest
 }) => {
     const { colors } = useTheme()
@@ -27,26 +27,50 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
                 onSwipedLeft={() => { alert('Ehlo') }}
                 onSwipedRight={() => { }}
                 verticalSwipe={false}
-                cards={['DO', 'MORE', 'OF', 'WHAT', 'MAKES', 'YOU', 'HAPPY']}
-                renderCard={(card) => {
+                cards={data}
+                renderCard={(card, index) => {
                     return (
                         <CardWapper>
-                            <ImageWrapper source={profileIcon}></ImageWrapper>
+                            <ImageWrapper source={{ uri: card?.featured_image_src[0]?.guid }}></ImageWrapper>
                             <BottomWrapper>
                                 <TextWrapper color={colors.blue} fontSize={18} fontWeight={800}>
-                                    $ 152,000
+                                    {card?.property_price}
                                 </TextWrapper>
 
                                 <TextWrapper color={colors.black} fontSize={16} fontWeight={500}>
-                                    1787 BGJM , HMK
+                                    {card?.title}
                                 </TextWrapper>
 
-                                <BottomTabWrapper>
-                                    <ImageWrapperTab height={28} width={28} source={AddIcon}></ImageWrapperTab>
-                                    <TextWrapper color={colors.black} fontSize={14} fontWeight={500}>
-                                        BED
-                                    </TextWrapper>
-                                </BottomTabWrapper>
+                                <HorizontalWrapper>
+                                    <BottomTabWrapper>
+                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={newbedIcon}></ImageWrapperTab>
+                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                            {card?.property_bedrooms} Beds
+                                        </TextWrapper>
+                                    </BottomTabWrapper>
+                                    <BottomTabWrapper>
+
+                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={bathIcon}></ImageWrapperTab>
+                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                            {card?.bathroomsfull} Baths
+                                        </TextWrapper>
+                                    </BottomTabWrapper>
+                                    <BottomTabWrapper>
+                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={measuringtapeIcon}></ImageWrapperTab>
+                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                            {card?.property_size} sq ft
+                                        </TextWrapper>
+                                    </BottomTabWrapper>
+                                    <BottomTabWrapper>
+
+                                        <ImageWrapperTab height={28} width={28} source={hoasIcon}></ImageWrapperTab>
+                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                            {card?.taxannualamount}
+                                        </TextWrapper>
+                                    </BottomTabWrapper>
+
+                                </HorizontalWrapper>
+
                             </BottomWrapper>
                         </CardWapper>
                     )
@@ -80,6 +104,13 @@ type TextProps = {
     color: string;
     fontWeight: number;
 }
+const VerticleView = styled.View``;
+
+const HorizontalWrapper = styled.View`
+    flex-direction:row;
+    width:100%;
+    justify-content:space-between;
+`;
 
 const BottomWrapperUndo = styled.View`
     flex-direction:row;
@@ -93,9 +124,12 @@ const ImageWrapperTab = styled.Image<ImageProps>`
     height:${({ height }: any) => height}px;
     width:${({ width }: any) => width}px;
     background-color:white;
+    resize-mode:contain;
 `;
 
 const BottomTabWrapper = styled.View`
+    justify-content:center;
+    align-items:center;
 `;
 
 const TextWrapper = styled.Text<TextProps>`
@@ -116,6 +150,7 @@ const BottomWrapper = styled.View`
 const ImageWrapper = styled.Image`
     height:60%;
     width:100%;
+    border-radius:10px;
 `;
 
 const CardWapper = styled.View`

@@ -16,24 +16,35 @@ export const login = (data: any) => {
         dispatch({
             type: ActionType.LOGIN,
         });
-        try {
-            const response = await service.post(apiUri.auth.login, data);
-            alert(JSON.stringify(response))
-            // setAuthInitalToken(response.data.data.access_token);
-            // await storeData(storageConstants.access_token, response.data.data.access_token);
 
-            // AsyncStorage.setItem('TOKEN', "" + response)
-            // AsyncStorage.setItem('EMAIL_CONFIRMED', response.data.email_confirmed)
-            // await dispatch(
-            //     setUser({
-            //         access_token: response.data.data.access_token,
-            //         email_confirmed: response.data.email_confirmed
-            //     }),
-            // );
-            dispatch(setAuthentication(true));
+        try {
+            const response = await service.post(apiUri.auth.login, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+
+            if (response?.data?.success) {
+                setAuthInitalToken(response.data.data.authToken);
+                await storeData(storageConstants.authToken, response.data.data.authToken);
+
+                AsyncStorage.setItem('TOKEN', "" + response)
+                AsyncStorage.setItem('user_email', response.data.data.user_email)
+                await dispatch(
+                    setUser({
+                        authToken: response.data.data.authToken,
+                        user_email: response.data.data.user_email
+                    }),
+                );
+                dispatch(setAuthentication(true));
+                return response;
+
+            } else {
+                dispatch(setAuthentication(false));
+            }
+
             return response;
         } catch (e: any) {
-
             dispatch({
                 type: ActionType.LOGIN_ERROR,
                 payload: 'Invalid email/password',
@@ -62,12 +73,9 @@ export const setUser = (fn: any) => {
         dispatch({
             type: ActionType.LOGIN_SUCCESS,
             payload: {
-                access_token: fn?.access_token,
-                email_confirmed: fn?.email_confirmed,
+                authToken: fn?.authToken,
+                user_email: fn?.user_email,
             },
         });
     };
 };
-function alert(accessToken: any) {
-    throw new Error('Function not implemented.');
-}

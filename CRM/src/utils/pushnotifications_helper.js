@@ -1,12 +1,12 @@
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from 'react-native';
 
 export async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
     const enabled =
         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-    console.log('HETE FIREBASE')
     if (enabled) {
         console.log('Authorization status:', authStatus);
         getFCMToken()
@@ -17,9 +17,6 @@ export async function requestUserPermission() {
 
 
 async function getFCMToken() {
-    let fcmtoken = AsyncStorage.getItem('fcmToken')
-    // if(!fcmtoken)
-    // {
     try {
         const fcmtoken = await messaging().getToken()
         if (fcmtoken) {
@@ -28,10 +25,6 @@ async function getFCMToken() {
     } catch (error) {
         console.log('Errr to get FCM token')
     }
-    // }else {
-    //     console.log('Errr to get FCM token1' ,fcmtoken)
-
-    // }
 }
 
 

@@ -43,7 +43,6 @@ const flushStorage = async (key: string) => {
         // remove error
     }
 
-    console.log('Done.');
 };
 
 const clearAll = async () => {
@@ -53,7 +52,6 @@ const clearAll = async () => {
         // clear error
     }
 
-    console.log('Done.');
 };
 
 export { storeData, getData, flushStorage, clearAll };

@@ -2,17 +2,29 @@ import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity } from 'react-native'
 import { styled, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from '../../../utils/globalStyles'
-import { AddIcon, FilterIcon } from '../../../utils/assets'
+import { FilterIcon } from '../../../utils/assets'
 import CardSwipeWrapper from "../../../components/CardSwipeWrapper";
 import { useActions } from '../../../hooks/useActions'
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import Activity from "../../../components/Activity";
+import { useIsFocused } from '@react-navigation/native';
 
 const Properties = () => {
     const [topHeight, setTopHeight] = useState(0)
     const [centerHeight, setCenterHeight] = useState(0)
     const [mainHeight, setMainHeight] = useState(0)
     const [visible, setVisible] = useState(false)
+    const isFocused = useIsFocused();
+    const { getFilterloading, getFilterData } = useTypedSelector(
+        state => state.getFilterData,
+    )
+    const { getAllPropertiesloading, getAllPPropertiesData } = useTypedSelector(
+        state => state.getAllPPropertiesData,
+    )
     const {
         openModal,
+        getFilter,
+        getAllProperties
     } = useActions();
 
     useEffect(() => {
@@ -20,96 +32,112 @@ const Properties = () => {
             setVisible(true)
         }, 2000)
     }, [])
+
     useEffect(() => {
         setCenterHeight(mainHeight - (topHeight + 30))
     }, [topHeight, mainHeight])
+
+    useEffect(() => {
+        if (isFocused) {
+            Promise.all[getFilter(), getAllProperties({ limit: 1 })]
+        }
+    }, [isFocused])
     return (
-        <MainWrapperWhite onLayout={({ nativeEvent }) => {
-            const { x, y, width, height } = nativeEvent.layout
-            setMainHeight(height)
-        }}>
-            <ChildWrapper >
-                <TopWrapper onLayout={({ nativeEvent }) => {
-                    const { x, y, width, height } = nativeEvent.layout
-                    setTopHeight(height)
-                }}>
-                    <FlatList
-                        data={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={() => {
-                            return (
-                                <FilterTabs>
-                                    <ImageWrapper height={20} width={20} source={AddIcon} />
-                                    <TextWrapper>Text</TextWrapper>
-                                </FilterTabs>
-                            )
-                        }}>
-                    </FlatList>
-                    <TabWrapper>
-                        <FilterBtn>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    openModal(
-                                        'SendSelectedPropertiesSheet',
-                                        {
-                                            height: '80%',
-                                        },
-                                    )
-                                }}>
-                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                                    <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
-                                </TabWrapper>
-                            </TouchableOpacity>
-                        </FilterBtn>
+        <MainView>
+            {
+                getFilterloading || getAllPropertiesloading ? <LoaderView>
+                    <Activity />
+                </LoaderView > : null
 
-                        <FilterBtn >
-                            <TouchableOpacity
-                                onPress={() => {
-                                    openModal(
-                                        'FilterSheet',
-                                        {
-                                            height: '80%',
-                                        },
-                                    )
-                                }}>
-                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                                    <TextWrapper style={{ marginLeft: 10 }}>Filter</TextWrapper>
-                                </TabWrapper>
-                            </TouchableOpacity>
+            }
+            <MainWrapperWhite onLayout={({ nativeEvent }) => {
+                const { x, y, width, height } = nativeEvent.layout
+                setMainHeight(height)
+            }}>
+                <ChildWrapper >
+                    <TopWrapper onLayout={({ nativeEvent }) => {
+                        const { x, y, width, height } = nativeEvent.layout
+                        setTopHeight(height)
+                    }}>
+                        <FlatList
+                            data={getFilterData?.data}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item }) => {
+                                return (
+                                    <FilterTabs>
+                                        <ImageWrapper height={20} width={20} source={{ uri: item?.term_image_url }} />
+                                        <TextWrapper>{item?.term_name}</TextWrapper>
+                                    </FilterTabs>
+                                )
+                            }}>
+                        </FlatList>
+
+                        <TabWrapper>
+                            <FilterBtn>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openModal(
+                                            'SendSelectedPropertiesSheet',
+                                            {
+                                                height: '80%',
+                                            },
+                                        )
+                                    }}>
+                                    <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                        <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                        <TextWrapper numberOfLines={1}>  Send Selected Properties</TextWrapper>
+                                    </TabWrapper>
+                                </TouchableOpacity>
+                            </FilterBtn>
+
+                            <FilterBtn >
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openModal(
+                                            'FilterSheet',
+                                            {
+                                                height: '80%',
+                                            },
+                                        )
+                                    }}>
+                                    <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                        <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                        <TextWrapper style={{ marginLeft: 10 }}>Filter</TextWrapper>
+                                    </TabWrapper>
+                                </TouchableOpacity>
 
 
-                        </FilterBtn>
-                        <FilterBtn>
+                            </FilterBtn>
+                            <FilterBtn>
 
-                            <TouchableOpacity
-                                onPress={() => {
-                                    openModal(
-                                        'SendSearchCriteriaSheet',
-                                        {
-                                            height: '90%',
-                                        },
-                                    )
-                                }}>
-                                <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                    <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
-                                    <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>
-                                </TabWrapper>
-                            </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openModal(
+                                            'SendSearchCriteriaSheet',
+                                            {
+                                                height: '90%',
+                                            },
+                                        )
+                                    }}>
+                                    <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                        <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
+                                        <TextWrapper numberOfLines={1}>  Send Search Criteria</TextWrapper>
+                                    </TabWrapper>
+                                </TouchableOpacity>
 
-                        </FilterBtn>
-                    </TabWrapper>
+                            </FilterBtn>
+                        </TabWrapper>
 
-                </TopWrapper>
+                    </TopWrapper>
 
-                {
-                    visible && <CardSwipeWrapper height={centerHeight}></CardSwipeWrapper>
-                }
+                    {
+                        visible && <CardSwipeWrapper height={centerHeight} data={getAllPPropertiesData.data}></CardSwipeWrapper>
+                    }
 
-            </ChildWrapper>
-        </MainWrapperWhite>
+                </ChildWrapper>
+            </MainWrapperWhite>
+        </MainView>
     )
 }
 
@@ -164,5 +192,19 @@ const FilterTabs = styled.View`
 
 const ChildWrapper = styled.View`
     justify-content:space-between;
+    flex:1;
+`;
+
+const LoaderView = styled.View`
+    height: 100%;
+    width: 100%;
+    backgroundColor: rgba(0,0,0,.2);
+    position: absolute;
+    zIndex: 99;
+    left: 0;
+    top: 0;
+`;
+
+const MainView = styled.View`
     flex:1;
 `;

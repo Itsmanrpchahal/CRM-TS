@@ -35,7 +35,7 @@ function StackNavigator(props: any) {
 
     // @ts-ignore
     return (
-        <Stack.Navigator initialRouteName={navigationStrings.LOGIN} >
+        <Stack.Navigator initialRouteName={isAuthenticated ? navigationStrings.TAB_BAR_DASHBOARD : navigationStrings.LOGIN} >
             <Stack.Screen
                 name={navigationStrings.LOGIN}
                 component={Login}

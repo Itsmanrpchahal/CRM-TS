@@ -1,6 +1,13 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { authActionCreators, modalSheet } from "../store";
+import {
+    authActionCreators,
+    logout,
+    modalSheet,
+    sociallogin,
+    getFilter,
+    getAllProperties
+} from "../store";
 
 export const useActions = () => {
     const dispatch = useDispatch();
@@ -8,7 +15,11 @@ export const useActions = () => {
         Object.assign(
             {},
             authActionCreators,
-            modalSheet
+            logout,
+            sociallogin,
+            modalSheet,
+            getFilter,
+            getAllProperties
         ),
         dispatch,
     );

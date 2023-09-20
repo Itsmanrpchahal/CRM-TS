@@ -12,17 +12,29 @@ import { useActions } from "../hooks/useActions";
 import axios from "axios";
 import { profileIcon, settingIcon } from '../assets';
 import { sideMenuOptions } from '../utils/constants'
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 function CustomDrawer(props: any) {
-  const { setAuthentication } = useActions();
+  const { setAuthentication, setSAuthentication, logout } = useActions();
   const { colors }: any = useTheme();
   const navigation = useNavigation()
-  const logout = async () => {
+  const { loading, error, isAuthenticated } = useTypedSelector(
+    state => state.auth,
+  );
+  const { s_loading, s_isAuthenticated } = useTypedSelector(
+    state => state.socialLogin,
+  );
+  const logoutAction = async () => {
+    await logout()
+    props.navigation.closeDrawer()
+
     await clearAll();
     await persistor.flush();
     await persistor.purge();
     setAuthentication(false);
-    delete axios.defaults.headers.common["Authorization"];
+    setSAuthentication(false)
+    delete axios.defaults.headers.common["security_key"];
+    delete axios.defaults.headers.common["access_token"];
     props.navigation.reset({
       index: 0,
       routes: [{ name: navigationStrings.LOGIN }],
@@ -62,7 +74,7 @@ function CustomDrawer(props: any) {
                                     item.value === 9 ? navigation.navigate(navigationStrings.AGENTS) :
                                       item.value === 10 ? navigation.navigate(navigationStrings.RETALORS) :
                                         item.value === 11 ? navigation.navigate(navigationStrings.MARKETING) :
-                                          null
+                                          item.value ? logoutAction() : null
                   }}>
                     <ItemWrapper>
                       <ImageView source={item.image}></ImageView>
