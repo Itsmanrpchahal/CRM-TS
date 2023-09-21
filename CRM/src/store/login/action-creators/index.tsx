@@ -33,7 +33,10 @@ export const login = (data: any) => {
                 await dispatch(
                     setUser({
                         authToken: response.data.data.authToken,
-                        user_email: response.data.data.user_email
+                        user_email: response.data.data.user_email,
+                        u_first_name: response.data.data.first_name,
+                        u_last_name: response.data.data.last_name,
+                        u_image: response.data.data?.user_url
                     }),
                 );
                 dispatch(setAuthentication(true));
@@ -75,6 +78,9 @@ export const setUser = (fn: any) => {
             payload: {
                 authToken: fn?.authToken,
                 user_email: fn?.user_email,
+                u_first_name: fn?.u_first_name,
+                u_last_name: fn?.u_last_name,
+                u_image: fn?.u_image
             },
         });
     };

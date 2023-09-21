@@ -34,3 +34,35 @@ export const getAllProperties = (limit: any) => {
         }
     };
 };
+
+
+
+/*
+* @param data
+*/
+export const appFilter = (fn: any) => {
+    return async (dispatch: Dispatch<Action | any>) => {
+        dispatch({
+            type: ActionType.GET_ALL_PROPERTIES,
+        });
+
+        try {
+            const response = await service.get(apiUri.surfMLP.appFilter + `data_custom_taxonomy=${fn.data_custom_taxonomy}+&data_customvalue=${fn.data_customvalue}`);
+
+            if (response?.data?.success) {
+                dispatch({
+                    type: ActionType.GET_ALL_PROPERTIES_SUCCESS,
+                    payload: response.data,
+                })
+                return response;
+            }
+
+            return response;
+        } catch (e: any) {
+            dispatch({
+                type: ActionType.GET_ALL_PROPERTIES_ERROR,
+                payload: 'Invalid email/password',
+            });
+        }
+    };
+};

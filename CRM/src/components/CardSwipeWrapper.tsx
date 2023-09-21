@@ -1,10 +1,12 @@
 // @ts-ignore
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme, withTheme } from 'styled-components';
 // @ts-ignore
 import styled from 'styled-components/native';
 import Swiper from 'react-native-deck-swiper'
 import { BrushIcon, UndoIcon, bathIcon, hoasIcon, measuringtapeIcon, newbedIcon } from '../utils/assets';
+import { useActions } from '../hooks/useActions';
+import { TouchableOpacity } from 'react-native';
 
 type CardSwipeProps = {
     height: number,
@@ -16,71 +18,116 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
     ...rest
 }) => {
     const { colors } = useTheme()
+    const { clearFilter,
+        getAllProperties
+    } = useActions()
+    const [indexs, setIndex] = useState(0)
+
+    useEffect(() => {
+        alert(indexs)
+    }, [indexs])
     return (
         <MainWrapper height={height}>
-            <Swiper
-                style={{ height: height }}
-                cardStyle={{ height: height - 40, top: 0, backgroundColor: 'white' }}
-                cardHorizontalMargin={0}
-                backgroundColor='#FFFFFF'
-                cardVerticalMargin={0}
-                onSwipedLeft={() => { alert('Ehlo') }}
-                onSwipedRight={() => { }}
-                verticalSwipe={false}
-                cards={data}
-                renderCard={(card, index) => {
-                    return (
-                        <CardWapper>
-                            <ImageWrapper source={{ uri: card?.featured_image_src[0]?.guid }}></ImageWrapper>
-                            <BottomWrapper>
-                                <TextWrapper color={colors.blue} fontSize={18} fontWeight={800}>
-                                    {card?.property_price}
-                                </TextWrapper>
+            {
+                data.length > 0 &&
+                <Swiper
+                    style={{ height: height }}
+                    cardStyle={{ height: height - 40, top: 0, backgroundColor: 'white' }}
+                    cardHorizontalMargin={0}
+                    backgroundColor='#FFFFFF'
+                    cardVerticalMargin={0}
+                    onSwipedLeft={() => { }}
+                    onSwipedRight={() => { }}
+                    verticalSwipe={false}
+                    cards={data}
+                    renderCard={(card, index) => {
+                        return (
+                            <CardWapper>
+                                <ImageArea>
+                                    <TouchableOpacity style={{
+                                        width: 50,
+                                        height: '100%',
+                                        position: 'absolute',
+                                        backgroundColor: 'red',
+                                        zIndex: 999
+                                    }}
+                                        disabled={indexs >= 0 ? false : true}
+                                        onPress={() => {
+                                            setIndex(indexs - 1)
+                                        }}>
+                                        <TapArea />
+                                    </TouchableOpacity>
+                                    <ImageWrapper source={{ uri: card?.featured_image_src[0]?.guid }}></ImageWrapper>
+                                    <TouchableOpacity style={{
+                                        width: 50,
+                                        height: '100%',
+                                        position: 'absolute',
+                                        backgroundColor: 'red',
+                                        zIndex: 999,
+                                        right: 0,
+                                    }}
+                                        disabled={indexs <= card?.featured_image_src.length ? false : true}
+                                        onPress={() => {
+                                            setIndex(indexs + 1)
+                                        }}>
+                                        <TapArea style={{ right: 0, position: 'absolute', }} />
+                                    </TouchableOpacity>
+                                </ImageArea>
+                                <BottomWrapper>
+                                    <TextWrapper color={colors.blue} fontSize={18} fontWeight={800}>
+                                        {card?.property_price}
+                                    </TextWrapper>
 
-                                <TextWrapper color={colors.black} fontSize={16} fontWeight={500}>
-                                    {card?.title}
-                                </TextWrapper>
+                                    <TextWrapper color={colors.black} fontSize={16} fontWeight={500}>
+                                        {card?.title}
+                                    </TextWrapper>
 
-                                <HorizontalWrapper>
-                                    <BottomTabWrapper>
-                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={newbedIcon}></ImageWrapperTab>
-                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
-                                            {card?.property_bedrooms} Beds
-                                        </TextWrapper>
-                                    </BottomTabWrapper>
-                                    <BottomTabWrapper>
+                                    <HorizontalWrapper>
+                                        <BottomTabWrapper>
+                                            <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={newbedIcon}></ImageWrapperTab>
+                                            <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                                {card?.property_bedrooms} Beds
+                                            </TextWrapper>
+                                        </BottomTabWrapper>
+                                        <BottomTabWrapper>
 
-                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={bathIcon}></ImageWrapperTab>
-                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
-                                            {card?.bathroomsfull} Baths
-                                        </TextWrapper>
-                                    </BottomTabWrapper>
-                                    <BottomTabWrapper>
-                                        <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={measuringtapeIcon}></ImageWrapperTab>
-                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
-                                            {card?.property_size} sq ft
-                                        </TextWrapper>
-                                    </BottomTabWrapper>
-                                    <BottomTabWrapper>
+                                            <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={bathIcon}></ImageWrapperTab>
+                                            <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                                {card?.bathroomsfull} Baths
+                                            </TextWrapper>
+                                        </BottomTabWrapper>
+                                        <BottomTabWrapper>
+                                            <ImageWrapperTab tintColor={colors.black} height={28} width={28} source={measuringtapeIcon}></ImageWrapperTab>
+                                            <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                                {card?.property_size} sq ft
+                                            </TextWrapper>
+                                        </BottomTabWrapper>
+                                        <BottomTabWrapper>
 
-                                        <ImageWrapperTab height={28} width={28} source={hoasIcon}></ImageWrapperTab>
-                                        <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
-                                            {card?.taxannualamount}
-                                        </TextWrapper>
-                                    </BottomTabWrapper>
+                                            <ImageWrapperTab height={28} width={28} source={hoasIcon}></ImageWrapperTab>
+                                            <TextWrapper color={colors.black} fontSize={14} fontWeight={400}>
+                                                {card?.taxannualamount}
+                                            </TextWrapper>
+                                        </BottomTabWrapper>
 
-                                </HorizontalWrapper>
+                                    </HorizontalWrapper>
 
-                            </BottomWrapper>
-                        </CardWapper>
-                    )
-                }}
-            >
-            </Swiper>
+                                </BottomWrapper>
+                            </CardWapper>
+                        )
+                    }}
+                >
+                </Swiper >
+            }
 
             <BottomWrapperUndo>
                 <ImageWrapperTab height={20} width={26} source={UndoIcon}></ImageWrapperTab>
-                <ImageWrapperTab height={20} width={20} source={BrushIcon}></ImageWrapperTab>
+                <TouchableOpacity onPress={async () => {
+                    await clearFilter()
+                    getAllProperties({ limit: 1 })
+                }}>
+                    <ImageWrapperTab height={20} width={20} source={BrushIcon}></ImageWrapperTab>
+                </TouchableOpacity>
             </BottomWrapperUndo>
         </MainWrapper >
 
@@ -104,7 +151,19 @@ type TextProps = {
     color: string;
     fontWeight: number;
 }
-const VerticleView = styled.View``;
+
+const TapArea = styled.View`
+    width:50px;
+    height:100%;
+    position:absolute;
+    z-index:999;
+`;
+
+const ImageArea = styled.View`
+    position:relative;
+    height:60%;
+    z-index:-999;
+`;
 
 const HorizontalWrapper = styled.View`
     flex-direction:row;
@@ -148,7 +207,7 @@ const BottomWrapper = styled.View`
 `;
 
 const ImageWrapper = styled.Image`
-    height:60%;
+    height:100%;
     width:100%;
     border-radius:10px;
 `;

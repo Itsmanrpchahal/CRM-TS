@@ -7,6 +7,9 @@ interface RepositoriesStateInterface {
     error: string | null;
     authToken: string;
     user_email: string;
+    u_first_name: string;
+    u_last_name: string;
+    u_image: string;
     isAuthenticated: boolean;
 }
 
@@ -15,6 +18,9 @@ const initialState = {
     error: null,
     authToken: '',
     user_email: '',
+    u_first_name: '',
+    u_last_name: '',
+    u_image: '',
     isAuthenticated: false,
 };
 
@@ -33,11 +39,17 @@ const reducer = (
                 draft.error = null;
                 draft.authToken = '';
                 draft.user_email = '';
+                draft.u_first_name = '';
+                draft.u_image = '';
+                draft.u_last_name = '';
                 draft.isAuthenticated = false;
                 return draft;
             case ActionType.LOGIN_SUCCESS:
                 draft.loading = false;
                 draft.error = null;
+                draft.u_first_name = action.payload.u_first_name;
+                draft.u_last_name = action.payload.u_last_name;
+                draft.u_image = action.payload?.u_image;
                 draft.authToken = action.payload.authToken;
                 draft.user_email = action.payload.user_email;
                 draft.isAuthenticated = true;
@@ -46,6 +58,7 @@ const reducer = (
                 draft.loading = false;
                 draft.error = action.payload;
                 draft.authToken = '';
+                draft.u_image = '';
                 draft.user_email = '';
                 draft.isAuthenticated = false;
                 return draft;

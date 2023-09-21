@@ -4,6 +4,7 @@ import logout from '../store/logout/reducer';
 import socialLogin from '../store/socialLogin/reducer';
 import modalSheet from '../store/global_modal/reducer'
 import getFilterData from '../store/getFilter/reducer'
+import clearFilterData from '../store/clearFIlter/reducer'
 import getAllPPropertiesData from '../store/getAllProperites/reducer'
 
 const reducers = combineReducers({
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     socialLogin,
     modalSheet,
     getFilterData,
-    getAllPPropertiesData
+    getAllPPropertiesData,
+    clearFilterData
 });
 
 export default reducers;

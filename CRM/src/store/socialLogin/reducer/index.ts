@@ -9,6 +9,7 @@ interface RepositoriesStateInterface {
     user_email: string;
     first_name: string;
     last_name: string;
+    image: string;
     s_isAuthenticated: boolean;
 }
 
@@ -19,6 +20,7 @@ const initialState = {
     user_email: '',
     first_name: '',
     last_name: '',
+    image: '',
     s_isAuthenticated: false,
 };
 
@@ -38,15 +40,17 @@ const reducer = (
                 draft.authToken = '';
                 draft.user_email = '';
                 draft.first_name = '',
+                    draft.image = '',
                     draft.last_name = '',
                     draft.s_isAuthenticated = false;
                 return draft;
             case ActionType.SOCIAL_LOGIN_SUCCESS:
                 draft.s_loading = false;
                 draft.error = null;
-                draft.first_name = '',
-                    draft.last_name = '',
+                draft.first_name = action.payload.first_name,
+                    draft.last_name = action.payload.last_name,
                     draft.authToken = action.payload.authToken;
+                draft.image = action.payload.image;
                 draft.user_email = action.payload.user_email;
                 draft.s_isAuthenticated = true;
                 return draft;
@@ -55,7 +59,10 @@ const reducer = (
                 draft.error = action.payload;
                 draft.authToken = '';
                 draft.user_email = '';
-                draft.s_isAuthenticated = false;
+                draft.image = '';
+                draft.first_name = '',
+                    draft.last_name = '',
+                    draft.s_isAuthenticated = false;
                 return draft;
 
             case ActionType.SOCIAL_SET_AUTHENTICATION:

@@ -15,6 +15,14 @@ export const logout = () => {
             const response = await service.post(apiUri.auth.logout);
 
             if (response?.data?.success) {
+                dispatch({
+                    first_name: '',
+                    last_name: '',
+                    image: '',
+                    u_first_name: '',
+                    u_last_name: '',
+                    u_image: '',
+                })
                 return response;
             } else {
                 dispatch(setAuthentication(false));

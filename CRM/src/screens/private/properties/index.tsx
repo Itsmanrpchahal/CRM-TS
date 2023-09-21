@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity } from 'react-native'
-import { styled, withTheme } from "styled-components/native";
+import { styled, useTheme, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from '../../../utils/globalStyles'
 import { FilterIcon } from '../../../utils/assets'
 import CardSwipeWrapper from "../../../components/CardSwipeWrapper";
@@ -8,23 +8,30 @@ import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Activity from "../../../components/Activity";
 import { useIsFocused } from '@react-navigation/native';
+import { store } from "../../../store";
 
 const Properties = () => {
+    const { colors } = useTheme()
     const [topHeight, setTopHeight] = useState(0)
     const [centerHeight, setCenterHeight] = useState(0)
     const [mainHeight, setMainHeight] = useState(0)
     const [visible, setVisible] = useState(false)
     const isFocused = useIsFocused();
+    const [selectedTabs, setSelectedTabs] = useState([]);
     const { getFilterloading, getFilterData } = useTypedSelector(
         state => state.getFilterData,
     )
     const { getAllPropertiesloading, getAllPPropertiesData } = useTypedSelector(
         state => state.getAllPPropertiesData,
     )
+    const { clearFilterloading } = useTypedSelector(
+        state => state.clearFilterData,
+    )
     const {
         openModal,
         getFilter,
-        getAllProperties
+        getAllProperties,
+        appFilter
     } = useActions();
 
     useEffect(() => {
@@ -42,13 +49,36 @@ const Properties = () => {
             Promise.all[getFilter(), getAllProperties({ limit: 1 })]
         }
     }, [isFocused])
+
+    const renderItem = ({ item, index }) => {
+        const { data_custom_taxonomy, data_customvalue } = item
+        const isSelected = selectedTabs.filter((i) => i === data_customvalue).length > 0; // checking if the item is already selected
+
+        return (
+            <TouchableOpacity onPress={() => {
+                if (isSelected) {
+                    setSelectedTabs((prev) => prev.filter((i) => i !== data_customvalue));
+                } else {
+                    setSelectedTabs(prev => [...prev, data_customvalue])
+                }
+                appFilter({ data_custom_taxonomy: item.data_custom_taxonomy, data_customvalue: item.data_customvalue })
+
+            }}>
+                <FilterTabs>
+                    <ImageWrapper height={20} width={20} source={{ uri: item?.term_image_url }} />
+                    <TextWrapper color={isSelected ? colors.primary : colors.black}>{item?.term_name}</TextWrapper>
+                    <Divider backgroundColor={isSelected ? colors.primary : colors.white}></Divider>
+                </FilterTabs>
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <MainView>
             {
-                getFilterloading || getAllPropertiesloading ? <LoaderView>
+                getFilterloading || getAllPropertiesloading || clearFilterloading ? <LoaderView>
                     <Activity />
                 </LoaderView > : null
-
             }
             <MainWrapperWhite onLayout={({ nativeEvent }) => {
                 const { x, y, width, height } = nativeEvent.layout
@@ -60,17 +90,10 @@ const Properties = () => {
                         setTopHeight(height)
                     }}>
                         <FlatList
-                            data={getFilterData?.data}
+                            data={getFilterData?.data?.Webinfo}
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            renderItem={({ item }) => {
-                                return (
-                                    <FilterTabs>
-                                        <ImageWrapper height={20} width={20} source={{ uri: item?.term_image_url }} />
-                                        <TextWrapper>{item?.term_name}</TextWrapper>
-                                    </FilterTabs>
-                                )
-                            }}>
+                            renderItem={renderItem}>
                         </FlatList>
 
                         <TabWrapper>
@@ -81,6 +104,7 @@ const Properties = () => {
                                             'SendSelectedPropertiesSheet',
                                             {
                                                 height: '80%',
+
                                             },
                                         )
                                     }}>
@@ -98,6 +122,7 @@ const Properties = () => {
                                             'FilterSheet',
                                             {
                                                 height: '80%',
+                                                data: getFilterData?.data
                                             },
                                         )
                                     }}>
@@ -110,7 +135,6 @@ const Properties = () => {
 
                             </FilterBtn>
                             <FilterBtn>
-
                                 <TouchableOpacity
                                     onPress={() => {
                                         openModal(
@@ -149,6 +173,19 @@ type ImageProps = {
     width?: number;
 }
 
+type TextProps = {
+    color?: string;
+}
+
+type DividerProps = {
+    backgroundColor?: string;
+}
+
+const Divider = styled.View<DividerProps>`
+    width:100%;
+    height:1px;
+    background-color:${({ backgroundColor }: any) => backgroundColor};
+`;
 
 const TabWrapper = styled.View`
     flex-direction:row;
@@ -175,7 +212,7 @@ const FilterBtn = styled.View`
     background-color:${({ theme }: any) => theme.colors.white};
 `;
 
-const TextWrapper = styled.Text`
+const TextWrapper = styled.Text<TextProps>`
     color: ${({ color }: any) => color};
 `;
 

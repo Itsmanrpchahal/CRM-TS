@@ -26,13 +26,15 @@ export const sociallogin = (data: any) => {
             if (response?.data?.success) {
                 setAuthInitalToken(response.data.data.authToken);
                 await storeData(storageConstants.authToken, response.data.data.authToken);
-
                 AsyncStorage.setItem('TOKEN', "" + response.data.data.authToken)
                 AsyncStorage.setItem('user_email', response.data.data.user_email)
                 await dispatch(
                     setUser({
                         authToken: response.data.data.authToken,
-                        user_email: response.data.data.user_email
+                        user_email: response.data.data.user_email,
+                        first_name: response.data.data.first_name,
+                        last_name: response.data.data.last_name,
+                        image: response.data.data.image
                     }),
                 );
                 dispatch(setSAuthentication(true));
@@ -74,6 +76,9 @@ export const setUser = (fn: any) => {
             payload: {
                 authToken: fn?.authToken,
                 user_email: fn?.user_email,
+                first_name: fn?.first_name,
+                last_name: fn?.last_name,
+                image: fn?.image
             },
         });
     };

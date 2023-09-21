@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from 'react';
+import React, { useEffect } from 'react';
 // @ts-ignore
 import styled from 'styled-components/native';
 import { useNavigation, useTheme } from '@react-navigation/native';
@@ -10,18 +10,19 @@ import { clearAll } from "../storage";
 import { persistor } from "../store";
 import { useActions } from "../hooks/useActions";
 import axios from "axios";
-import { profileIcon, settingIcon } from '../assets';
+import { settingIcon } from '../assets';
 import { sideMenuOptions } from '../utils/constants'
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { store } from '../store';
 
 function CustomDrawer(props: any) {
   const { setAuthentication, setSAuthentication, logout } = useActions();
   const { colors }: any = useTheme();
   const navigation = useNavigation()
-  const { loading, error, isAuthenticated } = useTypedSelector(
+  const { loading, error, isAuthenticated, u_image, u_first_name, u_last_name } = useTypedSelector(
     state => state.auth,
   );
-  const { s_loading, s_isAuthenticated } = useTypedSelector(
+  const { s_loading, s_isAuthenticated, image, first_name, last_name } = useTypedSelector(
     state => state.socialLogin,
   );
   const logoutAction = async () => {
@@ -40,6 +41,8 @@ function CustomDrawer(props: any) {
       routes: [{ name: navigationStrings.LOGIN }],
     });
   };
+
+
   // @ts-ignore
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
@@ -48,8 +51,8 @@ function CustomDrawer(props: any) {
           <MainWrapper>
             <HorizontalWrapper>
               <ItemWrapper>
-                <ImageView source={profileIcon}></ImageView>
-                <UserName>Username</UserName>
+                <ImageView style={{ borderRadius: 14 }} source={{ uri: !isAuthenticated ? image : u_image }}></ImageView>
+                <UserName>{isAuthenticated ? u_first_name : first_name + " " + isAuthenticated ? u_last_name : last_name}</UserName>
               </ItemWrapper>
               <TouchableOpacity onPress={() => {
                 navigation.navigate(navigationStrings.SETTING)

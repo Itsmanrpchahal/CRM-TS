@@ -6,7 +6,9 @@ import {
     modalSheet,
     sociallogin,
     getFilter,
-    getAllProperties
+    getAllProperties,
+    appFilter,
+    clearFilter
 } from "../store";
 
 export const useActions = () => {
@@ -19,7 +21,9 @@ export const useActions = () => {
             sociallogin,
             modalSheet,
             getFilter,
-            getAllProperties
+            getAllProperties,
+            appFilter,
+            clearFilter
         ),
         dispatch,
     );

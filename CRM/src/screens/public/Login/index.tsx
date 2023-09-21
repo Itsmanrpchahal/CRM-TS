@@ -46,7 +46,6 @@ const Login = ({ navigation }) => {
     useEffect(() => {
         requestUserPermission()
         NotificationListerner()
-        getToken()
     }, [])
 
     const getToken = async () => {
@@ -66,6 +65,7 @@ const Login = ({ navigation }) => {
             formData.append('social_token', userInfo?.idToken)
             formData.append('last_name', userInfo?.user.familyName)
             formData.append('first_name', userInfo?.user.givenName)
+            formData.append('image', userInfo?.user?.photo)
             formData.append('device_type', '2')
             formData.append('device_token', fcmtoken)
             formData.append('user_type', '2')

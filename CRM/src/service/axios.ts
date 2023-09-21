@@ -27,13 +27,13 @@ instance.defaults.headers['security_key'] = "SurfLokal52"
 
 
 instance.interceptors.request.use(payload => {
-
+    console.log('request ===> ', payload)
     return payload;
 });
 
 instance.interceptors.response.use(
     response => {
-        if (!response.data.status) {
+        if (!response.data.success) {
             Snackbar.show({
                 text: response && response.data.message,
                 duration: Snackbar.LENGTH_SHORT,

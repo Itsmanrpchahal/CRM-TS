@@ -7,8 +7,10 @@ const apiUri = {
         socialLogin: 'webapi/v1/login/emaillogin.php', //email,username,device_type,device_token,social_id,social_token,user_type , first_name,last_name in formData and security_key in header
     },
     surfMLP: {
-        getFilter: 'wp-json/Filter/WebFilter',
+        getFilter: 'webapi/v1/SubFilter/websubfilter.php',
         getProperties: 'webapi/v1/property/?limit=',//send limit in URL and 
+        appFilter: 'webapi/v1/AppFilter?',
+        clearFilter: 'webapi/v1/AppFilter/clearfilter.php'
     }
 };
 
