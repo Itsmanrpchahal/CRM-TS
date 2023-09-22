@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme, withTheme } from 'styled-components';
 // @ts-ignore
 import styled from 'styled-components/native';
@@ -7,14 +7,18 @@ import Swiper from 'react-native-deck-swiper'
 import { BrushIcon, UndoIcon, bathIcon, hoasIcon, measuringtapeIcon, newbedIcon } from '../utils/assets';
 import { useActions } from '../hooks/useActions';
 import { TouchableOpacity } from 'react-native';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import navigationStrings from '../navigation/navigationStrings';
 
 type CardSwipeProps = {
     height: number,
     data: any,
+    navigation: any,
 };
 const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
     height,
     data = [],
+    navigation,
     ...rest
 }) => {
     const { colors } = useTheme()
@@ -24,7 +28,7 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
     const [indexs, setIndex] = useState(0)
 
     useEffect(() => {
-        alert(indexs)
+        // alert(indexs)
     }, [indexs])
     return (
         <MainWrapper height={height}>
@@ -38,41 +42,52 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
                     cardVerticalMargin={0}
                     onSwipedLeft={() => { }}
                     onSwipedRight={() => { }}
+                    onTapCard={(item) => {
+                        navigation.current.navigate(navigationStrings.PROPERTY_DETAIL)
+                    }}
                     verticalSwipe={false}
                     cards={data}
                     renderCard={(card, index) => {
                         return (
                             <CardWapper>
-                                <ImageArea>
-                                    <TouchableOpacity style={{
-                                        width: 50,
-                                        height: '100%',
-                                        position: 'absolute',
-                                        backgroundColor: 'red',
-                                        zIndex: 999
-                                    }}
-                                        disabled={indexs >= 0 ? false : true}
-                                        onPress={() => {
-                                            setIndex(indexs - 1)
-                                        }}>
-                                        <TapArea />
-                                    </TouchableOpacity>
-                                    <ImageWrapper source={{ uri: card?.featured_image_src[0]?.guid }}></ImageWrapper>
-                                    <TouchableOpacity style={{
-                                        width: 50,
-                                        height: '100%',
-                                        position: 'absolute',
-                                        backgroundColor: 'red',
-                                        zIndex: 999,
-                                        right: 0,
-                                    }}
-                                        disabled={indexs <= card?.featured_image_src.length ? false : true}
-                                        onPress={() => {
-                                            setIndex(indexs + 1)
-                                        }}>
-                                        <TapArea style={{ right: 0, position: 'absolute', }} />
-                                    </TouchableOpacity>
-                                </ImageArea>
+                                <SwiperFlatList
+                                    contentContainerStyle={{ height: '100%', width: '100%' }}
+                                    style={{ height: '60%', width: '100%' }}
+                                    scrollEnabled
+                                    data={card?.featured_image_src}
+                                    renderItem={({ item, index }) => (
+                                        <ImageArea>
+                                            <TouchableOpacity style={{
+                                                width: 50,
+                                                height: '100%',
+                                                position: 'absolute',
+                                                zIndex: 999
+                                            }}
+                                                // disabled={indexs >= 0 ? false : true}
+                                                onPress={() => {
+                                                    setIndex(indexs - 1)
+                                                }}>
+                                                <TapArea />
+                                            </TouchableOpacity>
+                                            <ImageWrapper style={{ height: '100%', width: '100%' }} source={{ uri: card?.featured_image_src[indexs]?.guid }}></ImageWrapper>
+                                            <TouchableOpacity style={{
+                                                width: 50,
+                                                height: '100%',
+                                                position: 'absolute',
+                                                zIndex: 999,
+                                                right: 0,
+                                            }}
+                                                // disabled={item?.featured_image_src?.length - 1 === indexs ? true : false}
+                                                onPress={() => {
+                                                    setIndex(indexs + 1)
+                                                }}>
+                                                <TapArea style={{ right: 0, position: 'absolute', }} />
+                                            </TouchableOpacity>
+                                        </ImageArea>
+
+                                    )}
+                                />
+
                                 <BottomWrapper>
                                     <TextWrapper color={colors.blue} fontSize={18} fontWeight={800}>
                                         {card?.property_price}
@@ -161,7 +176,8 @@ const TapArea = styled.View`
 
 const ImageArea = styled.View`
     position:relative;
-    height:60%;
+    height:100%;
+    width:100%;
     z-index:-999;
 `;
 
@@ -207,9 +223,8 @@ const BottomWrapper = styled.View`
 `;
 
 const ImageWrapper = styled.Image`
-    height:100%;
-    width:100%;
     border-radius:10px;
+    resize-mode:cover;
 `;
 
 const CardWapper = styled.View`

@@ -80,7 +80,7 @@ function CustomDrawer(props: any) {
                                           item.value ? logoutAction() : null
                   }}>
                     <ItemWrapper>
-                      <ImageView source={item.image}></ImageView>
+                      <ImageView tintColor={colors.white} source={item.image}></ImageView>
                       <UserName>{item.label}</UserName>
                     </ItemWrapper>
                   </TouchableOpacity>

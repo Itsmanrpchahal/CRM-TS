@@ -25,5 +25,6 @@ export default {
     VOICEMAIL: 'Voicemail',
     SETTING: 'Settings',
     CALENDER_SCREEN: 'Calender',
-    NOTIFICATION: 'Notifications'
+    NOTIFICATION: 'Notifications',
+    PROPERTY_DETAIL: 'Property Detail'
 };

@@ -1,10 +1,15 @@
 import React from "react";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { grommetIcon, waveIcon } from "../../utils/assets";
-import { FlatList, Text, View, StyleSheet } from "react-native";
+import { waveIcon } from "../../utils/assets";
+import { FlatList, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { useActions } from "../../hooks/useActions";
+import { closeModal } from "../../store/global_modal/action-creators";
+import LineChart from "../LineChart";
 
 const ContactHeatMap = () => {
     const { colors } = useTheme()
+    const { openModal } = useActions()
+
     return (
         <MainWrapper>
             <TextView fontWeight={500} fontColor={colors.black} fontSize={24} textAlign='center'>
@@ -35,112 +40,74 @@ const ContactHeatMap = () => {
                 <Card>
                     <HorizontalWrapper1>
                         <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Engagement</TextView1>
-
                     </HorizontalWrapper1>
                     <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>00:13:53</TextView1>
                 </Card>
                 <Card>
-                    <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Saved Criteria</TextView1>
-                    <LiveView>
-                        <FlatList
-                            style={{ height: 80 }}
-                            nestedScrollEnabled={true}
-                            showsVerticalScrollIndicator={false}
-                            scrollEnabled={false}
-                            data={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
-                            renderItem={() => {
-                                return (
-                                    <LineBarView>
-                                        <LineBarText>
-                                            4 Bedrooms
-                                        </LineBarText>
-                                        <LineBarProgress>
-                                            <LineInProgress>
-                                            </LineInProgress>
-                                        </LineBarProgress>
-                                        <LineProgressText>10</LineProgressText>
-                                    </LineBarView>
-                                )
-                            }}>
-                        </FlatList>
-                    </LiveView>
+                    <HorizontalWrapper1>
+                        <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Saved Criteria</TextView1>
+                        <ImageView1 height={40} width={40} marginLeft={10} source={waveIcon} />
+                    </HorizontalWrapper1>
+                    <TouchableOpacity onPress={async () => {
+                        await closeModal()
+
+                        openModal(
+                            'SearchCriteriaSheet',
+                            {
+                                height: '80%',
+                            },
+                        )
+                    }}>
+                        <LiveView>
+                            <FlatList
+                                style={{ height: 80 }}
+                                nestedScrollEnabled={true}
+                                showsVerticalScrollIndicator={false}
+                                scrollEnabled={false}
+                                data={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+                                renderItem={() => {
+                                    return (
+                                        <LineBarView>
+                                            <LineBarText>
+                                                4 Bedrooms
+                                            </LineBarText>
+                                            <LineBarProgress>
+                                                <LineInProgress>
+                                                </LineInProgress>
+                                                <LineProgressText>10</LineProgressText>
+                                            </LineBarProgress>
+                                        </LineBarView>
+                                    )
+                                }}>
+                            </FlatList>
+                        </LiveView>
+                    </TouchableOpacity>
                 </Card>
             </HorizontalWrapper>
 
             <HorizontalWrapper>
-                <Card>
-                    <TextView1 style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center" }} fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Surf Level</TextView1>
+                <TouchableOpacity onPress={async () => {
+                    await closeModal()
+                    openModal(
+                        'SearchBehaviorSheet',
+                        {
+                            height: '80%',
+                        },
+                    )
+                }}>
+                    <Card>
+                        <TextView1 style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center" }} fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Search Behavior</TextView1>
 
-                    <View style={{ position: "relative", height: "100%", width: "100%", flexDirection: "row", alignItems: "flex-end" }}>
-                        <View style={{ position: "relative", height: "100%", width: "90%", marginTop: 12, paddingHorizontal: 12, alignItems: "flex-end", justifyContent: "flex-start", paddingVertical: 12, flexDirection: "row", paddingLeft: 1 }}>
-                            <View style={styles.leftnum}>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
-                                <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
+                        <LineChart />
 
-                                <Text style={styles.nummain}>0 -</Text>
-                            </View>
-                            <View style={{ justifyContent: "space-between", flexDirection: "row", height: "80%", width: "100%" }}>
-
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 50 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >M</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 20 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >T</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 40 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >W</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 55 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >T</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 65 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >F</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 5 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >S</Text>
-                                </View>
-                                <View style={styles.mainlymain}>
-                                    <View style={styles.covertop}>
-                                        <View style={{ backgroundColor: colors.primary, height: 17 }}></View>
-                                    </View>
-                                    <Text style={styles.maincoverbar} >S</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                </Card>
+                    </Card>
+                </TouchableOpacity>
                 <Card>
                     <HorizontalWrapper1>
                         <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Search Behavior</TextView1>
                     </HorizontalWrapper1>
-                    <ImageView source={grommetIcon} />
-                    <TextView1 fontSize={12} color={colors.black} fontWeight={700} marginTop={0}>Grommet</TextView1>
+                    <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>$1.8 K</TextView1>
+
                 </Card>
             </HorizontalWrapper>
 
@@ -179,25 +146,21 @@ type ImageViewProps = {
     width: number
 }
 
-const ImageView = styled.Image`
-    height:70px;
-    width:70px;
-    resize-mode:contain;
-    margin-top:10px;
-`;
-
-
 const LineProgressText = styled.Text`
     text-align: right;
     font-size: 7px;
-    margin-top: 4;
-    color: #979897;
+   
+    color: #000;
+    position:absolute;
+    right:2;
+    top:-2
 `;
 
 const LineInProgress = styled.View`
     height: 3px;
+    width:90%;
     border-radius: 22px;
-    background-rolor: red;
+    background-color: red;
     position:absolute;
     left: 0;
     top: 0;
@@ -208,8 +171,8 @@ const LineBarProgress = styled.View`
     width: 100%;
     height: 3px;
     border-radius: 22px;
-    background-color:${({ theme }: any) => theme.colors.green};
-    position: relative;
+    flex-direction:row;
+    display:flex;
 `;
 
 const LineBarText = styled.Text`
@@ -259,7 +222,8 @@ const TextView1 = styled.Text<TextProps>`
 
 const LiveView = styled.View`
     height:80px;
-    width:90px;
+    width:125px;
+    margin-top:24px;
     flex:1;
     overflow:hidden;
 `;

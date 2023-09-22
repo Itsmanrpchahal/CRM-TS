@@ -15,6 +15,8 @@ import DripCampaignsSheet from '../../components/sheets/DripCampaignsSheet'
 import AddTagSheet from '../../components/sheets/AddTagSheet'
 import HeatMapSheet from '../../components/sheets/HeatMapsheet'
 import ContactHeatMap from '../../components/sheets/ContactHeatMap'
+import SearchBehaviorSheet from '../../components/sheets/SearchBehaviorSheet'
+import SearchCriteriaSheet from '../../components/sheets/SearchCriteriaSheet'
 
 export {
     ActivityLogSheet,
@@ -33,5 +35,7 @@ export {
     DripCampaignsSheet,
     AddTagSheet,
     HeatMapSheet,
-    ContactHeatMap
+    ContactHeatMap,
+    SearchBehaviorSheet,
+    SearchCriteriaSheet
 };

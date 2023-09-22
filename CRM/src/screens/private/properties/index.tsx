@@ -9,8 +9,9 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Activity from "../../../components/Activity";
 import { useIsFocused } from '@react-navigation/native';
 import { store } from "../../../store";
+import { navigationRef } from "../../../navigation/RootNavigation";
 
-const Properties = () => {
+const Properties = (navigation) => {
     const { colors } = useTheme()
     const [topHeight, setTopHeight] = useState(0)
     const [centerHeight, setCenterHeight] = useState(0)
@@ -156,7 +157,7 @@ const Properties = () => {
                     </TopWrapper>
 
                     {
-                        visible && <CardSwipeWrapper height={centerHeight} data={getAllPPropertiesData.data}></CardSwipeWrapper>
+                        visible && <CardSwipeWrapper navigation={navigationRef} height={centerHeight} data={getAllPPropertiesData.data}></CardSwipeWrapper>
                     }
 
                 </ChildWrapper>

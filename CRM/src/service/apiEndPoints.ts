@@ -10,7 +10,8 @@ const apiUri = {
         getFilter: 'webapi/v1/SubFilter/websubfilter.php',
         getProperties: 'webapi/v1/property/?limit=',//send limit in URL and 
         appFilter: 'webapi/v1/AppFilter?',
-        clearFilter: 'webapi/v1/AppFilter/clearfilter.php'
+        clearFilter: 'webapi/v1/AppFilter/clearfilter.php',
+        singleProperty: 'webapi/v1/singleproperty/?post_id=' //Property ID in url
     }
 };
 

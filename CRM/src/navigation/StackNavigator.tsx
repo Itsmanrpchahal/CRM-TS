@@ -27,6 +27,7 @@ import mailView from '../screens/private/mailView';
 import setting from '../screens/private/setting';
 import calenderScreen from '../screens/private/calenderScreen';
 import notifications from '../screens/private/notifications';
+import propertyDetailPage from '../screens/private/propertyDetailPage';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -328,6 +329,22 @@ function StackNavigator(props: any) {
                     headerTitleAlign: 'center',
                     headerTintColor: colors.white,
                     title: navigationStrings.NOTIFICATION,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.PROPERTY_DETAIL}
+                component={propertyDetailPage}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.PROPERTY_DETAIL,
                     headerStyle: {
                         backgroundColor: colors.primary
                     },

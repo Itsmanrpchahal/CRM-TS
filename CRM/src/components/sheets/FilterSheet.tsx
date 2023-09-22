@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import { MainWrapperWhite } from "../../utils/globalStyles";
 import { styled, useTheme, withTheme } from "styled-components/native";
 import { MultiSelect } from "react-native-element-dropdown";
-import WheelPicker from '../../utils/wheelPicker'
 import { Picker, DatePicker } from 'react-native-wheel-pick';
 import { useActions } from "../../hooks/useActions";
 

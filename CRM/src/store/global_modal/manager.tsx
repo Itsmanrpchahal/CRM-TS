@@ -26,7 +26,9 @@ import {
     DripCampaignsSheet,
     AddTagSheet,
     HeatMapSheet,
-    ContactHeatMap
+    ContactHeatMap,
+    SearchBehaviorSheet,
+    SearchCriteriaSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -96,7 +98,8 @@ const ModalManager = () => {
                     snapPoints={snapPoints}
                     onChange={handleSheetChanges}>
                     <BottomSheetScrollView
-                        style={{ backgroundColor: colors.white }}
+                        contentContainerStyle={{ flexGrow: 1 }}
+                        style={{ backgroundColor: colors.white, }}
                         showsVerticalScrollIndicator={false}>
                         {renderedModal}
                     </BottomSheetScrollView>
@@ -111,7 +114,7 @@ const ModalManager = () => {
                 index={0}
                 snapPoints={snapPoints}
                 onChange={handleSheetChanges}>
-                <View></View>
+                <View style={{ backgroundColor: 'red' }}></View>
             </BottomSheet>
         );
     }
@@ -149,7 +152,9 @@ const modalLookup: any = {
     DripCampaignsSheet,
     AddTagSheet,
     HeatMapSheet,
-    ContactHeatMap
+    ContactHeatMap,
+    SearchBehaviorSheet,
+    SearchCriteriaSheet
 };
 
 const WelcomeModalWrapper = styled.View`

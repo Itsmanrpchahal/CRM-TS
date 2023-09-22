@@ -110,6 +110,7 @@ import bathIcon from '../assets/bath/bath.png'
 import newbedIcon from '../assets/newbed/newbed.png'
 import measuringtapeIcon from '../assets/measuringtape/measuringtape.png'
 import hoasIcon from '../assets/hoas/hoas.png'
+import powerOffIcon from '../assets/powerOff/powerOff.png'
 
 export {
     ChatIcon,
@@ -223,5 +224,6 @@ export {
     bathIcon,
     newbedIcon,
     measuringtapeIcon,
-    hoasIcon
+    hoasIcon,
+    powerOffIcon
 };
