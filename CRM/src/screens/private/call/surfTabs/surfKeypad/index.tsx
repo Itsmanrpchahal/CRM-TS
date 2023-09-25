@@ -31,7 +31,11 @@ const surfKeypad = () => {
                                         <TextView color={colors.black} fontSize={28} fontWeight={700}>{item?.number}</TextView>
                                 }
 
-                                <TextView style={{ marginTop: index === 9 ? 12 : 0 }} color={colors.black} fontSize={index === 9 || index === 11 ? 30 : 10} fontWeight={300}>{item?.alpha}</TextView>
+                                {
+                                    index != 0 ?
+                                        <TextView style={{ marginTop: index === 9 ? 12 : 0 }} color={colors.black} fontSize={index === 9 || index === 11 ? 30 : 10} fontWeight={300}>{item?.alpha}</TextView>
+                                        : null
+                                }
                             </KeyPadView>
                         )
                     }}>

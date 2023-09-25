@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { styled, withTheme } from "styled-components/native";
-import { MainWrapper } from '../../../utils/globalStyles'
+import { LoaderView, MainWrapper } from '../../../utils/globalStyles'
 import navigationStrings from "../../../navigation/navigationStrings";
 import { useTheme } from "styled-components";
 import TextField from '../../../components/TextField';
@@ -12,7 +12,7 @@ import {
     statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { googleIcon } from "../../../utils/assets";
-import { Platform, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import messaging from '@react-native-firebase/messaging';
 import { useActions } from '../../../hooks/useActions'
 import { requestUserPermission, NotificationListerner } from '../../../utils/pushnotifications_helper'
@@ -47,10 +47,6 @@ const Login = ({ navigation }) => {
         requestUserPermission()
         NotificationListerner()
     }, [])
-
-    const getToken = async () => {
-        const token = await messaging().getToken()
-    }
 
     const signIn = async () => {
         try {
@@ -206,15 +202,7 @@ const LoginWrapper = styled.View`
     justify-content:center;
     align-items:center;
 `
-const LoaderView = styled.View`
-    height: 100%;
-    width: 100%;
-    backgroundColor: rgba(0,0,0,.2);
-    position: absolute;
-    zIndex: 99;
-    left: 0;
-    top: 0;
-`;
+
 const MainView = styled.View`
     flex:1;
 `;

@@ -43,7 +43,6 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
                     onSwipedLeft={() => { }}
                     onSwipedRight={() => { }}
                     onTapCard={(item) => {
-                        navigation.current.navigate(navigationStrings.PROPERTY_DETAIL)
                     }}
                     verticalSwipe={false}
                     cards={data}
@@ -69,7 +68,12 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
                                                 }}>
                                                 <TapArea />
                                             </TouchableOpacity>
-                                            <ImageWrapper style={{ height: '100%', width: '100%' }} source={{ uri: card?.featured_image_src[indexs]?.guid }}></ImageWrapper>
+                                            <TouchableOpacity onPress={() => {
+                                                navigation.current.navigate(navigationStrings.PROPERTY_DETAIL, { ID: card?.ID })
+                                            }}>
+                                                <ImageWrapper style={{ height: '100%', width: '100%' }} source={{ uri: card?.featured_image_src[indexs]?.guid }}></ImageWrapper>
+
+                                            </TouchableOpacity>
                                             <TouchableOpacity style={{
                                                 width: 50,
                                                 height: '100%',

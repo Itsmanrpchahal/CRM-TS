@@ -1,128 +1,120 @@
 import React, { useEffect, useState } from "react";
 import styled, { useTheme, withTheme } from "styled-components/native";
-import Speedmeter from "../Speedmeter";
-import { BaseIcon, NeedleCustom, RookieAloneIcon, RookieIcon, infoIcon } from "../../utils/assets";
-import { Dimensions, Platform, ScrollView, TouchableOpacity, View } from "react-native";
+import { RookieAloneIcon, infoIcon, tooltipIcon } from "../../utils/assets";
+import { Dimensions, TouchableOpacity } from "react-native";
+import LineChart from "../LineChart";
+import { grommetIcon } from "../../utils/assets";
 
 const HeatMapSheet = () => {
     const { colors } = useTheme()
-    const [topHeight, setTopHeight] = useState(0)
-    const [bottomHeight, setBottomHeight] = useState(0);
-    const [mainHeight, setMainHeight] = useState(0);
     let deviceHeight = Dimensions.get('window').height
-    const [modalHeight, setModalHeight] = useState(0)
     const [info, setInfo] = useState(false);
-    useEffect(() => {
-        setBottomHeight(mainHeight - topHeight)
-    }, [topHeight, mainHeight])
+    const [rookieInfo, setRookieInfo] = useState(false)
 
-    useEffect(() => {
-        setModalHeight(deviceHeight / 100 * 80);
-    }, [deviceHeight])
     return (
-        <MainWrapper height={modalHeight} onLayout={({ nativeEvent }) => {
-            const { x, y, width, height } = nativeEvent.layout
-            setMainHeight(height)
-        }}>
+        <MainWrapper >
 
-            <SpeedView onLayout={({ nativeEvent }) => {
-                const { x, y, width, height } = nativeEvent.layout
-                setTopHeight(height)
-            }}>
+            <TopHorizontalView>
                 <TextView fontWeight={500} fontColor={colors.black} fontSize={24} textAlign='center'>
-                    Your surf level
+                    Your surf stats
                 </TextView>
-                <VerticleView>
+                <TouchableOpacity onPress={() => { setInfo(!info) }}>
+                    <InfoIcon width={22} height={22} source={infoIcon}></InfoIcon>
+                </TouchableOpacity>
+
+            </TopHorizontalView>
+            {
+                info &&
+                <InfoMainView>
                     <TouchableOpacity onPress={() => { setInfo(!info) }}>
-                        <InfoIcon width={22} height={22} source={infoIcon}></InfoIcon>
+                        <TriangleView borderBottomColor={colors.orange}></TriangleView>
                     </TouchableOpacity>
-                    <Speedmeter
-                        minValue={0}
-                        defaultValue={0}
-                        allowedDecimals={0}
-                        backgroundColor={colors.white}
-                        size={155}
-                        marginTopLebel={-55}
-                        needleImage={NeedleCustom}
-                        maxValue={100}
-                        labels={[
-
-                        ]}
-                        value={20}>
-                    </Speedmeter>
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <ImageView source={BaseIcon}></ImageView>
-                    </View>
-                    {
-                        info &&
-                        <InfoMainView>
-                            <TouchableOpacity onPress={() => { setInfo(!info) }}>
-                                <TriangleView></TriangleView>
-                            </TouchableOpacity>
-                            <InfoView>
-                                <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
-                                    0 to 25 points - Rookie
-                                </TextView>
-                                <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
-                                    26 to 50 points - Novice
-                                </TextView>
-                                <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
-                                    51 to 75 points - Booster
-                                </TextView>
-                                <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
-                                    51 to 75 points - Rockstar
-                                </TextView>
-
-                            </InfoView>
-                        </InfoMainView>
-
-                    }
-                </VerticleView>
-
-
-
-
-                <TextView fontWeight={500} fontColor={colors.black} fontSize={29} textAlign='center'>
-                    Rookie
-                </TextView>
-                <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='flex-start'>
-                    “I’m here to help you stay focused and get the
-                    most out of our righteous CRM!”
-                </TextView>
-            </SpeedView>
-
-            <HorizontalView height={bottomHeight - 30}>
-                <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled>
-                    <VerticleView>
-                        <TextView fontWeight={400} fontColor={colors.black} fontSize={14} textAlign='flex-start'>
-                            1. Use the CRM everyday!
+                    <InfoView>
+                        <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
+                            0 to 25 points - Rookie
                         </TextView>
-                        <TextView fontWeight={400} fontColor={colors.black} fontSize={14} textAlign='flex-start'>
-                            2. Accept and follow up on
-                            every lead from your surf
-                            tools.
+                        <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
+                            26 to 50 points - Novice
                         </TextView>
-                        <TextView fontWeight={400} fontColor={colors.black} fontSize={14} textAlign='flex-start'>
-                            3. Booking as many showings
-                            as humanly possible.
+                        <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
+                            51 to 75 points - Booster
                         </TextView>
-                        <TextView fontWeight={400} fontColor={colors.black} fontSize={14} textAlign='flex-start'>
-                            4. Preparing sales and listing
-                            contracts from the transaction
-                            desk.
+                        <TextView fontWeight={500} fontColor={colors.black} fontSize={16} textAlign='center'>
+                            51 to 75 points - Rockstar
                         </TextView>
-                        <TextView marginTop={10} fontWeight={400} fontColor={colors.black} fontSize={14} textAlign='flex-start'>
-                            I’ll be here to help you anyway I can.
-                            Click me everyday to see
-                            useful tips and tricks on how you can
-                            level up!”
 
-                        </TextView>
-                    </VerticleView>
-                </ScrollView>
-                <RookieImage height={bottomHeight - 30} source={RookieIcon}></RookieImage>
-            </HorizontalView>
+                    </InfoView>
+                </InfoMainView>
+            }
 
+            <HorizontalWrapper>
+                <Card>
+                    <HorizontalWrapper1>
+                        <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Time on CRM</TextView1>
+                    </HorizontalWrapper1>
+                    <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>00:13:53</TextView1>
+
+                </Card>
+                <Card>
+                    <HorizontalWrapper1>
+                        <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Daily Logins</TextView1>
+                    </HorizontalWrapper1>
+                    <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>61</TextView1>
+                </Card>
+            </HorizontalWrapper>
+
+
+            <HorizontalWrapper>
+                <Card>
+                    <HorizontalWrapper1>
+                        <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Self-sourced
+                            Leads</TextView1>
+                    </HorizontalWrapper1>
+                    <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>159</TextView1>
+                </Card>
+                <Card>
+                    <TextView1 style={{ position: 'absolute', top: 0 }} fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Heatmap</TextView1>
+                    <LineChart />
+
+                </Card>
+            </HorizontalWrapper>
+            {
+                rookieInfo && <ToolTipMainDiv>
+                    <ToolTipView>
+                        <TextView1
+                            fontSize={21} color={colors.primary}
+                            fontWeight={700} marginTop={0}>“I’m here to help you stay focused
+                            and get the most out of our
+                            righteous CRM!”</TextView1>
+
+                    </ToolTipView>
+                    <TriangleView style={{ transform: [{ rotate: '145deg' }], marginTop: 2, marginLeft: '30%' }} borderBottomColor={'#D4EDF9'}></TriangleView>
+
+                </ToolTipMainDiv>
+            }
+            <HorizontalWrapper>
+                <TouchableOpacity onPress={async () => {
+
+                }}>
+                    <Card>
+                        <TextView1 style={{ position: "absolute", top: 0, left: 0, right: 0, textAlign: "center" }}
+                            fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>surf level</TextView1>
+                        <ImageView1 height={110} width={110} marginLeft={0} source={grommetIcon}></ImageView1>
+
+                        <TextView1
+                            fontSize={10} color={colors.black} fontWeight={700} marginTop={-10}>Rookie</TextView1>
+                    </Card>
+                </TouchableOpacity>
+
+
+                <TouchableOpacity onPress={() => { setRookieInfo(!rookieInfo) }}>
+                    <Card>
+                        <ImageView1 height={130} width={130} marginLeft={0} source={RookieAloneIcon}></ImageView1>
+                    </Card>
+                </TouchableOpacity>
+
+
+            </HorizontalWrapper>
 
         </MainWrapper>
     )
@@ -145,11 +137,85 @@ type ImageProps = {
     width?: number;
     height?: number;
 }
-type BottomProps = {
-    height?: number;
+
+type ImageViewProps = {
+    marginLeft: number;
+    height: number;
+    width: number
 }
 
-const TriangleView = styled.View`
+type TriangleProp = {
+    borderBottomColor?: string
+}
+
+const ToolTipView = styled.View`
+    position:absolute;
+    width:80%;
+    height:150px;
+    border-radius:16px;
+    top:-140;
+    padding:8px;
+    align-items:center;
+    justify-content:center;
+    background-color:#D4EDF9;
+`;
+
+const ToolTipMainDiv = styled.View`
+    position:relative;
+    width:100%;  
+    z-index:9;
+    align-items:center;
+    justify-content:center;
+    display:flex;margin:0 auto;
+`;
+
+const ImageView1 = styled.Image<ImageViewProps>`
+    height:${({ height }: any) => height}px;
+    width:${({ height }: any) => height}px;
+    justify-content:center;
+    align-items:center;
+    resize-mode:contain;
+    margin-left:${({ marginLeft }: any) => marginLeft}px;
+`;
+
+const TextView1 = styled.Text<TextProps>`
+    font-size:${({ fontSize }: any) => fontSize}px;
+    color:${({ color }: any) => color};
+    font-weight:${({ fontWeight }: any) => fontWeight};
+    align-items:center;
+    justify-content:center;
+    align-self:center;
+`;
+
+const Card = styled.View`
+    height:130px;
+    width:130px;
+    margin-bottom:15px;
+    margin-top:15px;
+    border-radius:15px;
+    border-width:2px;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    align-self:center;
+    border-color:${({ theme }: any) => theme.colors.primary};
+`;
+
+const HorizontalWrapper1 = styled.View`
+    flex-direction:row;
+    top:0;
+    justify-content:center;
+    align-items:center;
+    position:absolute;
+    width:100%;
+`;
+
+const HorizontalWrapper = styled.View`
+    flex-direction:row;
+    justify-content:space-evenly;
+`;
+
+const TriangleView = styled.View<TriangleProp>`
     width: 0px;
     height: 0px;
     borderLeftWidth: 10px;
@@ -159,7 +225,7 @@ const TriangleView = styled.View`
     backgroundColor: transparent;
     borderLeftColor: transparent;
     borderRightColor: transparent;
-    borderBottomColor: ${({ theme }: any) => theme.colors.orange};
+    borderBottomColor: ${({ borderBottomColor }: any) => borderBottomColor};
 `;
 const InfoView = styled.View`
     background-color:${({ theme }: any) => theme.colors.orange};   
@@ -172,52 +238,23 @@ const InfoMainView = styled.View`
     justify-content:center;
     align-items:center;
     position:absolute;
-    right:-92;
-    top:25;
+    top:20;
+    z-index:999;
+    right:10;
 `;
 
-const VerticleView = styled.View`
-    flexShrink:1;
-    justify-content:center;
-`;
-
-const HorizontalView = styled.View<BottomProps>`
-    position:absolute;
-    align-items:bottom;
+const TopHorizontalView = styled.View`
     flex-direction:row;
-    bottom:${({ height }: any) => Platform.OS === 'android' ? 0 : -15};
-    right:0;
-    width:100%;
-    height:${({ height }: any) => height}px;
-`;
-
-const RookieImage = styled.Image<BottomProps>`
-    resize-mode:contain;
-    right:0;
-    height:${({ height }: any) => height}px;
-    bottom:0;
+    justify-content:center;
+    margin-top:10px;
 `;
 
 const InfoIcon = styled.Image<ImageProps>`
     width:${({ width }: any) => width}px;
     height:${({ height }: any) => height}px;
-    position:absolute;
-    right:0;
-    top:10;
     resiz-mode:contain;
-`;
-
-const SpeedView = styled.View`
-    justify-content:center;
-    align-items:center;
-`;
-
-const ImageView = styled.Image`
-    height:35px;
-    width:100px;
-    justify-content:center;
-    resize-mode:contain;
-    align-items:center;
+    margin-left:8px;
+    margin-top:-10px;
 `;
 
 const TextView = styled.Text<TextProps>`

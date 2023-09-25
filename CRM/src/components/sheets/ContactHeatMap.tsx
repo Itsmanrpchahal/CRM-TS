@@ -117,21 +117,6 @@ const ContactHeatMap = () => {
 
 export default withTheme(ContactHeatMap)
 
-const styles = StyleSheet.create({
-    nummain: { fontSize: 8, textAlign: "center", },
-    leftnum: {
-        // position:"absolute",
-        // backgroundColor:"red",
-        height: "100%",
-        justifyContent: "space-between",
-        // bottom:6
-    },
-    mainlymain: { position: "relative", width: 12, marginHorizontal: 2 },
-    covertop: { height: "100%", justifyContent: "flex-end", position: "relative" },
-    maincoverbar: { fontSize: 8, textAlign: "center" },
-
-})
-
 type TextProps = {
     fontSize?: number;
     color?: string;
@@ -149,7 +134,6 @@ type ImageViewProps = {
 const LineProgressText = styled.Text`
     text-align: right;
     font-size: 7px;
-   
     color: #000;
     position:absolute;
     right:2;

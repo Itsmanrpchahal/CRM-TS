@@ -111,6 +111,11 @@ import newbedIcon from '../assets/newbed/newbed.png'
 import measuringtapeIcon from '../assets/measuringtape/measuringtape.png'
 import hoasIcon from '../assets/hoas/hoas.png'
 import powerOffIcon from '../assets/powerOff/powerOff.png'
+import clockIcon from '../assets/clock/clock.png'
+import rocketUpIcon from '../assets/rocketUp/rocketUp.png'
+import taxIcon from '../assets/taxIcon/taxIcon.png'
+import taxDocIcon from '../assets/taxDoc/taxDoc.png'
+import calenderPropertyIcon from '../assets/calenderProperty/calenderProperty.png'
 
 export {
     ChatIcon,
@@ -225,5 +230,10 @@ export {
     newbedIcon,
     measuringtapeIcon,
     hoasIcon,
-    powerOffIcon
+    powerOffIcon,
+    clockIcon,
+    rocketUpIcon,
+    taxIcon,
+    taxDocIcon,
+    calenderPropertyIcon,
 };

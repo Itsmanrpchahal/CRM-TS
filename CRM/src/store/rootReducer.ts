@@ -6,6 +6,7 @@ import modalSheet from '../store/global_modal/reducer'
 import getFilterData from '../store/getFilter/reducer'
 import clearFilterData from '../store/clearFIlter/reducer'
 import getAllPPropertiesData from '../store/getAllProperites/reducer'
+import getSinglePropertyData from '../store/singleProperty/reducer'
 
 const reducers = combineReducers({
     auth,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     modalSheet,
     getFilterData,
     getAllPPropertiesData,
-    clearFilterData
+    clearFilterData,
+    getSinglePropertyData
 });
 
 export default reducers;

@@ -18,7 +18,7 @@ prepare_react_native_project!
 #     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
 # ```
 flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
-
+  
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
@@ -48,6 +48,9 @@ target 'CRM' do
   pod 'Firebase', :modular_headers => true
    pod 'FirebaseCore', :modular_headers => true
    pod 'GoogleUtilities', :modular_headers => true
+   pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+   pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+
   target 'CRMTests' do
     inherit! :complete
     # Pods for testing

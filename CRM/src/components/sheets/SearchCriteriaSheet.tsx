@@ -38,7 +38,6 @@ const SearchCriteriaSheet = () => {
                         widthAndHeight={widthAndHeight}
                         series={series}
                         sliceColor={sliceColor}
-                        coverRadius={0.45}
                         coverFill={'#FFF'}
                     />
                 </PieWrapper>

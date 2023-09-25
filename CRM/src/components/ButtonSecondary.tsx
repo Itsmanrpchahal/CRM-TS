@@ -34,7 +34,7 @@ const SecondaryButton: React.FC<PrimaryButtonProps> = ({
 }) => {
     return (
         <TouchableOpacity onPress={() => onPress()}>
-            <SecondaryButton__Wrapper width={width} height={height} style={style}>
+            <SecondaryButton__Wrapper flexDirection={isIconLeft ? 'row-reverse' : 'row'} width={width} height={height} style={style}>
                 <SecondaryButton__Wrapper__Text fontSize={fontSize}>
                     {loading ? 'Loading...' : btnText}
                 </SecondaryButton__Wrapper__Text>
@@ -79,6 +79,7 @@ const SecondaryButton__Wrapper = styled.View<SecondaryButton__WrapperProps>`
     border-radius: 25px;
     padding: 0 6px 0 6px;
     margin-left:auto;
+    flex-direction:${({ flexDirection }: any) => flexDirection};
     width:${({ width }: any) => width}px
 `;
 const SecondaryButton__Wrapper__Text = styled.Text<FontSizeProps>`

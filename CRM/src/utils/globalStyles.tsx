@@ -34,6 +34,15 @@ export const MainWrapper = styled.View`
   background-color:${({ theme }: any) => theme.colors.primary}
 `;
 
+export const LoaderView = styled.View`
+height: 100%;
+width: 100%;
+backgroundColor: rgba(0,0,0,.2);
+position: absolute;
+zIndex: 99;
+left: 0;
+top: 0;
+`;
 
 export const MainWrapperWhite = styled.View`
   background-color: #FFFFFF;

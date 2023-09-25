@@ -139,7 +139,6 @@ const FilterSheet = (props: any) => {
 
             <TextView fontSize={18} marginTop={16} color={colors.black} fontWeight={500}>Square Feet</TextView>
             <HorizontalWrapper>
-
                 <Picker
                     textSize={16}
                     style={{ backgroundColor: 'white', width: '50%', height: 215 }}

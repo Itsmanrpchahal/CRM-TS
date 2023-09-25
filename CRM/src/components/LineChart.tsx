@@ -11,7 +11,6 @@ const LineChart = () => {
                 alignItems: "flex-end", justifyContent: "flex-start", paddingVertical: 12, flexDirection: "row",
                 paddingLeft: 1, flex: 1
             }}>
-                {/* <Text style={{ position: 'absolute', transform: [{ rotate: '-90deg' }], left: -80, top: '50%' }} >Time Spent in Minutes</Text> */}
                 <View style={styles.leftnum}>
                     <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>
                     <Text style={styles.nummain}>{Math.round(1 / 1)} -</Text>

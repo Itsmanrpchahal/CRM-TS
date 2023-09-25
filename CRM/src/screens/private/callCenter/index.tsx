@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useTheme, withTheme } from "styled-components/native";
 import { styled } from "styled-components/native";
 import { Switch } from 'react-native-switch';
-import { MessageIcon, calenderminusIcon, leftRightIcon, phoneincomingIcon, voiceMailIcon } from "../../../utils/assets";
+import { MessageIcon, backspaceIcon, calenderminusIcon, dialGreenIcon, leftRightIcon, phoneincomingIcon, voiceMailIcon } from "../../../utils/assets";
 import ClientCard from "../../../components/ClientCard";
 import ChatUI from "../../../components/ChatUI";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { FlatList, ScrollView, TouchableOpacity } from "react-native";
 import RetalorUI from "../../../components/RetalorUI";
 import { useActions } from "../../../hooks/useActions";
+import SurfKeypad from "../call/surfTabs/surfKeypad";
+import { dialPad } from "../../../utils/constants";
 
 const CallCenter = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -63,6 +65,42 @@ const CallCenter = () => {
                 <ClientCard></ClientCard>
                 <ChatUI></ChatUI>
                 <RetalorUI></RetalorUI>
+                <KeyWrapper>
+                    <DialedNumberView>
+                        <TextView color={colors.black} fontSize={26} fontWeight={700} marginRight={0}>
+                            Call
+                        </TextView>
+                        <TextView color={colors.black} fontSize={26} fontWeight={700} marginRight={0}>
+                            (561) 926-9032
+                        </TextView>
+                    </DialedNumberView>
+                    <FlatList
+                        style={{ marginTop: 5 }}
+                        scrollEnabled={false}
+                        data={dialPad}
+                        numColumns={3}
+                        renderItem={({ item, index }) => {
+                            return (
+                                <KeyPadView>
+                                    {
+                                        index === 9 || index === 11 ? null :
+                                            <TextView1 color={colors.black} fontSize={28} fontWeight={700}>{item?.number}</TextView1>
+                                    }
+                                    {
+                                        index != 0 ?
+                                            <TextView1 style={{ marginTop: index === 9 ? 12 : 0 }} color={colors.black} fontSize={index === 9 || index === 11 ? 12 : 10} fontWeight={300}>{item?.alpha}</TextView1>
+                                            : null
+                                    }
+                                </KeyPadView>
+                            )
+                        }}>
+
+                    </FlatList>
+                    <KeyPadView>
+
+                        <ImageView1 height={60} width={60} source={dialGreenIcon} />
+                    </KeyPadView>
+                </KeyWrapper>
                 <TouchableOpacity onPress={() => {
                     openModal(
                         'AddNewRealtorSheet',//AddNewRealtorSheet
@@ -95,6 +133,59 @@ type ImageProps = {
     marginBottom: number;
 }
 
+type ImageProps1 = {
+    height: number;
+    width: number;
+}
+type TextProps1 = {
+    color: string;
+    fontSize: number;
+    fontWeight: number;
+    marginRight?: number;
+}
+
+
+const DialedNumberView = styled.View`
+    height:60px;
+    border-bottom-width:1px;
+    padding-right:16px;
+    border-color:gray;
+    align-items:center;
+    margin-bottom:5px;
+    justify-content:center;
+    width:50%;
+`;
+
+
+const ImageView1 = styled.Image<ImageProps1>`
+    height:${({ height }: any) => height}px;
+    width:${({ width }: any) => width}px;
+    resize-mode:contain
+`;
+
+
+const KeyPadView = styled.View`
+    height:60px;
+    width:60px;
+    border-width:1px;
+    justify-content:center;
+    align-items:center;
+    border-radius:30px;
+    border-width:2px;
+    margin:4px 8px 8px 0px;
+    padding:4px;
+    background-color:${({ theme }: any) => theme.colors.white};
+    border-color:${({ theme }: any) => theme.colors.gray};
+`;
+
+const KeyWrapper = styled.View`
+    justify-content:center;
+    align-items:center;
+    margin:16px;
+    border-radius:8px;
+    background-color:#fff;
+`;
+
 const ImageWrapper1 = styled.Image<ImageProps>`
     height:${({ height }: any) => height}px;
     width:${({ height }: any) => height}px;
@@ -106,6 +197,14 @@ const ImageWrapper1 = styled.Image<ImageProps>`
 const ImageView = styled.View`
     justify-content:center;
     align-items:center;
+`;
+
+
+const TextView1 = styled.Text<TextProps1>`
+    color:${({ color }: any) => color};
+    font-size:${({ fontSize }: any) => fontSize}px;
+    font-weight:${({ fontWeight }: any) => fontWeight};
+    margin-right:${({ marginRight }: any) => marginRight}px;
 `;
 
 const TextView = styled.Text<TextProps>`
