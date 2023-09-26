@@ -17,6 +17,8 @@ import HeatMapSheet from '../../components/sheets/HeatMapsheet'
 import ContactHeatMap from '../../components/sheets/ContactHeatMap'
 import SearchBehaviorSheet from '../../components/sheets/SearchBehaviorSheet'
 import SearchCriteriaSheet from '../../components/sheets/SearchCriteriaSheet'
+import NewAppointmentSheet from '../../components/sheets/NewAppointmentSheet'
+import AppointmentListSheet from '../../components/sheets/AppointmentListSheet'
 
 export {
     ActivityLogSheet,
@@ -37,5 +39,7 @@ export {
     HeatMapSheet,
     ContactHeatMap,
     SearchBehaviorSheet,
-    SearchCriteriaSheet
+    SearchCriteriaSheet,
+    NewAppointmentSheet,
+    AppointmentListSheet
 };

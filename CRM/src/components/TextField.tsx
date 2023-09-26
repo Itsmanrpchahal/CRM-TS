@@ -27,6 +27,7 @@ type TextFieldProps = {
   borderRadius?: number;
   icon?: boolean;
   imageIcon?: any;
+  width?: any;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -48,12 +49,13 @@ const TextField: React.FC<TextFieldProps> = ({
   borderRadius = 8,
   icon = false,
   imageIcon = '',
+  width = '100%',
   ...rest
 }) => {
   const [showSecureEntry, setShowSecureEntry] = useState(false);
 
   return (
-    <TextFieldWrapper>
+    <TextFieldWrapper width={width}>
       {accessibilityLabel !== undefined && (
         <TextInputLabelWrapper>
           <TextInputLabelWrapper__Content accessibilityLabelColor={accessibilityLabelColor}>
@@ -97,6 +99,9 @@ type HorizontalProps = {
   borderRadius: number;
 }
 
+type TextFieldWrapperProps = {
+  width: string;
+}
 type accessibilityLabelProps = {
   color: string;
 }
@@ -145,4 +150,6 @@ const TextInputLabelWrapper = styled.View`
   margin-top: 24px;
 `;
 
-const TextFieldWrapper = styled.View``;
+const TextFieldWrapper = styled.View<TextFieldWrapperProps>`
+  width:${({ width }: any) => width};
+`;

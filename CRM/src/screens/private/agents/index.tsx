@@ -6,7 +6,7 @@ const Agents = () => {
     }, [])
     return (
         <MainWrapper>
-            <ContactSurfUI data={[1, 1, 1, 1, 1, 1]}></ContactSurfUI>
+            <ContactSurfUI data={[1, 1, 1, 1, 1, 1]} sreenName={'Agents'}></ContactSurfUI>
         </MainWrapper >
     )
 }

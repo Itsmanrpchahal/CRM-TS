@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Platform, TouchableOpacity, View } from "react-native";
 import { useTheme, withTheme } from "styled-components";
 // @ts-ignore
@@ -22,42 +22,58 @@ const contactSurfUI: React.FC<ContactSurfProps> = ({
     const { colors } = useTheme()
     return (
         <MainWrapper>
-            <SearchWrapperView>
-                <SearchWrapperTextFieldView>
-                    <ImageView height={16} width={16} marginLeft={0} source={seacrhIcon}></ImageView>
-                    <SearchTextInput style={{ paddingTop: Platform.OS === 'android' && -5, paddingBottom: Platform.OS === 'android' && -5 }} placeholder="Search"></SearchTextInput>
-                </SearchWrapperTextFieldView>
-                <FilterView>
-                    <ImageView height={18} width={18} marginLeft={0} source={FilterIcon}></ImageView>
-                    {
-                        sreenName != 'surfLeads' &&
-                        <ImageView height={18} width={18} marginLeft={10} source={AddIcon}></ImageView>
-                    }
+            {
+                sreenName === 'Retalors' || sreenName === 'Agents' ? null :
+                    <SearchWrapperView>
+                        <SearchWrapperTextFieldView>
+                            <ImageView height={16} width={16} marginLeft={0} source={seacrhIcon}></ImageView>
+                            <SearchTextInput style={{ paddingTop: Platform.OS === 'android' && -5, paddingBottom: Platform.OS === 'android' && -5 }} placeholder="Search"></SearchTextInput>
+                        </SearchWrapperTextFieldView>
+                        <FilterView>
+                            <TouchableOpacity onPress={() => {
+                                navigationRef.current.navigate(navigationStrings.CONTACT_CARD_START_TRANSACTION, { from: 'Contacts' })
+                            }}>
+                                <ImageView height={18} width={18} marginLeft={0} source={FilterIcon}></ImageView>
+                            </TouchableOpacity>
+                            {
+                                sreenName != 'surfLeads' &&
+                                <TouchableOpacity onPress={() => {
+                                    {
+                                        sreenName === 'Contacts' ? navigationRef.current.navigate(navigationStrings.CREATE_CONTACT) : null
+                                    }
+                                }}>
+                                    <ImageView height={18} width={18} marginLeft={10} source={AddIcon}></ImageView>
+                                </TouchableOpacity>
+                            }
 
-                </FilterView>
-            </SearchWrapperView>
+                        </FilterView>
+                    </SearchWrapperView>
 
-            <TabsWarpper>
-                <TouchableOpacity onPress={() => { setTab(0) }}>
-                    <TabView>
-                        <TabText fontSize={12} color={tab === 0 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'All leads' : 'All Contacts'}</TabText>
-                        <Divider color={tab === 0 ? colors.primary : 'transparent'}></Divider>
-                    </TabView>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setTab(1) }}>
-                    <TabView>
-                        <TabText fontSize={12} color={tab === 1 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'My Sphere' : 'Partner contacts'}</TabText>
-                        <Divider color={tab === 1 ? colors.primary : 'transparent'}></Divider>
-                    </TabView>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setTab(2) }}>
-                    <TabView>
-                        <TabText fontSize={12} color={tab === 2 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'New Leads' : 'Partner contacts'}</TabText>
-                        <Divider color={tab === 2 ? colors.primary : 'transparent'}></Divider>
-                    </TabView>
-                </TouchableOpacity>
+            }
+            {
+                sreenName === 'Retalors' || sreenName === 'Agents' ? null :
+                    <TabsWarpper>
+                        <TouchableOpacity onPress={() => { setTab(0) }}>
+                            <TabView>
+                                <TabText fontSize={12} color={tab === 0 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'All leads' : 'All Contacts'}</TabText>
+                                <Divider color={tab === 0 ? colors.primary : 'transparent'}></Divider>
+                            </TabView>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setTab(1) }}>
+                            <TabView>
+                                <TabText fontSize={12} color={tab === 1 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'My Sphere' : 'Partner contacts'}</TabText>
+                                <Divider color={tab === 1 ? colors.primary : 'transparent'}></Divider>
+                            </TabView>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setTab(2) }}>
+                            <TabView>
+                                <TabText fontSize={12} color={tab === 2 ? colors.primary : colors.black}>{sreenName === 'Self Sourced Leads' ? 'New Leads' : 'Partner contacts'}</TabText>
+                                <Divider color={tab === 2 ? colors.primary : 'transparent'}></Divider>
+                            </TabView>
+                        </TouchableOpacity>
 
-            </TabsWarpper>
+                    </TabsWarpper>
+            }
 
             <FlatList
                 data={data}

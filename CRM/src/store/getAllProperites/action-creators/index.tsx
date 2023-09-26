@@ -47,7 +47,7 @@ export const appFilter = (fn: any) => {
         });
 
         try {
-            const response = await service.get(apiUri.surfMLP.appFilter + `data_custom_taxonomy=${fn.data_custom_taxonomy}+&data_customvalue=${fn.data_customvalue}`);
+            const response = await service.get(apiUri.surfMLP.appFilter + `data_custom_taxonomy=${fn.data_custom_taxonomy}+&data_customvalue=${fn.data_customvalue}+&filter_type=${fn.filter_type}`);
 
             if (response?.data?.success) {
                 dispatch({

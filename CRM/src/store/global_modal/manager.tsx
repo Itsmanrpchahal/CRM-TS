@@ -28,7 +28,9 @@ import {
     HeatMapSheet,
     ContactHeatMap,
     SearchBehaviorSheet,
-    SearchCriteriaSheet
+    SearchCriteriaSheet,
+    NewAppointmentSheet,
+    AppointmentListSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -154,7 +156,9 @@ const modalLookup: any = {
     HeatMapSheet,
     ContactHeatMap,
     SearchBehaviorSheet,
-    SearchCriteriaSheet
+    SearchCriteriaSheet,
+    NewAppointmentSheet,
+    AppointmentListSheet
 };
 
 const WelcomeModalWrapper = styled.View`

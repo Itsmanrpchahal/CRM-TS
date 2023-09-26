@@ -5,8 +5,8 @@ import { MenuIcon, pencilEditIcon, seacrhIcon } from "../../../utils/assets";
 import navigationStrings from "../../../navigation/navigationStrings";
 import { profileIcon } from "../../../assets";
 const surfMails = ({ navigation }) => {
-
     const { colors } = useTheme()
+
     return (
         <MainWrapper>
             <TopView>

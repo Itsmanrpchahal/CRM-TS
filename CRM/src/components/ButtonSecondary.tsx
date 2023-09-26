@@ -19,6 +19,7 @@ type PrimaryButtonProps = {
     isIconLeft?: boolean;
     fontSize?: number;
     style?: object;
+    showIcon?: boolean;
 };
 
 const SecondaryButton: React.FC<PrimaryButtonProps> = ({
@@ -31,6 +32,7 @@ const SecondaryButton: React.FC<PrimaryButtonProps> = ({
     isIconLeft = true,
     fontSize,
     style,
+    showIcon = false,
 }) => {
     return (
         <TouchableOpacity onPress={() => onPress()}>
@@ -39,7 +41,7 @@ const SecondaryButton: React.FC<PrimaryButtonProps> = ({
                     {loading ? 'Loading...' : btnText}
                 </SecondaryButton__Wrapper__Text>
                 {
-                    isIconLeft && <ImageWrapperRight>
+                    showIcon && <ImageWrapperRight>
                         <ImageWrapperRight__Image tintColor={'white'} source={icon} />
                     </ImageWrapperRight>
                 }

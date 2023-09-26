@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, withTheme } from "styled-components/native";
 import { buildingIcon, docIcon, dollarHomeIcon, formsIcon, rocketMoneyIcon } from "../../../utils/assets";
 import { FlatList, TouchableOpacity } from "react-native";
 import navigationStrings from "../../../navigation/navigationStrings";
-
 
 const data = [
     {
@@ -28,9 +27,15 @@ const data = [
     }
 ]
 
-const DocumentPortal = ({ navigation }) => {
+const DocumentPortal = (props: any, { navigation }) => {
+
     return (
         <MainWrapper>
+            {
+                props?.from === 'Contacts' ?
+                    <TextView style={{ fontSize: 24, marginTop: 10 }}>Start Transaction</TextView> : null
+
+            }
             <FlatList
                 data={data}
                 ItemSeparatorComponent={<Divider />}

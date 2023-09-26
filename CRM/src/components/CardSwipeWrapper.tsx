@@ -26,10 +26,10 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
         getAllProperties
     } = useActions()
     const [indexs, setIndex] = useState(0)
+    const [swipeSelected, setSwipeSelected] = useState([])
 
     useEffect(() => {
-        // alert(indexs)
-    }, [indexs])
+    }, [swipeSelected])
     return (
         <MainWrapper height={height}>
             {
@@ -40,8 +40,13 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
                     cardHorizontalMargin={0}
                     backgroundColor='#FFFFFF'
                     cardVerticalMargin={0}
-                    onSwipedLeft={() => { }}
-                    onSwipedRight={() => { }}
+                    onSwipedLeft={(item) => {
+
+                    }}
+                    onSwipedRight={(item) => {
+                        const newTodo1 = data[item].ID
+                        setSwipeSelected([...swipeSelected, newTodo1])
+                    }}
                     onTapCard={(item) => {
                     }}
                     verticalSwipe={false}
@@ -140,7 +145,9 @@ const CardSwiperWrapper: React.FC<CardSwipeProps> = ({
             }
 
             <BottomWrapperUndo>
-                <ImageWrapperTab height={20} width={26} source={UndoIcon}></ImageWrapperTab>
+                <TouchableOpacity onPress={() => { setSwipeSelected(swipeSelected.slice(0, -1)) }}>
+                    <ImageWrapperTab height={20} width={26} source={UndoIcon}></ImageWrapperTab>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={async () => {
                     await clearFilter()
                     getAllProperties({ limit: 1 })

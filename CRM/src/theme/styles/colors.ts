@@ -11,3 +11,4 @@ export const TEXT_GRAY = '#A5A5A5';
 export const LIGHTGRAY = '#E2E2E2';
 export const GRAY_LIGHT = '#44494F';
 export const RED = '#FF0000';
+export const DARK_GRAY = '#707070';

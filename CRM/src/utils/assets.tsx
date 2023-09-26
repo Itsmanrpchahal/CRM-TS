@@ -116,6 +116,9 @@ import rocketUpIcon from '../assets/rocketUp/rocketUp.png'
 import taxIcon from '../assets/taxIcon/taxIcon.png'
 import taxDocIcon from '../assets/taxDoc/taxDoc.png'
 import calenderPropertyIcon from '../assets/calenderProperty/calenderProperty.png'
+import arrowBtnIcon from '../assets/arrowBtn/arrowBtn.png'
+import pencilBorderIcon from '../assets/pencilBorder/pencilBorder.png'
+import alarmIcon from '../assets/alarm/alarm.png'
 
 export {
     ChatIcon,
@@ -236,4 +239,7 @@ export {
     taxIcon,
     taxDocIcon,
     calenderPropertyIcon,
+    arrowBtnIcon,
+    pencilBorderIcon,
+    alarmIcon
 };

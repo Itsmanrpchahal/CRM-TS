@@ -11,7 +11,6 @@ import SurfMailDrawer from './surfMailDrawer';
 const Stack = createStackNavigator();
 
 function surfMailStackNavigator(props: any) {
-    const { colors }: any = useTheme();
     const { isAuthenticated } = useTypedSelector((state) => state.auth);
 
     // @ts-ignore

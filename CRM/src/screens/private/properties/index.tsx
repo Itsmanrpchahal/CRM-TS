@@ -62,7 +62,7 @@ const Properties = (navigation) => {
                 } else {
                     setSelectedTabs(prev => [...prev, data_customvalue])
                 }
-                appFilter({ data_custom_taxonomy: item.data_custom_taxonomy, data_customvalue: item.data_customvalue })
+                appFilter({ data_custom_taxonomy: item.data_custom_taxonomy, data_customvalue: item.data_customvalue, filter_type: 1 })
 
             }}>
                 <FilterTabs>

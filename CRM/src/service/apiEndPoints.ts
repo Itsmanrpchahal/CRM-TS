@@ -9,7 +9,7 @@ const apiUri = {
     surfMLP: {
         getFilter: 'webapi/v1/SubFilter/websubfilter.php',
         getProperties: 'webapi/v1/property/?limit=',//send limit in URL and 
-        appFilter: 'webapi/v1/AppFilter?',
+        appFilter: 'webapi/v1/AppFilter?', //data_custom_taxonomy and data_customvalue
         clearFilter: 'webapi/v1/AppFilter/clearfilter.php',
         singleProperty: 'webapi/v1/singleproperty/?post_id=' //Property ID in url
     }

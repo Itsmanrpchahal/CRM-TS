@@ -1,8 +1,10 @@
 import React from "react";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { mailBlackIcon, MessageIcon, PhoneIcon, pulseIcon, transactionDeskIcon } from "../../../utils/assets";
-import { FlatList } from "react-native";
+import { MessageIcon, pulseIcon, transactionDeskIcon } from "../../../utils/assets";
+import { FlatList, TouchableOpacity } from "react-native";
 import { chatTabIcon, phoneTabIcon } from "../../../assets";
+import navigationStrings from '../../../navigation/navigationStrings'
+import { navigationRef } from '../../../navigation/RootNavigation'
 
 const data = [
     {
@@ -11,45 +13,52 @@ const data = [
         count: 1,
     },
     {
-        label: 'surf Mail',
+        label: 'surf Phone',
         image: phoneTabIcon,
         count: 6,
     },
     {
-        label: 'surf Mail',
+        label: 'surf Text',
         image: chatTabIcon,
         count: 5,
     },
     {
-        label: 'surf Mail',
+        label: 'Transaction Desk',
         image: transactionDeskIcon,
         count: 1,
     },
     {
-        label: 'surf Mail',
+        label: 'Lead Activities',
         image: pulseIcon,
         count: 4,
     }
 ]
-const Notifications = () => {
+const Notifications = ({ navigation }) => {
     const { colors } = useTheme()
+
+
     return (
         <MainWrapper>
             <FlatList
                 data={data}
                 ItemSeparatorComponent={<Divider />}
                 ListFooterComponent={<Divider />}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     return (
-                        <ItemWrapper style={{ padding: 16 }}>
-                            <ItemWrapper>
-                                <ImageView tintColor={colors.black} source={item.image} />
-                                <TextView>{item.label}</TextView>
+                        <TouchableOpacity onPress={() => {
+                            index === 0 ? navigationRef.current.navigate(navigationStrings.TAB_BAR_MESSAGE) :
+                                index === 3 ? navigationRef.current.navigate(navigationStrings.TRANSACTION_DESK) : null
+                        }}>
+                            <ItemWrapper style={{ padding: 16 }}>
+                                <ItemWrapper>
+                                    <ImageView tintColor={colors.black} source={item.image} />
+                                    <TextView>{item.label}</TextView>
+                                </ItemWrapper>
+                                <BadgeView>
+                                    <TextView>{item.count}</TextView>
+                                </BadgeView>
                             </ItemWrapper>
-                            <BadgeView>
-                                <TextView>{item.count}</TextView>
-                            </BadgeView>
-                        </ItemWrapper>
+                        </TouchableOpacity>
                     )
                 }}>
 
@@ -95,6 +104,7 @@ const ImageView = styled.Image`
 const ItemWrapper = styled.View`
     flex-direction:row;
     justify-content:space-between;
+    margin-top:3px;
 `;
 
 const MainWrapper = styled.View`

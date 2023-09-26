@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled, useTheme, withTheme } from "styled-components/native";
 import { Dimensions, Platform, ScrollView, Text, View } from "react-native";
-import { bathIcon, calenderPropertyIcon, clockIcon, hoasIcon, measuringtapeIcon, newbedIcon, profileIcon, rocketUpIcon, taxDocIcon, taxIcon } from "../../../utils/assets";
+import { arrowBtnIcon, bathIcon, calenderPropertyIcon, clockIcon, hoasIcon, measuringtapeIcon, newbedIcon, profileIcon, rocketUpIcon, taxDocIcon, taxIcon } from "../../../utils/assets";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { LoaderView } from "../../../utils/globalStyles";
@@ -28,16 +28,15 @@ const PropertyDetailPage = (props: any) => {
     }, [])
 
     const getPropertyDetail = async () => {
-        await getSingleProperty({ ID: ID }).then((res) => {
-            setLatLng({
+        await getSingleProperty({ ID: ID }).then(async (res) => {
+            await setLatLng({
                 latitude: res?.data?.data?.address?.property_address?.property_latitude,
-                longitude: res?.data?.data?.data?.address?.property_address?.property_longitude
+                longitude: res?.data?.data?.address?.property_address?.property_longitude
             })
         })
     }
 
     useEffect(() => {
-
     }, [singlePropertyData])
 
 
@@ -69,8 +68,14 @@ const PropertyDetailPage = (props: any) => {
                                 <Swiper
                                     height={250}
                                     showsButtons={true}
-                                    buttonWrapperStyle={{ height: 250 }}
+                                    buttonWrapperStyle={{ height: 270 }}
                                     showsPagination={false}
+                                    nextButton={
+                                        <ImageWrapperTab tintColor={colors.white} height={28} width={28} source={arrowBtnIcon}></ImageWrapperTab>
+                                    }
+                                    prevButton={
+                                        <ImageWrapperTab style={{ transform: [{ rotate: '180deg' }] }} tintColor={colors.white} height={28} width={28} source={arrowBtnIcon}></ImageWrapperTab>
+                                    }
                                     loop={false}>
                                     {
                                         Object.keys(singlePropertyData).length > 0 && singlePropertyData?.data?.property_gallery?.Gallery.map((item) => {
@@ -142,7 +147,6 @@ const PropertyDetailPage = (props: any) => {
                                     Property is vacant
                                 </TextWrapper>
                             </ListView>
-                            <Text>{JSON.stringify(latLng)}</Text>
                             <MapWrapper>
                                 <MapView
                                     provider={PROVIDER_DEFAULT}
@@ -158,16 +162,16 @@ const PropertyDetailPage = (props: any) => {
                                         width: "100%",
                                     }}
                                     region={{
-                                        latitude: parseFloat(30.7046),
-                                        longitude: parseFloat(76.7179),
+                                        latitude: parseFloat(latLng?.latitude),
+                                        longitude: parseFloat(latLng?.longitude),
                                         latitudeDelta: 0.015,
                                         longitudeDelta: 0.0121,
                                     }}
                                 >
                                     <Marker
                                         coordinate={{
-                                            latitude: parseFloat(30.7046),
-                                            longitude: parseFloat(76.7179),
+                                            latitude: parseFloat(latLng?.latitude),
+                                            longitude: parseFloat(latLng?.longitude),
                                         }}
                                     />
                                 </MapView>

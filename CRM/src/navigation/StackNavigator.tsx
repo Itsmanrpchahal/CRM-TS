@@ -7,7 +7,7 @@ import { useTheme } from '@react-navigation/native';
 import Login from '../screens/public/Login';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import DashboardTabs from './Tabbar';
-import { Call, Chat, Contacts, Properties } from '.';
+import { Call, Chat, Contacts, Properties, surfMails } from '.';
 import surfLeads from '../screens/private/surfLeads';
 import agents from '../screens/private/agents';
 import retalors from '../screens/private/retalors';
@@ -28,6 +28,8 @@ import setting from '../screens/private/setting';
 import calenderScreen from '../screens/private/calenderScreen';
 import notifications from '../screens/private/notifications';
 import propertyDetailPage from '../screens/private/propertyDetailPage';
+import addContact from '../screens/private/addContact';
+import contactCardStartTransaction from '../screens/private/contactCardStartTransaction';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -86,6 +88,17 @@ function StackNavigator(props: any) {
                 component={SurfMailDrawer}
                 options={{
                     headerShown: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    headerTitleStyle: {
+                        color: colors.white
+                    },
+                    headerBackTitleStyle: {
+                        color: colors.white
+                    },
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
                     title: 'Message',
                 }}
             />
@@ -351,6 +364,40 @@ function StackNavigator(props: any) {
 
                 }}
             />
+
+            <Stack.Screen
+                name={navigationStrings.CREATE_CONTACT}
+                component={addContact}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.CREATE_CONTACT,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+
+            <Stack.Screen
+                name={navigationStrings.CONTACT_CARD_START_TRANSACTION}
+                component={contactCardStartTransaction}
+                options={{
+                    headerShown: true,
+                    headerShadowVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTintColor: colors.white,
+                    title: navigationStrings.CONTACT_CARD_START_TRANSACTION,
+                    headerStyle: {
+                        backgroundColor: colors.primary
+                    },
+
+                }}
+            />
+
+
 
         </Stack.Navigator>
     )

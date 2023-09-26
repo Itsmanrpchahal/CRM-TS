@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { styled, useTheme, withTheme } from 'styled-components/native'
 import { Agenda, DateData } from 'react-native-calendars';
-import { Card } from 'react-native-paper'
-import { TouchableOpacity, View, Text } from 'react-native';
+import { Text, TouchableOpacity, } from 'react-native';
 import { plusIcon } from '../../../utils/assets'
+import { useActions } from '../../../hooks/useActions';
 
-const CalerderScreen = () => {
+const CalerderScreen = ({ navigation }) => {
     const [items, setItems] = useState({})
     const { colors } = useTheme()
+    const { openModal } = useActions();
+
     const loadItems = (day: DateData) => {
         const timeToString = (time: number) => {
             const date = new Date(time);
@@ -21,7 +23,7 @@ const CalerderScreen = () => {
                 if (!items[strTime]) {
                     items[strTime] = [];
 
-                    const numItems = Math.floor(Math.random() * 3 + 1);
+                    const numItems = Math.floor(Math.random() + 1);
                     for (let j = 0; j < numItems; j++) {
                         items[strTime].push({
                             name: 'Item for ' + strTime + ' #' + j,
@@ -43,38 +45,101 @@ const CalerderScreen = () => {
     const renderDay = (item) => {
         return (
             <TouchableOpacity>
-                <Card style={{ backgroundColor: 'white', marginTop: 25 }}>
-                    <Card.Content >
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }} >
-                            <Text>{item.name}</Text>
-                        </View>
-                    </Card.Content>
-                </Card>
+                <HorizontalWrapper>
+                    <VerticleView height={50} backgroundColor={colors.black}></VerticleView>
+                    <HorizontalWrapper>
+                        <TextView>{item.name}</TextView>
+                        <TextView>All Day</TextView>
+                    </HorizontalWrapper>
+                </HorizontalWrapper>
+
             </TouchableOpacity>
         )
     }
     return (
         <MainWrapper>
             <Agenda
+                style={{ marginBottom: 60 }}
                 items={items}
                 loadItemsForMonth={loadItems}
                 numColumns={2}
-                theme={{ dotColor: colors.primary, agendaKnobColor: colors.primary, selectedDayBackgroundColor: colors.primary }}
+                ListHeaderComponent={<Divider />}
+                removeClippedSubviews
+                theme={{
+                    dotColor: colors.primary,
+                    agendaKnobColor: colors.primary,
+                    selectedDayBackgroundColor: colors.primary,
+                    backgroundColor: '#ffffff',
+                    calendarBackground: colors.white,
+                    reservationsBackgroundColor: colors.white,
+                }}
                 selected={'2023-10-17'}
                 renderItem={renderDay}>
             </Agenda>
 
-            <AddView>
-                <ImageView source={plusIcon}>
+            <TouchableOpacity onPress={() => {
+                openModal('AppointmentListSheet', {
+                    height: '80%'
+                })
+            }}>
+                <TextWrapper>Appointment List</TextWrapper>
 
-                </ImageView>
-            </AddView>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+                openModal('NewAppointmentSheet', {
+                    height: '80%'
+                })
+            }}>
+                <AddView>
+                    <ImageView source={plusIcon}>
+
+                    </ImageView>
+                </AddView>
+            </TouchableOpacity>
         </MainWrapper>
     )
 }
 
 export default withTheme(CalerderScreen)
 
+type VerticleViewProps = {
+    backgroundColor?: string;
+    height?: number;
+}
+
+const Divider = styled.View`
+    height:1px;
+    bckground-color:${({ theme }: any) => theme.colors.black};
+    width:100%;
+`;
+
+const TextWrapper = styled.Text`
+    font-size:16px;
+    color:${({ theme }: any) => theme.colors.primary};
+    position:absolute;
+    bottom:26;
+    left:16;
+`;
+const TextView = styled.Text`
+    margin:5px;
+`;
+
+const VerticleView = styled.View<VerticleViewProps>`
+    width:3px;
+    height:${({ height }: any) => height}px;
+    border-radius:5px;
+    background-color:${({ backgroundColor }: any) => backgroundColor}
+
+`;
+
+const HorizontalWrapper = styled.View`
+    flex-direction:row;
+    width:100%;
+    padding:8px 0px 8px 8px;
+    align-items:center;
+    justify-content:space-between;
+    background-color:${({ theme }: any) => theme.colors.white}
+`;
 const ImageView = styled.Image`
     height:16px;
     width:16px;

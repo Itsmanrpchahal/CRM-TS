@@ -26,5 +26,7 @@ export default {
     SETTING: 'Settings',
     CALENDER_SCREEN: 'Calender',
     NOTIFICATION: 'Notifications',
-    PROPERTY_DETAIL: 'Property Detail'
+    PROPERTY_DETAIL: 'Property Detail',
+    CREATE_CONTACT: 'Create Contact',
+    CONTACT_CARD_START_TRANSACTION: 'Start Transaction',
 };
