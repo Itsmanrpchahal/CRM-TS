@@ -48,8 +48,8 @@ target 'CRM' do
   pod 'Firebase', :modular_headers => true
    pod 'FirebaseCore', :modular_headers => true
    pod 'GoogleUtilities', :modular_headers => true
-   pod 'react-native-maps', :path => '../node_modules/react-native-maps'
-   pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
+  #  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+  #  pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
 
   target 'CRMTests' do
     inherit! :complete
