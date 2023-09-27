@@ -78,7 +78,7 @@ const CalerderScreen = ({ navigation }) => {
             </Agenda>
 
             <TouchableOpacity onPress={() => {
-                openModal('AppointmentListSheet', {
+                openModal('MyAppointmentsSheet', {
                     height: '80%'
                 })
             }}>
