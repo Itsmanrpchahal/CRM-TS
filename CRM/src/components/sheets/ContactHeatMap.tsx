@@ -1,6 +1,6 @@
 import React from "react";
 import { styled, useTheme, withTheme } from "styled-components/native";
-import { waveIcon } from "../../utils/assets";
+import { dateCalenderIcon, monthCalenderIcon, waveIcon, weekCalenderIcon } from "../../utils/assets";
 import { FlatList, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useActions } from "../../hooks/useActions";
 import { closeModal } from "../../store/global_modal/action-creators";
@@ -42,6 +42,12 @@ const ContactHeatMap = () => {
                         <TextView1 fontSize={10} color={colors.black} fontWeight={700} marginTop={10}>Engagement</TextView1>
                     </HorizontalWrapper1>
                     <TextView1 fontSize={25} color={colors.primary} fontWeight={700} marginTop={0}>00:13:53</TextView1>
+                    <HorizontalWrapper style={{ position: 'absolute', bottom: 0, justifyContent: 'space-between' }}>
+                        <ImageView source={dateCalenderIcon} />
+                        <ImageView source={weekCalenderIcon} />
+                        <ImageView source={monthCalenderIcon} />
+
+                    </HorizontalWrapper>
                 </Card>
                 <Card>
                     <HorizontalWrapper1>
@@ -182,6 +188,13 @@ const HorizontalWrapper1 = styled.View`
 const HorizontalWrapper = styled.View`
     flex-direction:row;
     justify-content:space-evenly;
+`;
+
+const ImageView = styled.Image`
+    height:22px;
+    width:22px;
+    margin:8px;
+    resize-mode:contain;
 `;
 
 const ImageView1 = styled.Image<ImageViewProps>`

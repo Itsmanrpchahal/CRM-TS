@@ -119,6 +119,9 @@ import calenderPropertyIcon from '../assets/calenderProperty/calenderProperty.pn
 import arrowBtnIcon from '../assets/arrowBtn/arrowBtn.png'
 import pencilBorderIcon from '../assets/pencilBorder/pencilBorder.png'
 import alarmIcon from '../assets/alarm/alarm.png'
+import dateCalenderIcon from '../assets/dateCalender/dateCalender.png'
+import weekCalenderIcon from '../assets/weekCalender/weekCalender.png'
+import monthCalenderIcon from '../assets/monthCalender/monthCalender.png'
 
 export {
     ChatIcon,
@@ -241,5 +244,8 @@ export {
     calenderPropertyIcon,
     arrowBtnIcon,
     pencilBorderIcon,
-    alarmIcon
+    alarmIcon,
+    dateCalenderIcon,
+    weekCalenderIcon,
+    monthCalenderIcon
 };

@@ -37,7 +37,7 @@ const DocumentPortalDetail = (props: any) => {
                 </MainCardView>
 
                 <ButtonView>
-                    <TextView style={{ fontSize: 16, color: 'white' }}>Prepare Documents</TextView>
+                    <TextView style={{ fontSize: 16, color: 'white', marginTop: 0 }}>Prepare Documents</TextView>
                     <ImageView height={30} width={30} marginLeft={10} source={documentUpIcon} />
                 </ButtonView>
             </ScrollView>
@@ -66,6 +66,8 @@ const ButtonView = styled.View`
     align-self:center;
     border-radius:22px;
     flex-direction:row;
+    align-items:center;
+    justify-content:center;
     margin-bottom:30px;
 `;
 

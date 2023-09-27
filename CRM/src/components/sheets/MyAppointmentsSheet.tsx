@@ -3,7 +3,6 @@ import { styled, useTheme, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from "../../utils/globalStyles";
 import { FlatList, Platform } from "react-native";
 import { profileIcon, seacrhIcon } from "../../utils/assets";
-import { dataCell } from "../../utils/constants";
 
 const MyAppointmentsSheet = () => {
     const { colors } = useTheme()
@@ -20,8 +19,10 @@ const MyAppointmentsSheet = () => {
             </SearchWrapperTextFieldView>
 
             <FlatList
-                data={dataCell}
+                data={[1, 1, 1, 1]}
+                ListHeaderComponent={<Divider />}
                 ItemSeparatorComponent={<Divider />}
+                ListFooterComponent={<Divider />}
                 renderItem={() => {
                     return (
                         <HorizontalView>
@@ -36,7 +37,9 @@ const MyAppointmentsSheet = () => {
                 }}>
 
             </FlatList>
-        </MainWrapperWhite>
+
+
+        </MainWrapperWhite >
     )
 }
 
@@ -57,8 +60,9 @@ type ImageProps = {
 }
 
 const Divider = styled.View`
-    width:100%:
-    height1px;
+    width:100%;
+    height:1px;
+    margin:8px 0px 8px 0px;
     background-color:${({ theme }: any) => theme.colors.gray};
 `;
 

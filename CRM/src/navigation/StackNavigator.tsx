@@ -30,6 +30,7 @@ import notifications from '../screens/private/notifications';
 import propertyDetailPage from '../screens/private/propertyDetailPage';
 import addContact from '../screens/private/addContact';
 import contactCardStartTransaction from '../screens/private/contactCardStartTransaction';
+import { SafeAreaView } from 'react-native';
 const Stack = createStackNavigator();
 
 function StackNavigator(props: any) {
@@ -400,6 +401,7 @@ function StackNavigator(props: any) {
 
 
         </Stack.Navigator>
+
     )
 }
 export default StackNavigator;

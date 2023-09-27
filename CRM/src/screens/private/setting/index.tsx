@@ -4,10 +4,12 @@ import TextField from "../../../components/TextField";
 import { Formik } from 'formik';
 import { LOGIN_SCHEMA } from "../../public/Login/helpers";
 import { arrowDownBorderIcon, profileIcon, uncheckIcon } from '../../../utils/assets'
-import { ScrollView, View } from "react-native";
+import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
 import RadioGroup from 'react-native-radio-buttons-group';
 import PrimaryButton from '../../../components/Button'
 import ButtonSecondary from "../../../components/ButtonSecondary";
+import ImagePicker from 'react-native-image-crop-picker';
+
 const Setting = () => {
     const { colors } = useTheme()
     const radioButtons = useMemo(() => ([
@@ -22,6 +24,29 @@ const Setting = () => {
             value: 'option2'
         }
     ]), []);
+
+    const [imagePath, setImagePath] = useState<any>(null);
+    const saveImage = (image: any) => {
+        if (image === null) {
+            alert('Image path error');
+        } else {
+            const formData = new FormData();
+            let osPath =
+                Platform.OS === 'android'
+                    ? imagePath.path
+                    : imagePath.path.replace('file://', '');
+            setImagePath(osPath)
+            formData.append('file', {
+                // @ts-ignore
+                uri: osPath,
+                type: 'image/jpeg',
+                name: 'photo.png',
+            });
+            console.log('Image ===> ', imagePath)
+
+
+        }
+    }
 
     const [selectedId, setSelectedId] = useState();
 
@@ -104,10 +129,31 @@ const Setting = () => {
                             />
                             <TextView fontSize={14} marginTop={16} marginLeft={0} color={colors.black}>Photo</TextView>
                             <HorizontalWrapper>
-                                <ImageView height={70} width={70} source={profileIcon} />
-                                <ButtonView>
-                                    <TextView fontSize={14} marginTop={0} marginLeft={0} color={colors.gray}>Replace</TextView>
-                                </ButtonView>
+                                {
+                                    imagePath ?
+                                        <ImageView height={70} width={70} source={{ uri: imagePath ? imagePath.path : null }} />
+                                        : <ImageView height={70} width={70} source={profileIcon} />
+                                }
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        ImagePicker.openPicker({
+                                            cropping: true,
+                                            compressImageQuality:
+                                                Platform.OS === 'android'
+                                                    ? 1
+                                                    : 0.8,
+                                            mediaType: 'photo',
+                                            forceJpg: true,
+                                        }).then(async (image) => {
+                                            setImagePath(image)
+                                            saveImage(image)
+                                        });
+                                    }}>
+                                    <ButtonView>
+                                        <TextView fontSize={14} marginTop={0} marginLeft={0} color={colors.gray}>Replace</TextView>
+                                    </ButtonView>
+                                </TouchableOpacity>
+
                                 <ButtonView>
                                     <TextView fontSize={14} marginTop={0} marginLeft={0} color={colors.gray}>Remove</TextView>
                                 </ButtonView>
@@ -302,6 +348,7 @@ const ButtonView = styled.View`
 const ImageView = styled.Image<ImageProps>`
     height:${({ height }: any) => height}px;
     width:${({ width }: any) => width}px;
+    border-radius:35px;
     resize-mode:contain;
 `;
 

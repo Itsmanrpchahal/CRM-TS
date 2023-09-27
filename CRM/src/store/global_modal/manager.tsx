@@ -31,7 +31,8 @@ import {
     SearchCriteriaSheet,
     NewAppointmentSheet,
     AppointmentListSheet,
-    MyAppointmentsSheet
+    MyAppointmentsSheet,
+    GreetingSheet
 } from './modal';
 import { useTheme } from 'styled-components/native';
 
@@ -160,7 +161,8 @@ const modalLookup: any = {
     SearchCriteriaSheet,
     NewAppointmentSheet,
     AppointmentListSheet,
-    MyAppointmentsSheet
+    MyAppointmentsSheet,
+    GreetingSheet
 };
 
 const WelcomeModalWrapper = styled.View`

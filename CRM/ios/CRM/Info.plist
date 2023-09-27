@@ -4,7 +4,13 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleDisplayName</key>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>This app need your Photo library permission</string>
+  <key>NSCameraUsageDescription</key>
+  <string>This app need your camera permission</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>This app need your microphone permission</string>
+  <key>CFBundleDisplayName</key>
 	<string>CRM</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>

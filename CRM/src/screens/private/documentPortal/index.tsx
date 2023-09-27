@@ -3,6 +3,7 @@ import { styled, withTheme } from "styled-components/native";
 import { buildingIcon, docIcon, dollarHomeIcon, formsIcon, rocketMoneyIcon } from "../../../utils/assets";
 import { FlatList, TouchableOpacity } from "react-native";
 import navigationStrings from "../../../navigation/navigationStrings";
+import { navigationRef } from "../../../navigation/RootNavigation";
 
 const data = [
     {
@@ -27,8 +28,7 @@ const data = [
     }
 ]
 
-const DocumentPortal = (props: any, { navigation }) => {
-
+const DocumentPortal = (props: any) => {
     return (
         <MainWrapper>
             {
@@ -43,8 +43,8 @@ const DocumentPortal = (props: any, { navigation }) => {
                 renderItem={({ item, index }) => {
                     return (
                         <TouchableOpacity onPress={() => {
-                            index === 0 ? navigation.navigate(navigationStrings.DOCUMENT_PORTAL_DETAIL, { screenName: 'Buyer’s Agent Packet' }) :
-                                index === 1 ? navigation.navigate(navigationStrings.DOCUMENT_PORTAL_DETAIL, { screenName: data[1].title }) : null
+                            index === 0 ? navigationRef.current.navigate(navigationStrings.DOCUMENT_PORTAL_DETAIL, { screenName: 'Buyer’s Agent Packet' }) :
+                                index === 1 ? navigationRef.current.navigate(navigationStrings.DOCUMENT_PORTAL_DETAIL, { screenName: data[1].title }) : null
                         }}>
                             <RenderView>
                                 <ImageView source={item.image} />

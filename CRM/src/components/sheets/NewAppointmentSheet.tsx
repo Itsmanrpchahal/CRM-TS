@@ -1,15 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { useTheme, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from "../../utils/globalStyles";
 import { UsersIconIcon, alarmIcon, pencilBorderIcon, plusIcon, uncheckIcon } from "../../utils/assets";
 import TextField from "../TextField";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { MultiSelect } from "react-native-element-dropdown";
+import CustomDatePicker from "../DatePicker";
+import { format } from 'date-fns';
 
 const NewAppointmentSheet = () => {
     const { colors } = useTheme()
     const ref = useRef()
     const [cities, setCities] = useState([])
+    const [visibleDate, setVisibleDate] = useState<boolean>(false);
+    const [calederMode, setCalenderMode] = useState<string>('date');
+    const [calType, setCalType] = useState<string>('startDate')
+    const [minDate, setMinDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(format(
+        new Date(),
+        'dd/MM/yyyy',
+    ));
+    const [startTime, setStartTime] = useState(format(
+        new Date(),
+        'HH:mm',
+    ));
+    const [endDate, setEndDate] = useState(format(
+        new Date(),
+        'dd/MM/yyyy',
+    ));
+    const [endTime, setEndTime] = useState(format(
+        new Date(),
+        'HH:mm',
+    ));
 
     return (
         <MainWrapperWhite>
@@ -32,28 +54,45 @@ const NewAppointmentSheet = () => {
             </HorizontalWrapper>
             <HorizontalWrapper>
                 <ImageView tintColor={colors.black} style={{ marginTop: 16 }} height={22} width={22} source={alarmIcon}></ImageView>
-                <TouchableOpacity onPress={() => { }}>
+                <TouchableOpacity onPress={() => {
+                    setMinDate(new Date())
+                    setCalenderMode('date')
+                    setCalType('startDate')
+                    setVisibleDate(true)
+                }}>
                     <BorderTextView>
-                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>9/14/2023</TextWrapper>
+                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>{startDate}</TextWrapper>
                     </BorderTextView>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    setCalenderMode('time')
+                    setVisibleDate(true)
+                    setCalType('startTime')
+                }}>
                     <BorderTextView>
-                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>9/14/2023</TextWrapper>
+                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>{startTime}</TextWrapper>
                     </BorderTextView>
                 </TouchableOpacity>
 
                 <TextWrapper marginTop={10} color={colors.darkGray} fontSize={10} fontWeight={400}>to</TextWrapper>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    setCalenderMode('date')
+                    setVisibleDate(true)
+                    setCalType('endDate')
+                }}>
                     <BorderTextView>
-                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>9/14/2023</TextWrapper>
+                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>{endDate}</TextWrapper>
                     </BorderTextView>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    setCalenderMode('time')
+                    setCalType('endTime')
+                    setVisibleDate(true)
+                }}>
                     <BorderTextView>
-                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>9/14/2023</TextWrapper>
+                        <TextWrapper marginTop={0} color={colors.darkGray} fontSize={10} fontWeight={400}>{endTime}</TextWrapper>
                     </BorderTextView>
                 </TouchableOpacity>
             </HorizontalWrapper>
@@ -134,6 +173,51 @@ const NewAppointmentSheet = () => {
                 </TouchableOpacity>
             </HorizontalWrapper>
 
+            <CustomDatePicker
+                showDateTimePicker={visibleDate}
+                minDate={minDate}
+                handlePickerData={(date: any) => {
+                    setVisibleDate(false);
+                    setMinDate(date)
+                    {
+                        calType === 'startDate' ? setStartDate(format(
+                            new Date(
+                                date,
+                            ),
+                            'dd/MM/yyyy',
+                        )) : calType === 'startTime' ? setStartTime(
+                            format(
+                                new Date(
+                                    date,
+                                ),
+                                'HH:mm',
+                            )
+                        ) : calType === 'endDate' ? setEndDate(
+                            format(
+                                new Date(
+                                    date,
+                                ),
+                                'dd/MM/yyyy',
+                            )
+                        ) : setEndTime(format(
+                            new Date(
+                                date,
+                            ),
+                            'HH:mm',
+                        ))
+                    }
+                    // setFieldValue(
+                    //     'complainantDOB',
+                    //     format(date, 'yyyy-MM-dd') +
+                    //     'T00:00:00.000',
+                    // );
+                }}
+                date={
+                    ''
+                }
+                mode={calederMode}
+                setDateTimePicker={setVisibleDate}
+            />
         </MainWrapperWhite>
     )
 }

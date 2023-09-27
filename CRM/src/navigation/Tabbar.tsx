@@ -2,16 +2,15 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 // @ts-ignore
 import styled from 'styled-components/native';
-import { Chat, Call, Contacts, Dashboard, Properties, surfMails } from '../navigation/index';
+import { Chat, Contacts, Dashboard, Properties } from '../navigation/index';
 import navigationStrings from './navigationStrings';
 import { TabBarIcon } from './TabbarIcon';
 import { MenuIcon } from '../assets';
 import surfLeads from '../screens/private/surfLeads';
 import { CalenderWhiteIcon, NotificatioWhiteIcon } from '../utils/assets';
-import surfMailStackNavigator from './SurfMailStackNavigator';
 import SurfMailDrawer from './surfMailDrawer';
 import surfCallTabs from './surfCallTabbar';
 import { navigationRef } from './RootNavigation';
@@ -28,7 +27,7 @@ function DashboardTabs(props: any) {
                 tabBarIcon: ({ color }) => (
                     <TabBarIcon color={color} routeName={route.name} />
                 ),
-                tabBarStyle: { backgroundColor: colors.primary },
+                tabBarStyle: { backgroundColor: colors.primary, },
                 tabBarActiveTintColor: colors.white,
                 tabBarInactiveTintColor: colors.black,
                 headerTintColor: colors.white,

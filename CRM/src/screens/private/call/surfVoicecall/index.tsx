@@ -18,7 +18,13 @@ const surfCallVoiceMail = ({ navigation }) => {
         <MainWrapper>
             <HorizontalWrapper>
                 <TextView color={colors.black} fontSize={20} fontWeight={500}>Contacts</TextView>
-                <TextView color={colors.primary} fontSize={16} fontWeight={500}>Greeting</TextView>
+                <TouchableOpacity onPress={() => {
+                    openModal('GreetingSheet', {
+                        height: '80%'
+                    })
+                }}>
+                    <TextView color={colors.primary} fontSize={16} fontWeight={500}>Greeting</TextView>
+                </TouchableOpacity>
                 <TextView color={colors.primary} fontSize={16} fontWeight={500}>Edit</TextView>
             </HorizontalWrapper>
 

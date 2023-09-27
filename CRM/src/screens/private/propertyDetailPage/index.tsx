@@ -8,7 +8,6 @@ import { LoaderView } from "../../../utils/globalStyles";
 import Activity from '../../../components/Activity'
 import Swiper from 'react-native-swiper'
 import MapView, { Marker, PROVIDER_DEFAULT } from 'react-native-maps';
-import FastImage from 'react-native-fast-image';
 
 const PropertyDetailPage = (props: any) => {
     const { colors } = useTheme()
@@ -160,6 +159,7 @@ const PropertyDetailPage = (props: any) => {
                                     style={{
                                         height: 250,
                                         width: "100%",
+                                        borderRadius: 20
                                     }}
                                     region={{
                                         latitude: parseFloat(latLng?.latitude),
@@ -207,7 +207,8 @@ type PropImageProps = {
 
 const MapWrapper = styled.View`
     border-radius:16px;
-    padding:16px;
+    margin-left:16px;
+    margin-right:16px;
     margin-bottom:50px;
 `;
 const ListView = styled.View`

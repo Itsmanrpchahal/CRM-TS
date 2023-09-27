@@ -8,6 +8,7 @@ import Animated, {
   cancelAnimation,
   Easing,
 } from 'react-native-reanimated';
+import { styled } from 'styled-components/native';
 const Loader = () => {
   const rotation = useSharedValue(0);
   const rotation1 = useSharedValue(0);
@@ -69,15 +70,17 @@ const Loader = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: "100%" }}>
       <View style={styles.container}>
-        <Animated.View style={[styles.spinner, animatedStyles]} />
+        <Animated.View style={[styles.spinner, animatedStyles,]} />
         <Animated.View style={[styles.spinner2, animatedStyles1]} />
         <Animated.View style={[styles.spinner3, animatedStyles3]} />
+        <View style={{ borderLeftColor: 'red', height: 100, width: 100 }}></View>
       </View>
     </View>
   );
 };
 
 export default Loader;
+
 
 const styles = StyleSheet.create({
   container: {

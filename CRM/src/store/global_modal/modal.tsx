@@ -20,6 +20,7 @@ import SearchCriteriaSheet from '../../components/sheets/SearchCriteriaSheet'
 import NewAppointmentSheet from '../../components/sheets/NewAppointmentSheet'
 import AppointmentListSheet from '../../components/sheets/AppointmentListSheet'
 import MyAppointmentsSheet from '../../components/sheets/MyAppointmentsSheet'
+import GreetingSheet from '../../components/sheets/GreetingSheet'
 
 export {
     ActivityLogSheet,
@@ -43,5 +44,6 @@ export {
     SearchCriteriaSheet,
     NewAppointmentSheet,
     AppointmentListSheet,
-    MyAppointmentsSheet
+    MyAppointmentsSheet,
+    GreetingSheet
 };
