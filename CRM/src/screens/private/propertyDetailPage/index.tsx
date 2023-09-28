@@ -272,5 +272,5 @@ const MainWrapper = styled.View`
 `;
 
 const MainView = styled.View`
-    flex:1;
+flex:1;
 `;

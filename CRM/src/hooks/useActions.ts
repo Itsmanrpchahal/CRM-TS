@@ -9,7 +9,8 @@ import {
     getAllProperties,
     appFilter,
     clearFilter,
-    getSingleProperty
+    getSingleProperty,
+    getContacts
 } from "../store";
 
 export const useActions = () => {
@@ -25,7 +26,8 @@ export const useActions = () => {
             getAllProperties,
             appFilter,
             clearFilter,
-            getSingleProperty
+            getSingleProperty,
+            getContacts
         ),
         dispatch,
     );

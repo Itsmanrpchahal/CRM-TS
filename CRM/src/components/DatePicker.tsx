@@ -39,6 +39,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
         <View>
             <DateTimePickerModal
                 isVisible={showDateTimePicker}
+                style={{ backgroundColor: 'red' }}
                 locale='en_GB'
                 is24Hour={true}
                 mode={mode}

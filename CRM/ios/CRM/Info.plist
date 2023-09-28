@@ -2,15 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <key>FirebaseDynamicLinksCustomDomains</key>
+   <array>
+     <string>https://surflokal.page.link/property</string>
+     <string>http://surflokal.page.link/property</string>
+   </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>This app need your Photo library permission</string>
-  <key>NSCameraUsageDescription</key>
-  <string>This app need your camera permission</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>This app need your microphone permission</string>
-  <key>CFBundleDisplayName</key>
+	<key>CFBundleDisplayName</key>
 	<string>CRM</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -34,6 +33,16 @@
 				<string>com.googleusercontent.apps.681904798882-24aavuvkrsg3l1mqrkn49g4kh0s4pom5</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>surf.lokal.crm</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -50,8 +59,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app need your camera permission</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app need your microphone permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app need your Photo library permission</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

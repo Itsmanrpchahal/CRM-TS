@@ -143,7 +143,6 @@ const NewAppointmentSheet = () => {
                         valuestyle={{ color: "red" }}
                         onChange={async item => {
                             setCities(item)
-                            ref.current.close()
                         }}
                         selectedStyle={styles.selectedStyle}
                     />

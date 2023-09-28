@@ -20,3 +20,10 @@ export const RESET_PASSWORD_SCHEMA = Yup.object().shape({
     otp: Yup.string().required('OTP required'),
     password: Yup.string().required('Password is required'),
 })
+
+export const SEND_SELECTED_PROPERTIES_SCHEMA = Yup.object().shape({
+    client_email: Yup.string().email('Email entered is not valid')
+        .required('Email is required'),
+    subject: Yup.string().required('Enter subject'),
+    message: Yup.string().required('Enter message')
+})

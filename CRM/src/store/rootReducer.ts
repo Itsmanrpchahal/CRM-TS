@@ -7,6 +7,7 @@ import getFilterData from '../store/getFilter/reducer'
 import clearFilterData from '../store/clearFIlter/reducer'
 import getAllPPropertiesData from '../store/getAllProperites/reducer'
 import getSinglePropertyData from '../store/singleProperty/reducer'
+import contactListData from '../store/getContacts/reducer'
 
 const reducers = combineReducers({
     auth,
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     getFilterData,
     getAllPPropertiesData,
     clearFilterData,
-    getSinglePropertyData
+    getSinglePropertyData,
+    contactListData
 });
 
 export default reducers;

@@ -39,7 +39,10 @@ const Login = ({ navigation }) => {
 
     useEffect(() => {
         if (isAuthenticated || s_isAuthenticated) {
-            navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD)
+            navigation.reset({
+                index: 0,
+                routes: [{ name: navigationStrings.TAB_BAR_DASHBOARD }],
+            });
         }
     }, [isAuthenticated, s_isAuthenticated])
 

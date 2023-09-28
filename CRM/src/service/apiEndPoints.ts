@@ -7,11 +7,14 @@ const apiUri = {
         socialLogin: 'webapi/v1/login/emaillogin.php', //email,username,device_type,device_token,social_id,social_token,user_type , first_name,last_name in formData and security_key in header
     },
     surfMLP: {
-        getFilter: 'webapi/v1/SubFilter/websubfilter.php',
-        getProperties: 'webapi/v1/property/?limit=',//send limit in URL and 
-        appFilter: 'webapi/v1/AppFilter?', //data_custom_taxonomy and data_customvalue
-        clearFilter: 'webapi/v1/AppFilter/clearfilter.php',
-        singleProperty: 'webapi/v1/singleproperty/?post_id=' //Property ID in url
+        getFilter: 'webapi/v1/CRM/SubFilter/websubfilter.php',
+        getProperties: 'webapi/v1/CRM/property/?limit=',//send limit in URL and 
+        appFilter: 'webapi/v1/CRM/AppFilter?', //data_custom_taxonomy and data_customvalue
+        clearFilter: 'webapi/v1/CRM/AppFilter/clearfilter.php',
+        singleProperty: 'webapi/v1/CRM/singleproperty/?post_id=' //Property ID in url
+    },
+    contact: {
+        contactList: 'wp-json/leads/contact'
     }
 };
 

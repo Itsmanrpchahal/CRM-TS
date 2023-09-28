@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // @ts-ignore
 import styled from 'styled-components/native';
 import { useNavigation, useTheme } from '@react-navigation/native';
@@ -13,14 +13,17 @@ import axios from "axios";
 import { settingIcon } from '../assets';
 import { sideMenuOptions } from '../utils/constants'
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { store } from '../store';
 
 function CustomDrawer(props: any) {
   const { setAuthentication, setSAuthentication, logout } = useActions();
   const { colors }: any = useTheme();
   const navigation = useNavigation()
+  const [selectedIndex, setSelectedIndex] = useState(-1)
   const { loading, error, isAuthenticated, u_image, u_first_name, u_last_name } = useTypedSelector(
     state => state.auth,
+  );
+  const { logoutloading } = useTypedSelector(
+    state => state.logout,
   );
   const { s_loading, s_isAuthenticated, image, first_name, last_name } = useTypedSelector(
     state => state.socialLogin,
@@ -46,13 +49,14 @@ function CustomDrawer(props: any) {
   // @ts-ignore
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
+
       <ScrollView>
         <DrawerWrapper backgroundColor={colors.primary}>
           <MainWrapper>
             <HorizontalWrapper>
-              <ItemWrapper>
+              <ItemWrapper backgroundColor={colors.primary}>
                 <ImageView style={{ borderRadius: 14 }} source={{ uri: !isAuthenticated ? image : u_image }}></ImageView>
-                <UserName>{isAuthenticated ? u_first_name : first_name + " " + isAuthenticated ? u_last_name : last_name}</UserName>
+                <UserName color={colors.white}>{isAuthenticated ? u_first_name : first_name + " " + isAuthenticated ? u_last_name : last_name}</UserName>
               </ItemWrapper>
               <TouchableOpacity onPress={() => {
                 navigation.navigate(navigationStrings.SETTING)
@@ -63,9 +67,10 @@ function CustomDrawer(props: any) {
             <FlatList
               data={sideMenuOptions}
               ItemSeparatorComponent={<Divider backgroundColor={colors.white}></Divider>}
-              renderItem={({ item }) => {
+              renderItem={({ item, index }) => {
                 return (
                   <TouchableOpacity onPress={() => {
+                    setSelectedIndex(index)
                     item.value === 1 ? navigation.navigate(navigationStrings.TAB_BAR_DASHBOARD) :
                       item.value === 2 ? navigation.navigate(navigationStrings.TAB_BAR_CONTACTS) :
                         item.value === 3 ? navigation.navigate(navigationStrings.TAB_BAR_USERS) :
@@ -78,10 +83,11 @@ function CustomDrawer(props: any) {
                                       item.value === 10 ? navigation.navigate(navigationStrings.RETALORS) :
                                         item.value === 11 ? navigation.navigate(navigationStrings.MARKETING) :
                                           item.value ? logoutAction() : null
+
                   }}>
-                    <ItemWrapper>
-                      <ImageView tintColor={colors.white} source={item.image}></ImageView>
-                      <UserName>{item.label}</UserName>
+                    <ItemWrapper backgroundColor={selectedIndex + 1 === item.value ? colors.primary : colors.primary}>
+                      <ImageView tintColor={selectedIndex + 1 === item.value ? colors.white : colors.white} source={item.image}></ImageView>
+                      <UserName color={selectedIndex + 1 === item.value ? colors.white : colors.white}>{item.label}</UserName>
                     </ItemWrapper>
                   </TouchableOpacity>
                 )
@@ -101,9 +107,16 @@ type DrawerWrapperProps = {
   backgroundColor: string;
 };
 
+type ItemWrapperProps = {
+  backgroundColor: string;
+}
 
-const UserName = styled.Text`
-  color:${({ theme }: any) => theme.colors.white};
+type UserNameProps = {
+  color: string;
+}
+
+const UserName = styled.Text<UserNameProps>`
+  color:${({ color }: any) => color};
   font-size:18px;
 `;
 
@@ -119,17 +132,17 @@ const HorizontalWrapper = styled.View`
   justify-content:space-between;
 `;
 
-const ItemWrapper = styled.View`
+const ItemWrapper = styled.View<ItemWrapperProps>`
   flex-direction:row;
   justify-content:flex-start;
   align-items:center;
+  background-color: ${({ backgroundColor }: any) => backgroundColor};
 `;
 
 const Divider = styled.View<DrawerWrapperProps>`
   height: 1px;
   margin-left:10px;
   margin-right:10px;
-  margin-bottom:5px;
   background-color: ${({ backgroundColor }: any) => backgroundColor};
 `;
 

@@ -92,7 +92,6 @@ const FilterSheet = (props: any) => {
                 valuestyle={{ color: "red" }}
                 onChange={async item => {
                     setCities(item)
-                    ref.current.close()
                     appFilter({ data_custom_taxonomy: 'property_city', data_customvalue: item })
                     closeModal()
                 }}

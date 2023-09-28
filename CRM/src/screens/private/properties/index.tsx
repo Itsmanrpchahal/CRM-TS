@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, TouchableOpacity } from 'react-native'
+import { FlatList, Platform, TouchableOpacity } from 'react-native'
 import { styled, useTheme, withTheme } from "styled-components/native";
 import { MainWrapperWhite } from '../../../utils/globalStyles'
 import { FilterIcon } from '../../../utils/assets'
@@ -8,8 +8,8 @@ import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Activity from "../../../components/Activity";
 import { useIsFocused } from '@react-navigation/native';
-import { store } from "../../../store";
 import { navigationRef } from "../../../navigation/RootNavigation";
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 const Properties = (navigation) => {
     const { colors } = useTheme()
@@ -22,9 +22,13 @@ const Properties = (navigation) => {
     const { getFilterloading, getFilterData } = useTypedSelector(
         state => state.getFilterData,
     )
+    const { contactsloading, contactListData } = useTypedSelector(
+        state => state.contactListData,
+    )
     const { getAllPropertiesloading, getAllPPropertiesData } = useTypedSelector(
         state => state.getAllPPropertiesData,
     )
+
     const { clearFilterloading } = useTypedSelector(
         state => state.clearFilterData,
     )
@@ -32,7 +36,8 @@ const Properties = (navigation) => {
         openModal,
         getFilter,
         getAllProperties,
-        appFilter
+        appFilter,
+        getContacts
     } = useActions();
 
     useEffect(() => {
@@ -47,9 +52,42 @@ const Properties = (navigation) => {
 
     useEffect(() => {
         if (isFocused) {
-            Promise.all[getFilter(), getAllProperties({ limit: 1 })]
+            Promise.all[getFilter(), getAllProperties({ limit: 1 }), getContacts()]
         }
     }, [isFocused])
+
+    useEffect(() => {
+        setSelectedTabs([])
+    }, [clearFilterloading])
+
+    const generateLink = async () => {
+        try {
+            const link = await dynamicLinks().buildShortLink(
+                {
+                    link: `https://surflokal.page.link/property?propetyID=${10}`,
+                    domainUriPrefix:
+                        Platform.OS === 'android'
+                            ? 'https://surflokal.page.link/'
+                            : 'https://surflokal.page.link',
+                    android: {
+                        packageName: 'surf.lokal',
+                    },
+                    ios: {
+                        appStoreId: '123456789',
+                        bundleId: 'surf.lokal',
+                    },
+                    navigation: {
+                        forcedRedirectEnabled: true,
+                    },
+                },
+                dynamicLinks.ShortLinkType.SHORT,
+            );
+            console.log('link:', link);
+            return link;
+        } catch (error) {
+            console.log('Generating Link Error:', error);
+        }
+    };
 
     const renderItem = ({ item, index }) => {
         const { data_custom_taxonomy, data_customvalue } = item
@@ -62,7 +100,7 @@ const Properties = (navigation) => {
                 } else {
                     setSelectedTabs(prev => [...prev, data_customvalue])
                 }
-                appFilter({ data_custom_taxonomy: item.data_custom_taxonomy, data_customvalue: item.data_customvalue, filter_type: 1 })
+                appFilter({ data_custom_taxonomy: item.data_custom_taxonomy, data_customvalue: item.data_customvalue })
 
             }}>
                 <FilterTabs>
@@ -77,7 +115,10 @@ const Properties = (navigation) => {
     return (
         <MainView>
             {
-                getFilterloading || getAllPropertiesloading || clearFilterloading ? <LoaderView>
+                getFilterloading ||
+                    getAllPropertiesloading ||
+                    clearFilterloading ||
+                    contactsloading ? <LoaderView>
                     <Activity />
                 </LoaderView > : null
             }
@@ -101,13 +142,14 @@ const Properties = (navigation) => {
                             <FilterBtn>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        openModal(
-                                            'SendSelectedPropertiesSheet',
-                                            {
-                                                height: '80%',
-
-                                            },
-                                        )
+                                        // openModal(
+                                        //     'SendSelectedPropertiesSheet',
+                                        //     {
+                                        //         height: '80%',
+                                        //         data: contactListData?.data
+                                        //     },
+                                        // )
+                                        generateLink()
                                     }}>
                                     <TabWrapper style={{ justifyContent: 'center', alignItems: 'center' }}>
                                         <ImageWrapper height={12} width={16} source={FilterIcon}></ImageWrapper>
@@ -142,6 +184,7 @@ const Properties = (navigation) => {
                                             'SendSearchCriteriaSheet',
                                             {
                                                 height: '90%',
+                                                data: contactListData?.data
                                             },
                                         )
                                     }}>

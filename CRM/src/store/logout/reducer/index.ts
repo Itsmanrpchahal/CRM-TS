@@ -3,7 +3,7 @@ import { Action } from '../actions';
 import { ActionType } from '../actions-types';
 
 interface RepositoriesStateInterface {
-    loading: boolean;
+    logoutloading: boolean;
     error: string | null;
     authToken: string;
     user_email: string;
@@ -11,7 +11,7 @@ interface RepositoriesStateInterface {
 }
 
 const initialState = {
-    loading: false,
+    logoutloading: false,
     error: null,
     authToken: '',
     user_email: '',
@@ -29,19 +29,19 @@ const reducer = (
     produce(state, draft => {
         switch (action.type) {
             case ActionType.LOGOUT:
-                draft.loading = true;
+                draft.logoutloading = true;
                 draft.error = null;
                 draft.authToken = '';
                 draft.user_email = '';
                 draft.isAuthenticated = true;
                 return draft;
             case ActionType.LOGOUT_SUCCESS:
-                draft.loading = false;
+                draft.logoutloading = false;
                 draft.error = null;
                 draft.isAuthenticated = false;
                 return draft;
             case ActionType.LOGOUT_ERROR:
-                draft.loading = false;
+                draft.logoutloading = false;
                 draft.error = action.payload;
                 draft.authToken = '';
                 draft.user_email = '';

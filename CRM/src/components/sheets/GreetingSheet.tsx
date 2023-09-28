@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MainWrapperWhite } from "../../utils/globalStyles";
 import { withTheme } from "styled-components/native";
 
-const GreetingSheet = () => {
+const GreetingSheet = (props: any) => {
+
+
+
     return (
         <MainWrapperWhite>
 

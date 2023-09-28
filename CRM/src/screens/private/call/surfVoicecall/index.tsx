@@ -8,12 +8,7 @@ const surfCallVoiceMail = ({ navigation }) => {
     const { colors } = useTheme()
     const { openModal } = useActions()
 
-    useEffect(() => {
-        navigation.setOptions({
-            tabBarBadge: 5,
-            tabBarBadgeStyle: { backgroundColor: colors.green }
-        });
-    }, [navigation]);
+
     return (
         <MainWrapper>
             <HorizontalWrapper>

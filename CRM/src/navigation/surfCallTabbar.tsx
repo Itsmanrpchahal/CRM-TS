@@ -51,7 +51,7 @@ function surfCallTabs(props: any) {
 
 
             <Tab.Screen name={navigationStrings.VOICEMAIL} component={surfVoicecall} options={{
-                tabBarLabel: navigationStrings.VOICEMAIL
+                tabBarLabel: navigationStrings.VOICEMAIL, tabBarBadge: 5, tabBarBadgeStyle: { backgroundColor: colors.green }
             }} />
 
         </Tab.Navigator>
